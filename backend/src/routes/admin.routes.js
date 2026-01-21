@@ -2,7 +2,7 @@ import express from "express";
 import { protect, adminOnly } from "../middlewares/auth.middleware.js";
 import Property from "../models/Property.js";
 import Booking from "../models/Booking.js";
-// import Enquiry from "../models/Enquiry.js";
+import Enquiry from "../models/Enquiry.js";
 
 const router = express.Router();
 
@@ -10,8 +10,7 @@ router.get("/stats", protect, adminOnly, async (req, res) => {
   try {
     const totalProperties = await Property.countDocuments();
     const siteVisits = await Booking.countDocuments();
-    // Temporary placeholders until you add models
-    const enquiries = 0;
+    const enquiries = await Enquiry.countDocuments();
     
 
     res.json({

@@ -8,6 +8,7 @@ import PropertyDetail from "./pages/PropertyDetail";
 import EditPropertyPage from "./pages/EditProperty";
 import AdminProperties from "./pages/AdminProperties";
 import AdminBookings from "./pages/AdminBookings";
+import AdminEnquiries from "./components/admin/AdminEnquiries";
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/admin/properties" element={<AdminProperties />} />
         <Route path="/admin/edit-property/:id" element={<EditPropertyPage />} />
         <Route path="/admin/bookings" element={<AdminBookings />} />
+        <Route path="/admin/enquiries" element={<AdminEnquiries />} />
       </Routes>
     </BrowserRouter>
   );

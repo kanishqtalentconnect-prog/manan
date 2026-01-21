@@ -18,9 +18,12 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
     price: initialData?.price || "",
     bedrooms: initialData?.bedrooms || "",
     bathrooms: initialData?.bathrooms || "",
+    area: initialData?.area || "",
+    dimensions: initialData?.dimensions || "",
     propertyType: initialData?.propertyType || "villa",
     googleMapUrl: initialData?.googleMapUrl || "",
   });
+
 
   useEffect(() => {
     if (initialData) {
@@ -30,6 +33,8 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
         price: initialData.price || "",
         bedrooms: initialData.bedrooms || "",
         bathrooms: initialData.bathrooms || "",
+        area: initialData.area || "",
+        dimensions: initialData.dimensions || "",
         propertyType: initialData.propertyType || "villa",
         googleMapUrl: initialData.googleMapUrl || "",
       });
@@ -38,10 +43,14 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
 
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,10 +61,15 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
 
       formData.append("title", form.title);
       formData.append("description", form.description);
-      formData.append("price", String(form.price));
-      formData.append("bedrooms", String(form.bedrooms));
-      formData.append("bathrooms", String(form.bathrooms));
       formData.append("propertyType", form.propertyType);
+      formData.append("price", String(form.price));
+      if (form.propertyType === "land") {
+        formData.append("dimensions", form.dimensions);
+      } else {
+        formData.append("bedrooms", String(form.bedrooms));
+        formData.append("bathrooms", String(form.bathrooms));
+        formData.append("area", String(form.area));
+      }
 
       if (form.googleMapUrl) {
         formData.append("googleMapUrl", form.googleMapUrl);
@@ -98,70 +112,159 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white shadow rounded-xl p-6 space-y-4"
+      className="bg-white shadow rounded-xl p-6 space-y-5"
     >
-      <Input
-        name="title"
-        placeholder="Property Title"
-        value={form.title}
-        onChange={handleChange}
-        required
-      />
-      <Input
-        name="description"
-        placeholder="Property Description"
-        value={form.description}
-        onChange={handleChange}
-        required
-      />
-      <Input
-        name="price"
-        type="number"
-        placeholder="Price"
-        value={form.price}
-        onChange={handleChange}
-        required
-      />
-
-      <div className="grid grid-cols-2 gap-4">
+      {/* TITLE */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Property Title
+        </label>
         <Input
-          name="bedrooms"
-          type="number"
-          placeholder="Bedrooms"
-          value={form.bedrooms}
-          onChange={handleChange}
-          required
-        />
-        <Input
-          name="bathrooms"
-          type="number"
-          placeholder="Bathrooms"
-          value={form.bathrooms}
+          name="title"
+          placeholder="Eg. Luxury 3 BHK Villa"
+          value={form.title}
           onChange={handleChange}
           required
         />
       </div>
-      <Input
-        name="googleMapUrl"
-        placeholder="Google Maps Embed URL"
-        value={form.googleMapUrl}
-        onChange={handleChange}
-      />
-      <select
-        name="propertyType"
-        className="w-full border p-3 rounded"
-        value={form.propertyType}
-        onChange={handleChange}
-      >
-        <option value="villa">Villa</option>
-        <option value="flat">Flat</option>
-        <option value="cottage">Cottage</option>
-      </select>
 
+      {/* DESCRIPTION */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Property Description
+        </label>
+        <textarea
+          name="description"
+          placeholder={`Write detailed description...
+    • Location advantages
+    • Amenities
+    • Nearby facilities`}
+          value={form.description}
+          onChange={handleChange}
+          rows={6}
+          required
+          className="w-full border rounded-lg p-3 resize-y focus:outline-none focus:ring-2 focus:ring-black"
+        />
+      </div>
+
+      {/* PRICE */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Price (₹)
+        </label>
+        <Input
+          name="price"
+          type="number"
+          placeholder="Eg. 8500000"
+          value={form.price}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      {/* CONDITIONAL PROPERTY DETAILS */}
+      {form.propertyType !== "land" ? (
+        <>
+          {/* BEDROOMS + BATHROOMS */}
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Bedrooms
+              </label>
+              <Input
+                name="bedrooms"
+                type="number"
+                placeholder="Eg. 3"
+                value={form.bedrooms}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Bathrooms
+              </label>
+              <Input
+                name="bathrooms"
+                type="number"
+                placeholder="Eg. 2"
+                value={form.bathrooms}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+
+          {/* AREA */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Area (sq ft)
+            </label>
+            <Input
+              name="area"
+              type="number"
+              placeholder="Eg. 1450"
+              value={form.area}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </>
+      ) : (
+        <>
+          {/* LAND DIMENSIONS */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Land Dimensions
+            </label>
+            <Input
+              name="dimensions"
+              placeholder="Eg. 40 x 60 ft"
+              value={form.dimensions}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </>
+      )}
+
+
+      {/* GOOGLE MAP */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Google Maps Embed URL
+        </label>
+        <Input
+          name="googleMapUrl"
+          placeholder="Paste Google Maps iframe src URL"
+          value={form.googleMapUrl}
+          onChange={handleChange}
+        />
+      </div>
+
+      {/* PROPERTY TYPE */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Property Type
+        </label>
+        <select
+          name="propertyType"
+          className="w-full border p-3 rounded-lg"
+          value={form.propertyType}
+          onChange={handleChange}
+        >
+          <option value="villa">Villa</option>
+          <option value="flat">Flat</option>
+          <option value="cottage">Cottage</option>
+          <option value="land">Land</option>
+        </select>
+      </div>
+
+      {/* EXISTING IMAGES */}
       {initialData?.images?.length > 0 && (
         <div>
           <p className="font-medium mb-2">Existing Images</p>
-
           <div className="grid grid-cols-3 gap-3">
             {initialData.images.map((img: string, i: number) => (
               <img
@@ -171,22 +274,26 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
               />
             ))}
           </div>
-
           <p className="text-sm text-gray-500 mt-2">
             Uploading new images will replace existing images
           </p>
         </div>
       )}
 
-      <ImageUpload onChange={setImages} />
+      {/* IMAGE UPLOAD */}
+      <div>
+        <ImageUpload onChange={setImages} />
+      </div>
 
+      {/* SUBMIT */}
       <button
         type="submit"
         disabled={loading}
         className="w-full bg-black text-white py-3 rounded-lg"
       >
-        {loading ? "Uploading..." : "Add Property"}
+        {loading ? "Uploading..." : initialData ? "Update Property" : "Add Property"}
       </button>
     </form>
+
   );
 }

@@ -9,9 +9,15 @@ const propertySchema = new mongoose.Schema(
     area: Number,
     bedrooms: Number,
     bathrooms: Number,
+    area: {
+      type: Number,
+    },
+    dimensions: {
+      type: String,
+    },
     propertyType: {
       type: String,
-      enum: ["villa", "flat", "cottage"],
+      enum: ["villa", "flat", "cottage", "land"],
     },
     images: [String],
     googleMapUrl: {

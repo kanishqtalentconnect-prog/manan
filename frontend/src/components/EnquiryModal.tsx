@@ -6,53 +6,56 @@ type Props = {
   onClose: () => void;
 };
 
-export default function BookSiteVisitModal({ propertyId, onClose }: Props) {
+export default function EnquiryModal({ propertyId, onClose }: Props) {
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
-    visitDate: "",
-    timeSlot: "",
-    comingFrom: "",
+    bestTimeToReach: "",
+    question: "",
   });
 
-  const [loading, setLoading] = useState(false);
-
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async () => {
-    if (!form.timeSlot || !form.comingFrom) {
-      alert("Please select time slot and location");
-      return;
-    }
-
     try {
       setLoading(true);
-      await api.post("/bookings", {
-        propertyId,
+
+      await api.post("/enquiries", {
+        propertyId, // ✅ IMPORTANT
         ...form,
       });
 
-      alert("Site visit booked successfully!");
+      alert("Enquiry submitted successfully!");
       onClose();
     } catch (err: any) {
-      alert(err?.response?.data?.message || "Booking failed");
+      alert(err?.response?.data?.message || "Failed to submit enquiry");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-xl p-6 w-full max-w-md">
-        <h2 className="text-xl font-semibold mb-4">
-          Book Site Visit
-        </h2>
+    <div
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+      onClick={onClose}   
+    >
+      <div
+        className="bg-white rounded-xl p-6 w-full max-w-md"
+        onClick={(e) => e.stopPropagation()}
+      >
+
+      
+        <h2 className="text-xl font-semibold mb-1">Send an Enquiry</h2>
+        <p className="text-sm text-gray-500 mb-4">
+          We’ll get back to you shortly.
+        </p>
 
         <div className="space-y-3">
           <input
@@ -84,36 +87,20 @@ export default function BookSiteVisitModal({ propertyId, onClose }: Props) {
           />
 
           <input
-            name="visitDate"
-            type="date"
-            value={form.visitDate}
+            name="bestTimeToReach"
+            placeholder="Best Time to Reach (e.g. Evening)"
+            value={form.bestTimeToReach}
             onChange={handleChange}
             className="w-full border p-3 rounded-lg"
-            required
           />
 
-          {/* TIME SLOT */}
-          <select
-            name="timeSlot"
-            value={form.timeSlot}
+          <textarea
+            name="question"
+            placeholder="Your Question"
+            rows={4}
+            value={form.question}
             onChange={handleChange}
-            className="w-full border p-3 rounded-lg"
-            required
-          >
-            <option value="">Select Time Slot</option>
-            <option value="10:00 AM - 11:00 AM">10:00 AM – 11:00 AM</option>
-            <option value="11:00 AM - 12:00 PM">11:00 AM – 12:00 PM</option>
-            <option value="02:00 PM - 03:00 PM">02:00 PM – 03:00 PM</option>
-            <option value="04:00 PM - 05:00 PM">04:00 PM – 05:00 PM</option>
-          </select>
-
-          {/* COMING FROM */}
-          <input
-            name="comingFrom"
-            placeholder="Coming From (City / Area)"
-            value={form.comingFrom}
-            onChange={handleChange}
-            className="w-full border p-3 rounded-lg"
+            className="w-full border p-3 rounded-lg resize-none"
             required
           />
         </div>
@@ -131,9 +118,10 @@ export default function BookSiteVisitModal({ propertyId, onClose }: Props) {
             disabled={loading}
             className="px-4 py-2 bg-black text-white rounded-lg"
           >
-            {loading ? "Booking..." : "Confirm"}
+            {loading ? "Sending..." : "Submit"}
           </button>
         </div>
+      
       </div>
     </div>
   );

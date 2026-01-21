@@ -3,9 +3,9 @@ import { sendEmail } from "../utils/sendEmail.js";
 
 export const createBooking = async (req, res) => {
   try {
-    const { propertyId, name, email, phone, visitDate } = req.body;
+    const { propertyId, name, email, phone, visitDate, timeSlot, comingFrom } = req.body;
 
-    if (!propertyId || !name || !email || !phone || !visitDate) {
+    if (!propertyId || !name || !email || !phone || !visitDate || !timeSlot || !comingFrom) {
       return res.status(400).json({
         message: "All fields are required",
       });
@@ -17,6 +17,8 @@ export const createBooking = async (req, res) => {
       email,
       phone,
       visitDate,
+      timeSlot,
+      comingFrom
     });
 
     // 🔔 SEND EMAILS (do NOT block response if they fail)
@@ -26,8 +28,16 @@ export const createBooking = async (req, res) => {
       html: `
         <h2>Hello ${name},</h2>
         <p>Your site visit request has been received.</p>
-        <p><strong>Date:</strong> ${new Date(visitDate).toDateString()}</p>
-        <p>We will confirm shortly.</p>
+
+        <h4>Visit Details</h4>
+        <ul>
+          <li><strong>Date:</strong> ${new Date(visitDate).toDateString()}</li>
+          <li><strong>Time Slot:</strong> ${timeSlot}</li>
+          <li><strong>Coming From:</strong> ${comingFrom}</li>
+        </ul>
+
+        <p>Our team will confirm your visit shortly.</p>
+        <p>Thank you!</p>
       `,
     });
 
@@ -35,11 +45,16 @@ export const createBooking = async (req, res) => {
       to: process.env.ADMIN_EMAIL,
       subject: "New Site Visit Booking",
       html: `
-        <h3>New Booking</h3>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-        <p><strong>Date:</strong> ${new Date(visitDate).toDateString()}</p>
+        <h3>New Site Visit Booking</h3>
+
+        <ul>
+          <li><strong>Name:</strong> ${name}</li>
+          <li><strong>Email:</strong> ${email}</li>
+          <li><strong>Phone:</strong> ${phone}</li>
+          <li><strong>Date:</strong> ${new Date(visitDate).toDateString()}</li>
+          <li><strong>Time Slot:</strong> ${timeSlot}</li>
+          <li><strong>Coming From:</strong> ${comingFrom}</li>
+        </ul>
       `,
     });
 
@@ -98,10 +113,23 @@ export const updateBookingStatus = async (req, res) => {
           : "Your Site Visit is Cancelled",
       html: `
         <h2>Hello ${booking.name},</h2>
-        <p>Your site visit has been <strong>${status}</strong>.</p>
-        <p><strong>Date:</strong> ${new Date(
-          booking.visitDate
-        ).toDateString()}</p>
+
+        <p>Your site visit has been <strong>${status.toUpperCase()}</strong>.</p>
+
+        <h4>Visit Details</h4>
+        <ul>
+          <li><strong>Date:</strong> ${new Date(
+            booking.visitDate
+          ).toDateString()}</li>
+          <li><strong>Time Slot:</strong> ${booking.timeSlot}</li>
+          <li><strong>Coming From:</strong> ${booking.comingFrom}</li>
+        </ul>
+
+        ${
+          status === "confirmed"
+            ? "<p>We look forward to meeting you!</p>"
+            : "<p>Please feel free to rebook anytime.</p>"
+        }
       `,
     });
 
