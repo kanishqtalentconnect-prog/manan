@@ -14,6 +14,7 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
 
   const [form, setForm] = useState({
     title: initialData?.title || "",
+    description: initialData?.description || "",
     price: initialData?.price || "",
     bedrooms: initialData?.bedrooms || "",
     bathrooms: initialData?.bathrooms || "",
@@ -25,6 +26,7 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
     if (initialData) {
       setForm({
         title: initialData.title || "",
+        description: initialData.description || "",
         price: initialData.price || "",
         bedrooms: initialData.bedrooms || "",
         bathrooms: initialData.bathrooms || "",
@@ -49,6 +51,7 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
       const formData = new FormData();
 
       formData.append("title", form.title);
+      formData.append("description", form.description);
       formData.append("price", String(form.price));
       formData.append("bedrooms", String(form.bedrooms));
       formData.append("bathrooms", String(form.bathrooms));
@@ -104,7 +107,13 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
         onChange={handleChange}
         required
       />
-
+      <Input
+        name="description"
+        placeholder="Property Description"
+        value={form.description}
+        onChange={handleChange}
+        required
+      />
       <Input
         name="price"
         type="number"

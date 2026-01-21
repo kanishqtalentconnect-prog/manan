@@ -5,9 +5,11 @@ import api from "../api/axios";
 type Property = {
   _id: string;
   title: string;
+  description: string;
   price: number;
   bedrooms: number;
   bathrooms: number;
+  propertyType: string;
   images: string[];
   googleMapUrl?: string;
 };
@@ -47,12 +49,23 @@ export default function PropertyDetail() {
           />
         ))}
       </div>
+      
+      {/* DESCRIPTION */}
+      <div className="bg-white shadow rounded-xl p-6 mb-6">
+        <p className="text-2xl font-semibold mb-2">
+          {property.description}
+        </p>
+      </div>
 
       {/* DETAILS */}
       <div className="bg-white shadow rounded-xl p-6 mb-6">
         <p className="text-2xl font-semibold mb-2">
           ₹ {property.price.toLocaleString()}
         </p>
+
+        <div className="mb-4 text-gray-700">
+          Type: {property.propertyType}
+        </div>
 
         <div className="flex gap-6 text-gray-600">
           <span>{property.bedrooms} Bedrooms</span>

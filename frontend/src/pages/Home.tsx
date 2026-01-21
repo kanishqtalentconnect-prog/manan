@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 import { Link } from "react-router-dom";
+import BookSiteVisitModal from "../components/BookSiteVisitModal";
 
 
 type Property = {
@@ -9,6 +10,7 @@ type Property = {
   price: number;
   bedrooms: number;
   bathrooms: number;
+  propertyType: string;
   images: string[];
   googleMapUrl?: string;
 };
@@ -16,6 +18,14 @@ type Property = {
 export default function Home() {
   const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedPropertyId, setSelectedPropertyId] = useState<string | null>(null);
+  const propertyTypeStyles: Record<string, string> = {
+    villa: "bg-green-100 text-green-700",
+    flat: "bg-blue-100 text-blue-700",
+    cottage: "bg-purple-100 text-purple-700",
+  };
+
 
   useEffect(() => {
     api.get("/properties")
@@ -50,11 +60,7 @@ export default function Home() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {properties.map((property) => (
-            <Link
-              to={`/properties/${property._id}`}
-              key={property._id}
-              className="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden"
-            >
+            <div>
               <img
                 src={property.images?.[0]}
                 alt={property.title}
@@ -63,8 +69,21 @@ export default function Home() {
 
               <div className="p-4">
                 <h3 className="text-lg font-semibold">
+                  <Link to={`/properties/${property._id}`}
+                  key={property._id}
+                  className="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
                   {property.title}
+                  </Link>
                 </h3>
+
+                <span
+                  className={`inline-block mt-2 px-3 py-1 text-xs font-semibold rounded-full
+                    ${propertyTypeStyles[property.propertyType] || "bg-gray-100 text-gray-700"}
+                  `}
+                >
+                  {property.propertyType.toUpperCase()}
+                </span>
+
 
                 <p className="text-gray-600 mt-1">
                   ₹ {property.price?.toLocaleString()}
@@ -82,11 +101,30 @@ export default function Home() {
                   View Location
                 </a>
 
-                <button className="mt-4 w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800">
+                <button
+                  onClick={(e) => {
+                    e.preventDefault(); 
+                    e.stopPropagation();
+                    setSelectedPropertyId(property._id);
+                    setShowModal(true);
+                  }}
+                  className="mt-4 w-full bg-black text-white py-2 rounded-lg"
+                >
                   Book Site Visit
                 </button>
+
+                {showModal && selectedPropertyId && (
+                  <BookSiteVisitModal
+                    propertyId={selectedPropertyId}
+                    onClose={() => {
+                      setShowModal(false);
+                      setSelectedPropertyId(null);
+                    }}
+                  />
+                )}
+
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </section>

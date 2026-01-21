@@ -3,7 +3,9 @@ import cors from 'cors';
 
 import authRoutes from './routes/auth.routes.js';
 import propertyRoutes from './routes/property.routes.js';
-// import bookingRoutes from './routes/booking.routes.js';
+import bookingRoutes from './routes/booking.routes.js';
+import adminRoutes from "./routes/admin.routes.js";
+
 
 const app = express();
 const allowedOrigins = [
@@ -22,11 +24,12 @@ app.use(
     credentials: true,
   })
 );
-app.options("*", cors());
+
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use("/api/properties", propertyRoutes);
-// app.use("/api/bookings", bookingRoutes);
+app.use("/api/bookings", bookingRoutes);
+app.use("/api/admin", adminRoutes);
 
 export default app;
