@@ -3,6 +3,11 @@ import Input from "../Input";
 import ImageUpload from "./ImageUpload";
 import api from "../../api/axios";
 
+type Category ={ 
+  _id: string;
+  name: string; 
+  slug: string; 
+};
 type Property = {
   _id: string;
   title: string;
@@ -12,7 +17,7 @@ type Property = {
   bathrooms?: number;
   area?: number;
   dimensions?: string;
-  category?: string;
+  category?: Category;
   googleMapUrl?: string;
   images?: string[];
 };
@@ -20,11 +25,6 @@ type Property = {
 type Props = {
   initialData?: Property;
   onSuccess?: () => void;
-};
-
-type Category = {
-  _id: string;
-  name: string;
 };
 
 
@@ -89,15 +89,27 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
 
       formData.append("title", form.title);
       formData.append("description", form.description);
-      formData.append("category", form.category);
       formData.append("price", String(form.price));
-      if (form.category === "land") {
+      formData.append(
+        "category",
+        typeof form.category === "object" && form.category !== null
+          ? form.category._id
+          : ""
+      );
+
+      if (
+        typeof form.category === "object" &&
+        form.category !== null &&
+        form.category.slug &&
+        form.category.slug.toLowerCase() === "land"
+      ) {
         formData.append("dimensions", form.dimensions);
       } else {
         formData.append("bedrooms", String(form.bedrooms));
         formData.append("bathrooms", String(form.bathrooms));
         formData.append("area", String(form.area));
       }
+
 
       if (form.googleMapUrl) {
         formData.append("googleMapUrl", form.googleMapUrl);
@@ -191,7 +203,7 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
       </div>
 
       {/* CONDITIONAL PROPERTY DETAILS */}
-      {form.category !== "land" ? (
+      {typeof form.category === "object" && form.category !== null && form.category.slug !== "land" ? (
         <>
           {/* BEDROOMS + BATHROOMS */}
           <div className="grid grid-cols-2 gap-4">
@@ -274,12 +286,15 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
       {/* Category  */}
       <label className="block text-sm font-semibold">Category</label>
         <select
-          name="category"
-          value={form.category}
-          onChange={handleChange}
+          value={typeof form.category === "object" ? form.category?._id || "" : ""}
+          onChange={(e) => {
+            const selected = categories.find(c => c._id === e.target.value);
+            setForm(prev => ({ ...prev, category: selected || "" }));
+          }}
           className="w-full border p-3 rounded-lg"
           required
-        >
+          >
+
           <option value="">Select category</option>
           {categories.map((cat) => (
             <option key={cat._id} value={cat._id}>
