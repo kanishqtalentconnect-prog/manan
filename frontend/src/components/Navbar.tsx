@@ -46,6 +46,7 @@ export default function Navbar() {
 
         {/* RIGHT ACTIONS */}
         <div className="flex items-center gap-4">
+          {!user && ( <Link to="/login" className="bg-gray-900 text-white px-6 py-2.5 rounded-xl font-semibold hover:bg-black hover:shadow-lg hover:shadow-gray-200 transition-all active:scale-95" > Login </Link> )}
           {/* CONTACT CTA */}
           <a
             href="#contact"
