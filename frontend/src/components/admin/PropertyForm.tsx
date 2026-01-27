@@ -3,10 +3,30 @@ import Input from "../Input";
 import ImageUpload from "./ImageUpload";
 import api from "../../api/axios";
 
+type Property = {
+  _id: string;
+  title: string;
+  description: string;
+  price?: number;
+  bedrooms?: number;
+  bathrooms?: number;
+  area?: number;
+  dimensions?: string;
+  category?: string;
+  googleMapUrl?: string;
+  images?: string[];
+};
+
 type Props = {
-  initialData?: any;
+  initialData?: Property;
   onSuccess?: () => void;
 };
+
+type Category = {
+  _id: string;
+  name: string;
+};
+
 
 export default function PropertyForm({ initialData, onSuccess }: Props) {
   const [images, setImages] = useState<FileList | null>(null);
@@ -20,9 +40,16 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
     bathrooms: initialData?.bathrooms || "",
     area: initialData?.area || "",
     dimensions: initialData?.dimensions || "",
-    propertyType: initialData?.propertyType || "villa",
+    category: initialData?.category ||"",
     googleMapUrl: initialData?.googleMapUrl || "",
   });
+
+  const [categories, setCategories] = useState<Category[]>([]);
+
+
+  useEffect(() => {
+  api.get("/categories").then(res => setCategories(res.data));
+  }, []);
 
 
   useEffect(() => {
@@ -35,12 +62,13 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
         bathrooms: initialData.bathrooms || "",
         area: initialData.area || "",
         dimensions: initialData.dimensions || "",
-        propertyType: initialData.propertyType || "villa",
+        category: initialData?.category ||"",
         googleMapUrl: initialData.googleMapUrl || "",
       });
     }
   }, [initialData]);
 
+  const existingImages = initialData?.images ?? [];
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -61,9 +89,9 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
 
       formData.append("title", form.title);
       formData.append("description", form.description);
-      formData.append("propertyType", form.propertyType);
+      formData.append("category", form.category);
       formData.append("price", String(form.price));
-      if (form.propertyType === "land") {
+      if (form.category === "land") {
         formData.append("dimensions", form.dimensions);
       } else {
         formData.append("bedrooms", String(form.bedrooms));
@@ -163,7 +191,7 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
       </div>
 
       {/* CONDITIONAL PROPERTY DETAILS */}
-      {form.propertyType !== "land" ? (
+      {form.category !== "land" ? (
         <>
           {/* BEDROOMS + BATHROOMS */}
           <div className="grid grid-cols-2 gap-4">
@@ -243,30 +271,31 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
         />
       </div>
 
-      {/* PROPERTY TYPE */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Property Type
-        </label>
+      {/* Category  */}
+      <label className="block text-sm font-semibold">Category</label>
         <select
-          name="propertyType"
-          className="w-full border p-3 rounded-lg"
-          value={form.propertyType}
+          name="category"
+          value={form.category}
           onChange={handleChange}
+          className="w-full border p-3 rounded-lg"
+          required
         >
-          <option value="villa">Villa</option>
-          <option value="flat">Flat</option>
-          <option value="cottage">Cottage</option>
-          <option value="land">Land</option>
+          <option value="">Select category</option>
+          {categories.map((cat) => (
+            <option key={cat._id} value={cat._id}>
+              {cat.name}
+            </option>
+          ))}
         </select>
-      </div>
+
 
       {/* EXISTING IMAGES */}
-      {initialData?.images?.length > 0 && (
+      {existingImages.length > 0 && (
         <div>
           <p className="font-medium mb-2">Existing Images</p>
+
           <div className="grid grid-cols-3 gap-3">
-            {initialData.images.map((img: string, i: number) => (
+            {existingImages.map((img, i) => (
               <img
                 key={i}
                 src={img}
@@ -274,11 +303,13 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
               />
             ))}
           </div>
+
           <p className="text-sm text-gray-500 mt-2">
             Uploading new images will replace existing images
           </p>
         </div>
       )}
+
 
       {/* IMAGE UPLOAD */}
       <div>

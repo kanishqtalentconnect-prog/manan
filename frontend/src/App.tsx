@@ -4,11 +4,13 @@ import Login from "./pages/Login";
 import AddProperty from "./pages/AddProperty";
 import AdminDashboard from "./pages/AdminDashboard";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import PropertyDetail from "./pages/PropertyDetail";
 import EditPropertyPage from "./pages/EditProperty";
 import AdminProperties from "./pages/AdminProperties";
 import AdminBookings from "./pages/AdminBookings";
 import AdminEnquiries from "./components/admin/AdminEnquiries";
+import AdminCategories from "./components/admin/Categories";
 
 export default function App() {
   return (
@@ -25,7 +27,9 @@ export default function App() {
         <Route path="/admin/edit-property/:id" element={<EditPropertyPage />} />
         <Route path="/admin/bookings" element={<AdminBookings />} />
         <Route path="/admin/enquiries" element={<AdminEnquiries />} />
+        <Route path="/admin/categories" element={<AdminCategories />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

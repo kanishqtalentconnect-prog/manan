@@ -6,6 +6,7 @@ import propertyRoutes from './routes/property.routes.js';
 import bookingRoutes from './routes/booking.routes.js';
 import adminRoutes from "./routes/admin.routes.js";
 import enquiryRoutes from "./routes/enquiry.routes.js";
+import categoryRoutes from "./routes/category.routes.js";
 
 
 const app = express();
@@ -33,5 +34,6 @@ app.use("/api/properties", propertyRoutes);
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/enquiries", enquiryRoutes);
+app.use("/api/categories", categoryRoutes);
 
 export default app;

@@ -4,6 +4,13 @@ import api from "../api/axios";
 import BookSiteVisitModal from "../components/BookSiteVisitModal";
 import EnquiryModal from "../components/EnquiryModal";
 
+
+type Category = {
+  _id: string;
+  name: string;
+  slug: string;
+};
+
 type Property = {
   _id: string;
   title: string;
@@ -13,7 +20,7 @@ type Property = {
   bathrooms?: number;
   area?: number;
   dimensions?: string;
-  propertyType: "villa" | "flat" | "cottage" | "land";
+  category?: Category;
   images: string[];
   googleMapUrl?: string;
   status?: string;
@@ -92,7 +99,7 @@ export default function PropertyDetail() {
               <div className="flex items-center gap-3 mb-4">
                 
                 <span className="text-gray-500 text-sm font-medium uppercase tracking-wider">
-                  {property.propertyType}
+                  {property.category?.name}
                 </span>
               </div>
 
@@ -109,7 +116,7 @@ export default function PropertyDetail() {
 
             {/* Quick Stats Grid */}
             <div className="py-8 border-y border-gray-100 mb-8">
-              {property.propertyType === "land" ? (
+              {property.category?.slug === "land" ? (
                 <div className="text-center">
                   <p className="text-xs text-gray-400 uppercase tracking-widest mb-1">
                     Plot Dimensions

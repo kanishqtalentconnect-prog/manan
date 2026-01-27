@@ -2,6 +2,12 @@ import { useEffect, useState } from "react";
 import api from "../api/axios";
 import { useNavigate } from "react-router-dom";
 
+type Category = {
+  _id: string;
+  name: string;
+  slug: string;
+};
+
 type Property = {
   _id: string;
   title: string;
@@ -11,7 +17,7 @@ type Property = {
   bathrooms?: number;
   area?: number;
   dimensions?: string;
-  propertyType: "villa" | "flat" | "cottage" | "land";
+  category?: Category;
   images: string[];
   googleMapUrl?: string;
   status?: string;
@@ -71,8 +77,8 @@ export default function AdminProperties() {
 
               {/* TYPE BADGE */}
               <div className="absolute top-3 left-3">
-                <span className="bg-black/90 text-white px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest shadow-sm">
-                  {p.propertyType}
+                <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                  {p.category?.name}
                 </span>
               </div>
             </div>
@@ -91,7 +97,7 @@ export default function AdminProperties() {
 
               {/* DETAILS */}
               <div className="mt-4 pt-4 border-t border-gray-100 text-sm text-gray-600">
-                {p.propertyType === "land" ? (
+                {p.category?.slug === "land" ? (
                   <div className="flex flex-col">
                     <span className="font-semibold text-gray-900">
                       {p.dimensions}

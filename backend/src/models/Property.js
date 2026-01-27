@@ -15,9 +15,10 @@ const propertySchema = new mongoose.Schema(
     dimensions: {
       type: String,
     },
-    propertyType: {
-      type: String,
-      enum: ["villa", "flat", "cottage", "land"],
+    category: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      required: true,
     },
     images: [String],
     googleMapUrl: {

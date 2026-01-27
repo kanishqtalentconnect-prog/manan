@@ -17,13 +17,13 @@ export const createProperty = async (req, res) => {
 
 
 export const getAllProperties = async (req, res) => {
-  const properties = await Property.find();
+  const properties = await Property.find().populate("category");
   res.json(properties);
 };
 
 export const getPropertyById = async (req, res) => {
   try {
-    const property = await Property.findById(req.params.id);
+    const property = await Property.findById(req.params.id).populate("category");
     if (!property) {
       return res.status(404).json({ message: "Property not found" });
     }

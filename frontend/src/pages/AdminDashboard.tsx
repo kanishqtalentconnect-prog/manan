@@ -7,12 +7,26 @@ type Stats = {
   totalProperties: number;
   enquiries: number;
   siteVisits: number;
+  categories: number;
 };
+
+type RecentProperty = {
+  _id: string;
+  title: string;
+  price?: number;
+  category?: {
+    _id: string;
+    name: string;
+  };
+};
+
+
+
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
   const [stats, setStats] = useState<Stats | null>(null);
-  const [recent, setRecent] = useState<any[]>([]);
+  const [recent, setRecent] = useState<RecentProperty[]>([]);
 
   useEffect(() => {
     api.get("/properties").then((res) => {
@@ -50,6 +64,13 @@ export default function AdminDashboard() {
             </Link>
 
             <Link
+              to="/admin/categories"
+              className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-white hover:shadow-sm rounded-lg transition-all"
+            >
+              Categories
+            </Link>
+
+            <Link
               to="/admin/bookings"
               className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-white hover:shadow-sm rounded-lg transition-all"
             >
@@ -75,7 +96,11 @@ export default function AdminDashboard() {
       </div>
 
       {/* STATS */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-emerald-500">
+          <p className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-1">Categories</p>
+          <h3 className="text-3xl font-black text-gray-900">{stats?.categories || 0}</h3>
+        </div>
         <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-blue-600">
           <p className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-1">Total Properties</p>
           <h3 className="text-3xl font-black text-gray-900">{stats?.totalProperties || 0}</h3>
@@ -122,7 +147,7 @@ export default function AdminDashboard() {
                   </td>
                   <td className="px-6 py-4">
                     <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 capitalize">
-                      {p.propertyType}
+                      {p.category?.name || "—"}
                     </span>
                   </td>
                   <td className="px-6 py-4 font-medium text-gray-600">

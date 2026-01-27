@@ -1,3 +1,9 @@
+import Hero from "../components/Hero";
+import Hero2 from "../components/Hero2";
+import Hero3 from "../components/Hero3";
+import Hero4 from "../components/Hero4";
+import Contact from "../components/Contact";
+import About from "../components/About";
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 import BookSiteVisitModal from "../components/BookSiteVisitModal";
@@ -5,6 +11,11 @@ import MapModal from "../components/MapModal";
 import EnquiryModal from "../components/EnquiryModal";
 import { useNavigate } from "react-router-dom";
 
+type Category = {
+  _id: string;
+  name: string;
+  slug: string;
+};
 
 type Property = {
   _id: string;
@@ -14,7 +25,7 @@ type Property = {
   bathrooms?: number;
   area?: number;
   dimensions?: string;
-  propertyType: "villa" | "flat" | "cottage" | "land";
+  category?: Category;
   images: string[];
   googleMapUrl?: string;
   status?: string;
@@ -31,11 +42,7 @@ export default function Home() {
   const navigate = useNavigate();
 
 
-  const propertyTypeStyles: Record<string, string> = {
-    villa: "bg-green-100 text-green-700",
-    flat: "bg-blue-100 text-blue-700",
-    cottage: "bg-purple-100 text-purple-700",
-  };
+  
 
   useEffect(() => {
     api.get("/properties")
@@ -51,23 +58,42 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50/50">
-      {/* HERO */}
-      <section className="bg-linear-to-b from-gray-900 to-black text-white py-24 px-6 text-center">
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
-          Find Your Dream Property
-        </h1>
-        <p className="mt-4 text-lg text-gray-400 max-w-2xl mx-auto font-light">
-          Discover curated villas, flats, and premium living spaces designed for your lifestyle.
-        </p>
+      <section id="hero">
+        <Hero />
       </section>
 
-      {/* PROPERTY LIST */}
-      <section className="max-w-7xl mx-auto px-6 py-16">
-        <div className="flex items-center justify-between mb-10">
-          <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Available Properties</h2>
-          <div className="h-1 flex-1 bg-gray-100 ml-8 hidden md:block"></div>
-        </div>
+      <section id="about">
+        <About />
+      </section>
+      <section id="property" className="relative bg-[#0f0f0f] py-24">
 
+        {/* subtle background glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(196,164,124,0.08),transparent_60%)]" />
+
+        <div className="relative max-w-7xl mx-auto px-6">
+          {/* SECTION HEADER */}
+          <div className="text-center mb-16">
+            {/* pill */}
+            <div className="flex justify-center mb-4">
+              <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#c4a47c] bg-[#c4a47c]/10 border border-[#c4a47c]/30 px-4 py-1.5 rounded-full">
+                Featured Properties
+              </span>
+            </div>
+
+            {/* heading */}
+            <h2 className="text-4xl md:text-5xl font-serif text-white mb-4">
+              Exclusive Mountain{" "}
+              <span className="text-[#c4a47c] italic">Retreats</span>
+            </h2>
+
+            {/* subtitle */}
+            <p className="max-w-xl mx-auto text-sm md:text-base text-gray-400 font-light leading-relaxed">
+              Handpicked properties that offer the perfect blend of luxury,
+              location, and lifestyle.
+            </p>
+          </div>
+
+        {/* PROPERTY LIST */}
         {loading && (
           <div className="flex flex-col items-center py-20">
             <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-black mb-4"></div>
@@ -86,76 +112,83 @@ export default function Home() {
             <div
               key={property._id}
               onClick={() => navigate(`/properties/${property._id}`)}
-              className="group bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col"
+              className="group bg-[#14110f] rounded-2xl shadow-lg 
+                        border border-[#2a241f] hover:border-[#c4a47c]/40 
+                        hover:shadow-2xl transition-all duration-500 
+                        overflow-hidden flex flex-col cursor-pointer"
             >
               {/* Image Container */}
               <div className="relative overflow-hidden h-64">
                 <img
                   src={property.images?.[0]}
                   alt={property.title}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
+
+                {/* Dark overlay */}
+                <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
+
                 <div className="absolute top-4 left-4 flex gap-2">
-                  <span className={`px-3 py-1 text-[10px] font-bold tracking-wider uppercase rounded-md shadow-sm ${
-                    propertyTypeStyles[property.propertyType] || "bg-white text-gray-800"
-                  }`}>
-                    {property.propertyType}
+                  <span
+                    className={`px-3 py-1 text-[10px] font-semibold tracking-widest uppercase rounded-full
+                    bg-[#c4a47c]/15 text-[#c4a47c] border border-[#c4a47c]/30`}
+                  >
+                    {property.category?.name}
                   </span>
-                  
                 </div>
               </div>
 
-              <div className="p-6 flex flex-col grow">
-                <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-                    {property.title}
+              <div className="p-6 flex flex-col grow text-gray-300">
+                <h3 className="text-lg font-semibold text-white group-hover:text-[#c4a47c] transition-colors">
+                  {property.title}
                 </h3>
 
-                <p className="text-gray-600 mt-1">
+                <p className="text-sm text-gray-400 mt-1">
                   {typeof property.price === "number"
                     ? `₹ ${property.price.toLocaleString()}`
                     : "Price on request"}
                 </p>
 
-
-                <div className="mt-6 pt-6 border-t border-gray-50 text-sm text-gray-600">
-                  {property.propertyType === "land" ? (
+                {/* Stats */}
+                <div className="mt-6 pt-6 border-t border-white/10 text-sm text-gray-400">
+                  {property.category?.slug === "land" ? (
                     <div className="flex flex-col text-center">
-                      <span className="font-semibold text-gray-900 text-lg">
+                      <span className="font-semibold text-white text-lg">
                         {property.dimensions}
                       </span>
-                      <span className="text-[10px] uppercase tracking-widest text-gray-400">
+                      <span className="text-[10px] uppercase tracking-widest text-gray-500">
                         Plot Dimensions
                       </span>
                     </div>
                   ) : (
                     <div className="flex items-center justify-between">
-                      <div className="flex flex-col">
-                        <span className="font-semibold text-gray-900">
+                      <div className="flex flex-col text-center">
+                        <span className="font-semibold text-white">
                           {property.bedrooms}
                         </span>
-                        <span className="text-[10px] uppercase tracking-tighter text-gray-400">
+                        <span className="text-[10px] uppercase tracking-widest text-gray-500">
                           Beds
                         </span>
                       </div>
 
-                      <div className="w-px h-8 bg-gray-100"></div>
+                      <div className="w-px h-8 bg-white/10" />
 
-                      <div className="flex flex-col">
-                        <span className="font-semibold text-gray-900">
+                      <div className="flex flex-col text-center">
+                        <span className="font-semibold text-white">
                           {property.bathrooms}
                         </span>
-                        <span className="text-[10px] uppercase tracking-tighter text-gray-400">
+                        <span className="text-[10px] uppercase tracking-widest text-gray-500">
                           Baths
                         </span>
                       </div>
 
-                      <div className="w-px h-8 bg-gray-100"></div>
+                      <div className="w-px h-8 bg-white/10" />
 
-                      <div className="flex flex-col">
-                        <span className="font-semibold text-gray-900">
+                      <div className="flex flex-col text-center">
+                        <span className="font-semibold text-white">
                           {property.area}
                         </span>
-                        <span className="text-[10px] uppercase tracking-tighter text-gray-400">
+                        <span className="text-[10px] uppercase tracking-widest text-gray-500">
                           Sq Ft
                         </span>
                       </div>
@@ -163,7 +196,7 @@ export default function Home() {
                   )}
                 </div>
 
-
+                {/* Actions */}
                 <div className="mt-auto pt-6 space-y-3">
                   <button
                     onClick={(e) => {
@@ -171,12 +204,9 @@ export default function Home() {
                       if (!property.googleMapUrl) return;
                       setMapUrl(property.googleMapUrl);
                     }}
-                    className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors"
+                    className="inline-flex items-center text-sm font-medium 
+                              text-[#c4a47c] hover:text-[#e0c48f] transition-colors"
                   >
-                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
                     View Location
                   </button>
 
@@ -187,20 +217,24 @@ export default function Home() {
                       setSelectedPropertyId(property._id);
                       setShowModal(true);
                     }}
-                    className="w-full bg-gray-900 hover:bg-black text-white font-semibold py-3 rounded-xl transition-all active:scale-[0.98] shadow-md"
+                    className="w-full bg-[#c4a47c] hover:bg-[#b39367] 
+                              text-black font-semibold py-3 rounded-xl 
+                              transition-all active:scale-[0.98]"
                   >
                     Book Site Visit
                   </button>
+
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       setEnquiryPropertyId(property._id);
                     }}
-                    className="w-full border border-black py-3 rounded-lg font-semibold"
-                    >
+                    className="w-full border border-[#c4a47c]/40 
+                              text-[#c4a47c] py-3 rounded-xl font-semibold 
+                              hover:bg-[#c4a47c]/10 transition-all"
+                  >
                     Make an Enquiry
                   </button>
-
 
                   {enquiryPropertyId && (
                     <EnquiryModal
@@ -208,11 +242,12 @@ export default function Home() {
                       onClose={() => setEnquiryPropertyId(null)}
                     />
                   )}
-
                 </div>
               </div>
             </div>
+
           ))}
+        </div>
         </div>
       </section>
 
@@ -234,6 +269,18 @@ export default function Home() {
           onClose={() => setMapUrl(null)}
         />
       )}
+      <section id="hero2">
+        <Hero2 />
+      </section>
+      <section id="hero3">
+        <Hero3 />
+      </section>
+      <section id="hero4">
+        <Hero4 />
+      </section>
+      <section id="contact">
+        <Contact />
+      </section>
     </div>
   );
 }
