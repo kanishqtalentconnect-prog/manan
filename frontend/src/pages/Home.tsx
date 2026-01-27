@@ -236,12 +236,7 @@ export default function Home() {
                     Make an Enquiry
                   </button>
 
-                  {enquiryPropertyId && (
-                    <EnquiryModal
-                      propertyId={enquiryPropertyId}
-                      onClose={() => setEnquiryPropertyId(null)}
-                    />
-                  )}
+                  
                 </div>
               </div>
             </div>
@@ -250,6 +245,13 @@ export default function Home() {
         </div>
         </div>
       </section>
+      {/* ENQUIRY MODAL */}
+      {enquiryPropertyId && (
+        <EnquiryModal
+          propertyId={enquiryPropertyId}
+          onClose={() => setEnquiryPropertyId(null)}
+        />
+      )}
 
       {/* BOOKING MODAL */}
       {showModal && selectedPropertyId && (
