@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
+import { useNavigate } from "react-router-dom";
 
 type Booking = {
   _id: string;
@@ -17,6 +18,7 @@ type Booking = {
 export default function AdminBookings() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     api.get("/bookings")
@@ -41,9 +43,20 @@ export default function AdminBookings() {
 
   return (
     <div className="p-8 max-w-7xl mx-auto min-h-screen bg-gray-50/50">
-      <div className="flex flex-col mb-8">
+      <div className="flex flex-col mb-6">
         <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">Site Visit Bookings</h1>
         <p className="text-gray-500 mt-1">Manage and respond to client visit requests.</p>
+      </div>
+
+      <div className="p-2 max-w-7xl mb-6 mx-auto bg-gray-50/50">
+        <button
+            onClick={() => navigate("/admin")}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg 
+              bg-white border border-gray-200 text-sm font-semibold 
+              text-gray-700 hover:bg-gray-50 hover:shadow transition"
+          >
+            ← Back to Dashboard
+        </button>
       </div>
 
       {loading && (

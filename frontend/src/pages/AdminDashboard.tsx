@@ -46,7 +46,8 @@ export default function AdminDashboard() {
   return (
     <div className="p-8 max-w-7xl mx-auto bg-gray-50/50 min-h-screen">
       {/* HEADER */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-10 gap-6">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-2 gap-6">
+        
         <div>
           <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
             Admin Dashboard
@@ -87,12 +88,25 @@ export default function AdminDashboard() {
 
 
           <button
-            onClick={() => navigate("/admin/add-property")}
+            onClick={() => navigate("/admin/add-property", {
+              state: { from: "/admin" },
+            })}
             className="bg-black text-white px-6 py-2.5 rounded-xl font-bold hover:bg-gray-800 transition-all flex items-center gap-2 shadow-lg shadow-gray-200"
           >
             <span className="text-lg">+</span> Add Property
           </button>
         </div>
+      </div>
+
+      <div className="p-2 max-w-7xl mb-4 mx-auto bg-gray-50/50">
+        <button
+            onClick={() => navigate("/")}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg 
+              bg-white border border-gray-200 text-sm font-semibold 
+              text-gray-700 hover:bg-gray-50 hover:shadow transition"
+          >
+            ← Back to Home
+        </button>
       </div>
 
       {/* STATS */}

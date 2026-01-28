@@ -10,6 +10,7 @@ import BookSiteVisitModal from "../components/BookSiteVisitModal";
 import MapModal from "../components/MapModal";
 import EnquiryModal from "../components/EnquiryModal";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 type Category = {
   _id: string;
@@ -41,8 +42,16 @@ export default function Home() {
   const [enquiryPropertyId, setEnquiryPropertyId] = useState<string | null>(null);
   const navigate = useNavigate();
 
+  const location = useLocation();
 
-  
+  useEffect(() => {
+    if (location.hash) {
+      const el = document.querySelector(location.hash);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
 
   useEffect(() => {
     api.get("/properties")

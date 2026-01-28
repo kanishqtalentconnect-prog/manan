@@ -18,6 +18,17 @@ export default function EditPropertyPage() {
     <div className="max-w-3xl mx-auto p-8">
       <h1 className="text-3xl font-bold mb-6">Edit Property</h1>
 
+      <div className="p-2 max-w-7xl mb-6 mx-auto bg-gray-50/50">
+        <button
+            onClick={() => navigate("/admin/properties")}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg 
+              bg-white border border-gray-200 text-sm font-semibold 
+              text-gray-700 hover:bg-gray-50 hover:shadow transition"
+          >
+            ← Back to Properties
+        </button>
+      </div>
+
       <PropertyForm
         initialData={property}
         onSuccess={() => navigate("/admin/properties")}

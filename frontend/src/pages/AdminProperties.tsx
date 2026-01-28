@@ -44,7 +44,7 @@ export default function AdminProperties() {
 
   return (
     <div className="p-8 max-w-7xl mx-auto min-h-screen bg-gray-50/30">
-      <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
         <div>
           <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
             Manage Properties
@@ -54,10 +54,23 @@ export default function AdminProperties() {
           </p>
         </div>
         <button
-          onClick={() => navigate("/admin/add-property")}
+          onClick={() => navigate("/admin/add-property", {
+            state: { from: "/admin/properties" },
+          })}
           className="bg-black text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-800 transition-all flex items-center gap-2 shadow-sm"
         >
           <span className="text-xl">+</span> Add New Listing
+        </button>
+      </div>
+
+      <div className="p-2 max-w-7xl mb-4 mx-auto bg-gray-50/50">
+        <button
+            onClick={() => navigate("/admin")}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg 
+              bg-white border border-gray-200 text-sm font-semibold 
+              text-gray-700 hover:bg-gray-50 hover:shadow transition"
+          >
+            ← Back to Dashboard
         </button>
       </div>
 

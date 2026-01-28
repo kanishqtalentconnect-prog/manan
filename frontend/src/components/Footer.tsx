@@ -1,6 +1,29 @@
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 
 export default function Footer() {
+
+  const socialLinks = [
+    {
+      icon: FaFacebookF,
+      href: "https://www.facebook.com/",
+      label: "Facebook",
+    },
+    {
+      icon: FaInstagram,
+      href: "https://www.instagram.com/",
+      label: "Instagram",
+    },
+    {
+      icon: FaLinkedinIn,
+      href: "https://www.linkedin.com/",
+      label: "LinkedIn",
+    },
+    {
+      icon: FaYoutube,
+      href: "https://www.youtube.com/",
+      label: "YouTube",
+    },
+  ];
   return (
     <footer className="relative bg-[#0f0f0f] text-gray-400">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(196,164,124,0.05),transparent_70%)]" />
@@ -25,16 +48,21 @@ export default function Footer() {
             </p>
 
             <div className="flex gap-4 mt-6">
-              {[FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube].map(
-                (Icon, i) => (
-                  <div
-                    key={i}
-                    className="w-9 h-9 rounded-full bg-[#161616] border border-white/10 flex items-center justify-center hover:border-[#c4a47c]/40 transition cursor-pointer"
-                  >
-                    <Icon className="text-sm" />
-                  </div>
-                )
-              )}
+              {socialLinks.map(({ icon: Icon, href, label }, i) => (
+                <a
+                  key={i}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-9 h-9 rounded-full bg-[#161616] border border-white/10 
+                            flex items-center justify-center 
+                            hover:border-[#c4a47c]/40 hover:text-[#c4a47c] 
+                            transition cursor-pointer"
+                >
+                  <Icon className="text-sm" />
+                </a>
+              ))}
             </div>
           </div>
 
@@ -42,10 +70,10 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-4">Company</h4>
             <ul className="space-y-3 text-sm">
-              <li><a href="#about" className="hover:text-white">About Us</a></li>
-              <li><a href="#property" className="hover:text-white">Properties</a></li>
-              <li><a href="#hero2" className="hover:text-white">Why Invest</a></li>
-              <li><a href="#hero4" className="hover:text-white">Testimonials</a></li>
+              <li><a href="/#about" className="hover:text-white">About Us</a></li>
+              <li><a href="/#property" className="hover:text-white">Properties</a></li>
+              <li><a href="/#hero2" className="hover:text-white">Why Invest</a></li>
+              <li><a href="/#hero4" className="hover:text-white">Testimonials</a></li>
             </ul>
           </div>
 

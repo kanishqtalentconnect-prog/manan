@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import api from "../api/axios";
 import BookSiteVisitModal from "../components/BookSiteVisitModal";
 import EnquiryModal from "../components/EnquiryModal";
+import { useNavigate } from "react-router-dom";
 
 
 type Category = {
@@ -36,8 +37,7 @@ export default function PropertyDetail() {
   const [selectedImage, setSelectedImage] = useState(0);
   const [showZoom, setShowZoom] = useState(false);
   const [showEnquiry, setShowEnquiry] = useState(false);
-
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     api
@@ -101,6 +101,15 @@ export default function PropertyDetail() {
                 <span className="text-gray-500 text-sm font-medium uppercase tracking-wider">
                   {property.category?.name}
                 </span>
+
+                <button
+                  onClick={() => navigate("/#property")}
+                  className="flex ml-auto items-center gap-2 px-4 py-2 rounded-lg 
+                    bg-white border border-gray-200 text-sm font-semibold 
+                    text-gray-700 hover:bg-gray-50 hover:shadow transition"
+                >
+                  ← Back
+                </button>
               </div>
 
               <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../../api/axios";
+import { useNavigate } from "react-router-dom";
 
 type Category = {
   _id: string;
@@ -9,6 +10,7 @@ type Category = {
 export default function AdminCategories() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [name, setName] = useState("");
+  const navigate = useNavigate();
 
   const load = async () => {
     const res = await api.get("/categories");
@@ -40,9 +42,20 @@ export default function AdminCategories() {
 
   return (
     <div className="max-w-2xl mx-auto p-8 min-h-screen">
-      <div className="mb-10 text-center md:text-left">
+      <div className="mb-8 text-center md:text-left">
         <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">Manage Categories</h1>
         <p className="text-gray-500 mt-1">Organize property types like Villas, Apartments, or Penthouses.</p>
+      </div>
+
+      <div className="p-2 max-w-7xl mb-6 mx-auto bg-gray-50/50">
+        <button
+            onClick={() => navigate("/admin")}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg 
+              bg-white border border-gray-200 text-sm font-semibold 
+              text-gray-700 hover:bg-gray-50 hover:shadow transition"
+          >
+            ← Back to Dashboard
+        </button>
       </div>
 
       {/* ADD CATEGORY INPUT */}

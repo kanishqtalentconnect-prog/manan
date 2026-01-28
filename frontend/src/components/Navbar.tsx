@@ -25,35 +25,38 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* CENTER NAV LINKS */}
+        {!user && (
         <div className="hidden md:flex items-center gap-8 text-sm text-gray-300">
-          <a href="#property" className="hover:text-white transition">
+          <a href="/#property" className="hover:text-white transition">
             Properties
           </a>
-          <a href="#about" className="hover:text-white transition">
+          <a href="/#about" className="hover:text-white transition">
             About Mukteshwar
           </a>
-          <a href="#hero2" className="hover:text-white transition">
+          <a href="/#hero2" className="hover:text-white transition">
             Why Invest
           </a>
-          <a href="#hero3" className="hover:text-white transition">
+          <a href="/#hero3" className="hover:text-white transition">
             Gallery
           </a>
-          <a href="#hero4" className="hover:text-white transition">
+          <a href="/#hero4" className="hover:text-white transition">
             Testimonials
           </a>
         </div>
+        )}
 
         {/* RIGHT ACTIONS */}
         <div className="flex items-center gap-4">
           {!user && ( <Link to="/login" className="bg-gray-900 text-white px-6 py-2.5 rounded-xl font-semibold hover:bg-black hover:shadow-lg hover:shadow-gray-200 transition-all active:scale-95" > Login </Link> )}
           {/* CONTACT CTA */}
+          {!user && (
           <a
-            href="#contact"
+            href="/#contact"
             className="hidden sm:inline-flex items-center gap-2 bg-[#c4a47c] text-black px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#d6b88c] transition"
           >
             Contact Us
           </a>
+          )}
 
           {/* AUTH AREA */}
           {user && (
