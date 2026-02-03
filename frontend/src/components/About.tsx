@@ -106,7 +106,7 @@ const About = () => {
         {/* BOTTOM IMAGE */}
         <div className="rounded-2xl overflow-hidden shadow-2xl border border-white/10">
           <img 
-            src="s/about.jpg" 
+            src="/about.jpg" 
             alt="Mountains" 
             className="w-full h-87.5 md:h-112.5 object-cover grayscale-20 hover:grayscale-0 transition-all duration-1000"
           />
