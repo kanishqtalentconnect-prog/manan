@@ -89,7 +89,7 @@ export default function Hero2() {
           <div className="relative">
             <div className="absolute -inset-2 rounded-3xl bg-[#c4a47c]/20 blur-xl opacity-30" />
             <img
-              src="/hero2.jpg"
+              src="images/hero2.jpg"
               alt="Mukteshwar Landscape"
               className="relative rounded-3xl shadow-2xl object-cover"
             />
