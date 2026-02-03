@@ -30,6 +30,10 @@ type Property = {
 
 export default function PropertyDetail() {
   const { id } = useParams();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, []);
+
   const [property, setProperty] = useState<Property | null>(null);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);

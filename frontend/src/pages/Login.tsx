@@ -1,10 +1,15 @@
 import api from "../api/axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useEffect } from "react";
 
 export default function Login() {
   const navigate = useNavigate();
-  const { login } = useAuth()
+  const { login } = useAuth();
+  useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }, []);
+  
 
   const handleLogin = async () => {
     const res = await api.post("/auth/login", {
