@@ -33,6 +33,7 @@ export default function Hero3() {
             <img
               src="images/hero3_1.jpg"
               alt="Luxury Interior"
+              loading="eager"
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </div>
@@ -42,6 +43,7 @@ export default function Hero3() {
             <img
               src="images/hero2.jpg"
               alt="Himalayan Peaks"
+              loading="eager"
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </div>
@@ -51,6 +53,7 @@ export default function Hero3() {
             <img
               src="images/hero3_3.jpg"
               alt="Modern Villa"
+              loading="eager"
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </div>
@@ -60,6 +63,7 @@ export default function Hero3() {
             <img
               src="images/hero3_4.jpg"
               alt="Luxury Living Room"
+              loading="eager"
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </div>
@@ -69,6 +73,7 @@ export default function Hero3() {
             <img
               src="images/hero3_5.jpg"
               alt="Mountain View"
+              loading="eager"
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </div>

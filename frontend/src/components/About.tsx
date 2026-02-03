@@ -108,6 +108,7 @@ const About = () => {
           <img 
             src="images/about.jpg" 
             alt="Mountains" 
+            loading="eager"
             className="w-full h-87.5 md:h-112.5 object-cover grayscale-20 hover:grayscale-0 transition-all duration-1000"
           />
         </div>

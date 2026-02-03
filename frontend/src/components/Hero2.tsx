@@ -91,6 +91,7 @@ export default function Hero2() {
             <img
               src="images/hero2.jpg"
               alt="Mukteshwar Landscape"
+              loading="eager"
               className="relative rounded-3xl shadow-2xl object-cover"
             />
           </div>
