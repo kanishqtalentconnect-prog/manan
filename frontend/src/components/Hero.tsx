@@ -37,7 +37,7 @@ export default function Hero() {
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
             href="#property"
-            className="px-8 py-3.5 rounded-xl bg-[#c4a47c] text-black font-semibold
+            className="px-8 py-3.5 rounded-xl bg-[#c:\Users\dhang\Downloads\logo.svg] text-black font-semibold
                        hover:bg-[#b08f63] transition-all shadow-lg"
           >
             Explore Properties
