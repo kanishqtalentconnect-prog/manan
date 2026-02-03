@@ -31,7 +31,7 @@ export default function Hero3() {
           {/* Left tall image */}
           <div className="md:row-span-2 overflow-hidden rounded-3xl group">
             <img
-              src="../../public/hero3_1.jpg"
+              src="/hero3_1.jpg"
               alt="Luxury Interior"
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
@@ -40,7 +40,7 @@ export default function Hero3() {
           {/* Top middle */}
           <div className="overflow-hidden rounded-3xl group">
             <img
-              src="../../public/hero2.jpg"
+              src="/hero2.jpg"
               alt="Himalayan Peaks"
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
@@ -49,7 +49,7 @@ export default function Hero3() {
           {/* Top right */}
           <div className="overflow-hidden rounded-3xl group">
             <img
-              src="../../public/hero3_3.jpg"
+              src="/hero3_3.jpg"
               alt="Modern Villa"
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
@@ -58,7 +58,7 @@ export default function Hero3() {
           {/* Bottom middle */}
           <div className="overflow-hidden rounded-3xl group">
             <img
-              src="../../public/hero3_4.jpg"
+              src="/hero3_4.jpg"
               alt="Luxury Living Room"
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
@@ -67,7 +67,7 @@ export default function Hero3() {
           {/* Bottom right */}
           <div className="overflow-hidden rounded-3xl group">
             <img
-              src="../../public/hero3_5.jpg"
+              src="/hero3_5.jpg"
               alt="Mountain View"
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
