@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useEffect } from "react";
 
 const faqs = [
   {
@@ -45,7 +46,9 @@ const faqs = [
 
 export default function FAQ() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-
+  useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }, []);
   const toggleFAQ = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   };

@@ -1,4 +1,4 @@
-
+import { useEffect } from "react";
 
 const documents = [
   {
@@ -44,6 +44,9 @@ const documents = [
 ];
 
 export default function LegalDocumentation() {
+  useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }, []);
   return (
     <div className="max-w-5xl mx-auto px-6 py-16 animate-in fade-in duration-700">
       {/* Header */}
