@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const faqs = [
   {
     question: "What is a site visit and how can I book one?",
     answer:
-      "A site visit allows you to personally inspect the property with our representative. You can book a site visit by clicking on the 'Schedule a Private Tour' button on the property detail page and filling in your details.",
+      "A site visit allows you to personally inspect the property with our representative. You can book a site visit by clicking on the 'Book Site Visit' button on the property detail page and filling in your details.",
   },
   {
     question: "Is there any charge for booking a site visit?",
@@ -35,7 +36,7 @@ const faqs = [
   {
     question: "How do I make an enquiry about a property?",
     answer:
-      "You can click on the 'Send Enquiry' button on the property detail page. Our team will get in touch with you shortly after receiving your request.",
+      "You can click on the 'Make an Enquiry' button on the property detail page. Our team will get in touch with you shortly after receiving your request.",
   },
   {
     question: "Can I sell my property through this platform?",
@@ -46,6 +47,7 @@ const faqs = [
 
 export default function FAQ() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const navigate = useNavigate();
   useEffect(() => {
       window.scrollTo({ top: 0, behavior: "instant" });
     }, []);
@@ -55,6 +57,19 @@ export default function FAQ() {
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-16 animate-in fade-in duration-700">
+      <div className="relative max-w-7xl mx-auto p-6">
+        <div className="absolute top-0 right-0  gap-2">
+          {/* BACK */}
+          <button
+            onClick={() => navigate('/')}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg 
+              bg-white border border-gray-200 text-sm font-semibold 
+              text-gray-700 hover:bg-gray-50 hover:shadow transition"
+          >
+            ← Back
+          </button>
+        </div>
+      </div>
       {/* Header */}
       <div className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
@@ -111,13 +126,13 @@ export default function FAQ() {
         <p className="text-gray-600 mb-6">
           Our team is happy to help you with any queries you may have.
         </p>
-        <button
+        <a href="/#contact"
           className="inline-flex items-center justify-center px-8 py-4 
             rounded-2xl bg-gray-900 text-white font-bold text-lg 
             hover:bg-black transition active:scale-[0.98]"
         >
           Contact Support
-        </button>
+        </a>
       </div>
     </div>
   );

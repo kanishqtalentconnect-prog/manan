@@ -47,7 +47,9 @@ export default function Home() {
 
   useEffect(() => {
     if (location.hash) {
-      const el = document.querySelector(location.hash);
+      const id = location.hash.replace("#", "");
+      const el = document.getElementById(id);
+      el?.scrollIntoView({ behavior: "auto", block: "start" });
       if (el) {
         el.scrollIntoView({ behavior: "smooth" });
       }

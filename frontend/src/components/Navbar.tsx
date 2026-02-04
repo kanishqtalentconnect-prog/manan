@@ -2,14 +2,22 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
-export function useScrollSpy(sectionIds: string[]) {
+export function useScrollSpy(
+  sectionIds: string[],
+  enabled: boolean
+) {
   const [activeId, setActiveId] = useState<string>("");
 
   useEffect(() => {
+    if (!enabled) {
+      setActiveId("");
+      return;
+    }
+
     const handleScroll = () => {
       const triggerLine = window.innerHeight / 2;
-
       let current = sectionIds[0];
 
       for (const id of sectionIds) {
@@ -17,7 +25,6 @@ export function useScrollSpy(sectionIds: string[]) {
         if (!el) continue;
 
         const rect = el.getBoundingClientRect();
-
         if (rect.top <= triggerLine) {
           current = id;
         }
@@ -30,7 +37,7 @@ export function useScrollSpy(sectionIds: string[]) {
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [sectionIds]);
+  }, [sectionIds, enabled]);
 
   return activeId;
 }
@@ -42,13 +49,16 @@ function NavItem({
   href,
   label,
   activeSection,
+  disableUnderline,
 }: {
   href: string;
   label: string;
   activeSection: string;
+  disableUnderline?: boolean;
 }) {
   const sectionId = href.replace("/#", "");
-  const isActive = activeSection === sectionId;
+  const isActive = !disableUnderline && activeSection === sectionId;
+
 
   return (
     <a
@@ -57,13 +67,15 @@ function NavItem({
     >
       {label}
 
-      <span
-        className={`
-          absolute left-0 -bottom-2 h-[2px] w-full bg-[#c4a47c]
-          transform origin-left transition-transform duration-300
-          ${isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}
-        `}
-      />
+      {!disableUnderline && (
+        <span
+          className={`
+            absolute left-0 -bottom-2 h-[2px] w-full bg-[#c4a47c]
+            transform origin-left transition-transform duration-300
+            ${isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}
+          `}
+        />
+      )}
     </a>
   );
 }
@@ -72,13 +84,15 @@ function NavItem({
 export default function Navbar() {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
-  const activeSection = useScrollSpy([
-    "about",
-    "property",
-    "hero2",
-    "hero3",
-    "hero4",
-  ]);
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+  const isStaticPage =
+    location.pathname === "/faq" ||
+    location.pathname === "/documentation";
+  const activeSection = useScrollSpy(
+    ["about", "property", "hero2", "hero3", "hero4"],
+    isHomePage
+  );
   const handleLogout = () => {
     logout();
     navigate("/");
@@ -101,11 +115,11 @@ export default function Navbar() {
 
         {!user && (
         <div className="hidden md:flex items-center gap-8">
-          <NavItem href="/#about" label="About Mukteshwar" activeSection={activeSection} />
-          <NavItem href="/#property" label="Properties" activeSection={activeSection} />
-          <NavItem href="/#hero2" label="Why Invest" activeSection={activeSection} />
-          <NavItem href="/#hero3" label="Gallery" activeSection={activeSection} />
-          <NavItem href="/#hero4" label="Testimonials" activeSection={activeSection} />
+          <NavItem href="/#about" label="About Mukteshwar" activeSection={activeSection} disableUnderline={isStaticPage} />
+          <NavItem href="/#property" label="Properties" activeSection={activeSection} disableUnderline={isStaticPage} />
+          <NavItem href="/#hero2" label="Why Invest" activeSection={activeSection} disableUnderline={isStaticPage} />
+          <NavItem href="/#hero3" label="Gallery" activeSection={activeSection} disableUnderline={isStaticPage} />
+          <NavItem href="/#hero4" label="Testimonials" activeSection={activeSection} disableUnderline={isStaticPage} />
         </div>
         )}
 

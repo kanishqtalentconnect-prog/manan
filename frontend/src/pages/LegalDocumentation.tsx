@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const documents = [
   {
@@ -44,11 +45,25 @@ const documents = [
 ];
 
 export default function LegalDocumentation() {
+  const navigate = useNavigate();
   useEffect(() => {
       window.scrollTo({ top: 0, behavior: "instant" });
     }, []);
   return (
     <div className="max-w-5xl mx-auto px-6 py-16 animate-in fade-in duration-700">
+      <div className="relative max-w-7xl mx-auto p-6">
+        <div className="absolute top-6 right-4  gap-2">
+          {/* BACK */}
+          <button
+            onClick={() => navigate('/')}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg 
+              bg-white border border-gray-200 text-sm font-semibold 
+              text-gray-700 hover:bg-gray-50 hover:shadow transition"
+          >
+            ← Back
+          </button>
+        </div>
+      </div>
       {/* Header */}
       <div className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
@@ -99,13 +114,13 @@ export default function LegalDocumentation() {
         <p className="text-gray-600 mb-6">
           Our team can guide you through the legal verification process.
         </p>
-        <button
+        <a href="/#contact"
           className="inline-flex items-center justify-center px-8 py-4 
             rounded-2xl bg-gray-900 text-white font-bold text-lg 
             hover:bg-black transition active:scale-[0.98]"
         >
-          Contact Legal Support
-        </button>
+          Contact Us
+        </a>
       </div>
     </div>
   );

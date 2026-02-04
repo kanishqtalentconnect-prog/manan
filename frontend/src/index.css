@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+#about,
+#property,
+#hero2,
+#hero3,
+#hero4,
+#contact {
+  scroll-margin-top: 96px;
+}
