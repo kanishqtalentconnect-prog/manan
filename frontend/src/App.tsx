@@ -12,7 +12,7 @@ import AdminBookings from "./pages/AdminBookings";
 import AdminEnquiries from "./components/admin/AdminEnquiries";
 import AdminCategories from "./components/admin/Categories";
 import LegalDocumentation from "./pages/LegalDocumentation";
-import FAQ from "./pages/FAQ";
+import Faq from "./pages/FAQ";
 
 export default function App() {
   return (
@@ -30,7 +30,7 @@ export default function App() {
         <Route path="/admin/bookings" element={<AdminBookings />} />
         <Route path="/admin/enquiries" element={<AdminEnquiries />} />
         <Route path="/admin/categories" element={<AdminCategories />} />
-        <Route path="/faq" element={<FAQ />} />
+        <Route path="/faq" element={<Faq />} />
         <Route path="/documentation" element={<LegalDocumentation />} />
       </Routes>
       <Footer />
