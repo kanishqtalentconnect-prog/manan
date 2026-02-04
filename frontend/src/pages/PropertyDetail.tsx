@@ -4,7 +4,7 @@ import api from "../api/axios";
 import BookSiteVisitModal from "../components/BookSiteVisitModal";
 import EnquiryModal from "../components/EnquiryModal";
 import { useNavigate } from "react-router-dom";
-
+import { FiShare2 } from "react-icons/fi";
 
 type Category = {
   _id: string;
@@ -22,6 +22,7 @@ type Property = {
   area?: number;
   dimensions?: string;
   category?: Category;
+  tag?: string;
   images: string[];
   googleMapUrl?: string;
   status?: string;
@@ -52,6 +53,24 @@ export default function PropertyDetail() {
 
   if (loading) return <p className="p-8">Loading...</p>;
   if (!property) return <p className="p-8">Property not found</p>;
+  const handleShare = async () => {
+    const shareData = {
+      title: property.title,
+      text: `${property.title} – ${property.category?.name}`,
+      url: window.location.href,
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(shareData.url);
+        alert("Link copied to clipboard");
+      }
+    } catch (err) {
+      console.error("Share failed:", err);
+    }
+  };
 
   return (
     <>
@@ -102,18 +121,33 @@ export default function PropertyDetail() {
             <div className="mb-8">
               <div className="flex items-center gap-3 mb-4">
                 
-                <span className="text-gray-500 text-sm font-medium uppercase tracking-wider">
+                <span className="inline-flex items-center gap-2 text-base font-semibold uppercase tracking-widest text-gray-500">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
                   {property.category?.name}
                 </span>
 
-                <button
-                  onClick={() => navigate("/#property")}
-                  className="flex ml-auto items-center gap-2 px-4 py-2 rounded-lg 
-                    bg-white border border-gray-200 text-sm font-semibold 
-                    text-gray-700 hover:bg-gray-50 hover:shadow transition"
-                >
-                  ← Back
-                </button>
+
+                <div className="ml-auto flex items-center gap-2">
+                  {/* SHARE */}
+                  <button
+                    onClick={handleShare}
+                    className="flex items-center gap-2 px-4 py-2 rounded-lg 
+                      bg-white border border-gray-200 text-sm font-semibold 
+                      text-gray-700 hover:bg-gray-50 hover:shadow transition"
+                  >
+                    <FiShare2 className="text-lg" />
+                  </button>
+
+                  {/* BACK */}
+                  <button
+                    onClick={() => navigate('/#property')}
+                    className="flex items-center gap-2 px-4 py-2 rounded-lg 
+                      bg-white border border-gray-200 text-sm font-semibold 
+                      text-gray-700 hover:bg-gray-50 hover:shadow transition"
+                  >
+                    ← Back
+                  </button>
+                </div>
               </div>
 
               <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
@@ -125,6 +159,23 @@ export default function PropertyDetail() {
                   ? `₹${property.price.toLocaleString()}`
                   : "Price on request"}
               </p>
+
+              {property.tag && (
+                <span
+                  className="
+                    inline-block mt-3
+                    px-4 py-1.5
+                    text-xs font-semibold uppercase tracking-widest
+                    rounded-full
+                    bg-blue-600/10
+                    text-gray-600
+                    border border-blue-600/30
+                  "
+                >
+                  {property.tag}
+                </span>
+              )}
+
             </div>
 
             {/* Quick Stats Grid */}

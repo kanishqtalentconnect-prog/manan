@@ -20,6 +20,7 @@ const propertySchema = new mongoose.Schema(
       ref: "Category",
       required: true,
     },
+    tag: String,
     images: [String],
     googleMapUrl: {
       type: String,

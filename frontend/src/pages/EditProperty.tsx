@@ -7,7 +7,9 @@ export default function EditPropertyPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [property, setProperty] = useState<any>(null);
-
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, []);
   useEffect(() => {
     api.get(`/properties/${id}`).then((res) => setProperty(res.data));
   }, [id]);

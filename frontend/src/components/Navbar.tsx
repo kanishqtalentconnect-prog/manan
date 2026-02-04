@@ -1,10 +1,84 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+export function useScrollSpy(sectionIds: string[]) {
+  const [activeId, setActiveId] = useState<string>("");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const triggerLine = window.innerHeight / 2;
+
+      let current = sectionIds[0];
+
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+
+        const rect = el.getBoundingClientRect();
+
+        if (rect.top <= triggerLine) {
+          current = id;
+        }
+      }
+
+      setActiveId(current);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [sectionIds]);
+
+  return activeId;
+}
+
+
+
+function NavItem({
+
+  href,
+  label,
+  activeSection,
+}: {
+  href: string;
+  label: string;
+  activeSection: string;
+}) {
+  const sectionId = href.replace("/#", "");
+  const isActive = activeSection === sectionId;
+
+  return (
+    <a
+      href={href}
+      className="relative group text-sm text-gray-300 hover:text-white transition"
+    >
+      {label}
+
+      <span
+        className={`
+          absolute left-0 -bottom-2 h-[2px] w-full bg-[#c4a47c]
+          transform origin-left transition-transform duration-300
+          ${isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}
+        `}
+      />
+    </a>
+  );
+}
+
 
 export default function Navbar() {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
-
+  const activeSection = useScrollSpy([
+    "about",
+    "property",
+    "hero2",
+    "hero3",
+    "hero4",
+  ]);
   const handleLogout = () => {
     logout();
     navigate("/");
@@ -26,22 +100,12 @@ export default function Navbar() {
         </Link>
 
         {!user && (
-        <div className="hidden md:flex items-center gap-8 text-sm text-gray-300">
-          <a href="/#property" className="hover:text-white transition">
-            Properties
-          </a>
-          <a href="/#about" className="hover:text-white transition">
-            About Mukteshwar
-          </a>
-          <a href="/#hero2" className="hover:text-white transition">
-            Why Invest
-          </a>
-          <a href="/#hero3" className="hover:text-white transition">
-            Gallery
-          </a>
-          <a href="/#hero4" className="hover:text-white transition">
-            Testimonials
-          </a>
+        <div className="hidden md:flex items-center gap-8">
+          <NavItem href="/#about" label="About Mukteshwar" activeSection={activeSection} />
+          <NavItem href="/#property" label="Properties" activeSection={activeSection} />
+          <NavItem href="/#hero2" label="Why Invest" activeSection={activeSection} />
+          <NavItem href="/#hero3" label="Gallery" activeSection={activeSection} />
+          <NavItem href="/#hero4" label="Testimonials" activeSection={activeSection} />
         </div>
         )}
 

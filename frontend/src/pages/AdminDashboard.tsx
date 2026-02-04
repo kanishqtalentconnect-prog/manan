@@ -14,6 +14,7 @@ type RecentProperty = {
   _id: string;
   title: string;
   price?: number;
+  tag: string;
   category?: {
     _id: string;
     name: string;
@@ -147,6 +148,7 @@ export default function AdminDashboard() {
                 <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Title</th>
                 <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Type</th>
                 <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Price</th>
+                <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Tag</th>
                 <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-right">Action</th>
               </tr>
             </thead>
@@ -168,6 +170,11 @@ export default function AdminDashboard() {
                     {typeof p.price === "number"
                       ? `₹${p.price.toLocaleString()}`
                       : "Price on request"}
+                  </td>
+                  <td className="px-6 py-4">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 capitalize">
+                      {p.tag || "—"}
+                    </span>
                   </td>
                   <td className="px-6 py-4 text-right">
                     <button 

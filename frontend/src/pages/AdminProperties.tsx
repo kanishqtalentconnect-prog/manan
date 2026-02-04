@@ -18,6 +18,7 @@ type Property = {
   area?: number;
   dimensions?: string;
   category?: Category;
+  tag:string;
   images: string[];
   googleMapUrl?: string;
   status?: string;
@@ -92,6 +93,12 @@ export default function AdminProperties() {
               <div className="absolute top-3 left-3">
                 <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest shadow-sm">
                   {p.category?.name}
+                </span>
+              </div>
+
+              <div className="absolute top-3 right-3">
+                <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                  {p.tag}
                 </span>
               </div>
             </div>

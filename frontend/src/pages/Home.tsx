@@ -27,6 +27,7 @@ type Property = {
   area?: number;
   dimensions?: string;
   category?: Category;
+  tag?: string;
   images: string[];
   googleMapUrl?: string;
   status?: string;
@@ -139,12 +140,37 @@ export default function Home() {
 
                 <div className="absolute top-4 left-4 flex gap-2">
                   <span
-                    className={`px-3 py-1 text-[10px] font-semibold tracking-widest uppercase rounded-full
-                    bg-[#c4a47c]/15 text-[#c4a47c] border border-[#c4a47c]/30`}
+                    className="
+                      px-3 py-1
+                      text-[10px] font-medium tracking-widest uppercase
+                      rounded-full
+                      bg-white/85 backdrop-blur-md
+                      text-[#14110f]
+                      border border-black/10
+                      shadow-[0_2px_12px_rgba(0,0,0,0.25)]
+                    "
                   >
                     {property.category?.name}
                   </span>
                 </div>
+
+                {property.tag && (
+                  <div className="absolute top-4 right-4 flex gap-2">
+                    <span
+                      className="
+                        px-3 py-1
+                        text-[10px] font-bold tracking-widest uppercase
+                        rounded-full
+                        bg-black/75 backdrop-blur-md
+                        text-white
+                        border border-white/30
+                        shadow-[0_4px_20px_rgba(0,0,0,0.45)]
+                      "
+                    >
+                      {property.tag}
+                    </span>
+                  </div>
+                )}
               </div>
 
               <div className="p-6 flex flex-col grow text-gray-300">
@@ -207,17 +233,19 @@ export default function Home() {
 
                 {/* Actions */}
                 <div className="mt-auto pt-6 space-y-3">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      if (!property.googleMapUrl) return;
-                      setMapUrl(property.googleMapUrl);
-                    }}
-                    className="inline-flex items-center text-sm font-medium 
-                              text-[#c4a47c] hover:text-[#e0c48f] transition-colors"
-                  >
-                    View Location
-                  </button>
+                  {property.googleMapUrl && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (!property.googleMapUrl) return;
+                        setMapUrl(property.googleMapUrl);
+                      }}
+                      className="inline-flex items-center text-sm font-medium 
+                                text-[#c4a47c] hover:text-[#e0c48f] transition-colors"
+                    >
+                      View Location
+                    </button>
+                  )}
 
                   <button
                     onClick={(e) => {

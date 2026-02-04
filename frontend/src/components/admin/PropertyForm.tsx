@@ -18,6 +18,7 @@ type Property = {
   area?: number;
   dimensions?: string;
   category?: Category;
+  tag: string;
   googleMapUrl?: string;
   images?: string[];
 };
@@ -41,6 +42,7 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
     area: initialData?.area || "",
     dimensions: initialData?.dimensions || "",
     category: initialData?.category ||"",
+    tag: initialData?.tag || "",
     googleMapUrl: initialData?.googleMapUrl || "",
   });
 
@@ -63,6 +65,7 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
         area: initialData.area || "",
         dimensions: initialData.dimensions || "",
         category: initialData?.category ||"",
+        tag: initialData.tag || "",
         googleMapUrl: initialData.googleMapUrl || "",
       });
     }
@@ -96,7 +99,7 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
           ? form.category._id
           : ""
       );
-
+      formData.append("tag", form.tag);
       if (
         typeof form.category === "object" &&
         form.category !== null &&
@@ -303,7 +306,19 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
           ))}
         </select>
 
-
+      {/* TAG */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Tag 
+        </label>
+        <Input
+          name="tag"
+          type="string"
+          placeholder="Limited availability"
+          value={form.tag}
+          onChange={handleChange}
+        />
+      </div>
       {/* EXISTING IMAGES */}
       {existingImages.length > 0 && (
         <div>
