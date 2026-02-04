@@ -71,23 +71,23 @@ export default function PropertyDetail() {
   if (loading) return <p className="p-8">Loading...</p>;
   if (!property) return <p className="p-8">Property not found</p>;
   const handleShare = async () => {
-    const shareData = {
-      title: property.title,
-      text: `${property.title} – ${property.category?.name}`,
-      url: window.location.href,
-    };
+  const url = window.location.href;
 
-    try {
-      if (navigator.share) {
-        await navigator.share(shareData);
-      } else {
-        await navigator.clipboard.writeText(shareData.url);
-        alert("Link copied to clipboard");
-      }
-    } catch (err) {
-      console.error("Share failed:", err);
+  try {
+    if (navigator.share) {
+      await navigator.share({
+        title: property.title,
+        url, // 👈 keep it minimal
+      });
+    } else {
+      throw new Error("Web Share not supported");
     }
-  };
+  } catch (err) {
+    // ✅ universal fallback
+    await navigator.clipboard.writeText(url);
+    alert("Link copied to clipboard");
+  }
+};
   const media = property.media;
   const currentItem = media[selectedIndex];
 
