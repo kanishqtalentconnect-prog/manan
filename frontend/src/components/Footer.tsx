@@ -1,4 +1,5 @@
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
 
@@ -82,8 +83,8 @@ export default function Footer() {
             <h4 className="text-white font-semibold mb-4">Resources</h4>
             <ul className="space-y-3 text-sm">
               <li><a href="/#hero3" className="hover:text-white">Gallery</a></li>
-              <li><a href="/faq" className="hover:text-white">Investment FAQ</a></li>
-              <li><a href="/documentation" className="hover:text-white">Legal Documentation</a></li>
+              <li><Link to="/faq" className="hover:text-white">Investment FAQ</Link></li>
+              <li><Link to="/documentation" className="hover:text-white">Legal Documentation</Link></li>
             </ul>
           </div>
 
