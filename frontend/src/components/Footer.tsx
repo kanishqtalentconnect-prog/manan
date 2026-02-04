@@ -103,8 +103,8 @@ export default function Footer() {
         <div className="mt-16 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500 gap-4">
           <p>© {new Date().getFullYear()} Manan LLP. All rights reserved.</p>
           <div className="flex gap-6">
-            <span className="hover:text-white cursor-pointer">Privacy Policy</span>
-            <span className="hover:text-white cursor-pointer">Terms</span>
+            <Link to="/privacy-policy" className="hover:text-white cursor-pointer">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-white cursor-pointer">Terms</Link>
           </div>
         </div>
       </div>
