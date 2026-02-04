@@ -1,7 +1,11 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function TermsAndConditions() {
   const navigate = useNavigate();
+  useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "instant" });
+      }, []);
 
   return (
     <div className="relative max-w-5xl mx-auto px-6 py-16 animate-in fade-in duration-700">
