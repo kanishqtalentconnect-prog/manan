@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Input from "../Input";
-import ImageUpload from "./ImageUpload";
+import MediaUpload from "./MediaUpload";
 import api from "../../api/axios";
 
 type Category ={ 
@@ -20,7 +20,10 @@ type Property = {
   category?: Category;
   tag: string;
   googleMapUrl?: string;
-  images?: string[];
+  media?: {
+    url: string;
+    type: "image" | "video";
+  }[];
 };
 
 type Props = {
@@ -30,8 +33,9 @@ type Props = {
 
 
 export default function PropertyForm({ initialData, onSuccess }: Props) {
-  const [images, setImages] = useState<FileList | null>(null);
+  const [mediaFiles, setMediaFiles] = useState<FileList | null>(null);
   const [loading, setLoading] = useState(false);
+  const [removedMedia, setRemovedMedia] = useState<string[]>([]);
 
   const [form, setForm] = useState({
     title: initialData?.title || "",
@@ -71,7 +75,7 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
     }
   }, [initialData]);
 
-  const existingImages = initialData?.images ?? [];
+  const existingMedia = initialData?.media ?? [];
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -117,12 +121,19 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
       if (form.googleMapUrl) {
         formData.append("googleMapUrl", form.googleMapUrl);
       }
-
-      if (images) {
-        Array.from(images).forEach((img) =>
-          formData.append("images", img)
+      if (removedMedia.length > 0) {
+        formData.append(
+          "removedMedia",
+          JSON.stringify(removedMedia)
         );
       }
+
+      if (mediaFiles) {
+        Array.from(mediaFiles).forEach((file) => {
+          formData.append("media", file);
+        });
+      }
+
 
       if (initialData) {
         await api.put(`/properties/${initialData._id}`, formData);
@@ -320,30 +331,59 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
         />
       </div>
       {/* EXISTING IMAGES */}
-      {existingImages.length > 0 && (
-        <div>
-          <p className="font-medium mb-2">Existing Images</p>
+      {existingMedia.length > 0 && (
+  <div>
+    <p className="font-medium mb-2">Existing Media</p>
 
-          <div className="grid grid-cols-3 gap-3">
-            {existingImages.map((img, i) => (
+    <div className="grid grid-cols-3 gap-3">
+      {existingMedia.map((item, i) => {
+        const isRemoved = removedMedia.includes(item.url);
+        if (isRemoved) return null;
+
+        return (
+          <div key={i} className="relative group">
+            {item.type === "image" ? (
               <img
-                key={i}
-                src={img}
+                src={item.url}
                 className="h-24 w-full object-cover rounded"
               />
-            ))}
-          </div>
+            ) : (
+              <video
+                src={item.url}
+                className="h-24 w-full object-cover rounded"
+                controls
+              />
+            )}
 
-          <p className="text-sm text-gray-500 mt-2">
-            Uploading new images will replace existing images
-          </p>
-        </div>
-      )}
+            {/* DELETE BUTTON */}
+            <button
+              type="button"
+              onClick={() =>
+                setRemovedMedia((prev) => [...prev, item.url])
+              }
+              className="absolute top-1 right-1 bg-black/70 text-white 
+                         rounded-full w-7 h-7 flex items-center justify-center
+                         opacity-0 group-hover:opacity-100 transition"
+            >
+              ×
+            </button>
+          </div>
+        );
+      })}
+    </div>
+
+    <p className="text-sm text-gray-500 mt-2">
+      Removed media will be deleted after update
+    </p>
+  </div>
+)}
+
+
 
 
       {/* IMAGE UPLOAD */}
       <div>
-        <ImageUpload onChange={setImages} />
+        <MediaUpload onChange={setMediaFiles} />
       </div>
 
       {/* SUBMIT */}

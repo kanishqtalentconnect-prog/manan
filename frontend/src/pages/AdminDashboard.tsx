@@ -28,7 +28,9 @@ export default function AdminDashboard() {
   const navigate = useNavigate();
   const [stats, setStats] = useState<Stats | null>(null);
   const [recent, setRecent] = useState<RecentProperty[]>([]);
-
+  useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }, []);
   useEffect(() => {
     api.get("/properties").then((res) => {
       setRecent(res.data.slice(0, 5));

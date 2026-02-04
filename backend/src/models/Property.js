@@ -21,7 +21,16 @@ const propertySchema = new mongoose.Schema(
       required: true,
     },
     tag: String,
-    images: [String],
+    media: [
+      {
+        url: String,
+        type: {
+          type: String,
+          enum: ["image", "video"],
+          required: true,
+        },
+      },
+    ],
     googleMapUrl: {
       type: String,
     },

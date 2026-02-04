@@ -5,6 +5,7 @@ import BookSiteVisitModal from "../components/BookSiteVisitModal";
 import EnquiryModal from "../components/EnquiryModal";
 import { useNavigate } from "react-router-dom";
 import { FiShare2 } from "react-icons/fi";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 type Category = {
   _id: string;
@@ -23,7 +24,10 @@ type Property = {
   dimensions?: string;
   category?: Category;
   tag?: string;
-  images: string[];
+  media: {
+    url: string;
+    type: "image" | "video";
+  }[];
   googleMapUrl?: string;
   status?: string;
 };
@@ -39,10 +43,10 @@ export default function PropertyDetail() {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [selectedPropertyId, setSelectedPropertyId] = useState<string | null>(null);
-  const [selectedImage, setSelectedImage] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const [showZoom, setShowZoom] = useState(false);
   const [showEnquiry, setShowEnquiry] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useNavigate();  
 
   useEffect(() => {
     api
@@ -50,6 +54,19 @@ export default function PropertyDetail() {
       .then((res) => setProperty(res.data))
       .finally(() => setLoading(false));
   }, [id]);
+
+  useEffect(() => {
+    if (!showZoom) return;
+
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") nextItem();
+      if (e.key === "ArrowLeft") prevItem();
+      if (e.key === "Escape") setShowZoom(false);
+    };
+
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [showZoom]);
 
   if (loading) return <p className="p-8">Loading...</p>;
   if (!property) return <p className="p-8">Property not found</p>;
@@ -71,6 +88,22 @@ export default function PropertyDetail() {
       console.error("Share failed:", err);
     }
   };
+  const media = property.media;
+  const currentItem = media[selectedIndex];
+
+  const nextItem = () => {
+    setSelectedIndex((prev) =>
+      prev === media.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  const prevItem = () => {
+    setSelectedIndex((prev) =>
+      prev === 0 ? media.length - 1 : prev - 1
+    );
+  };
+
+
 
   return (
     <>
@@ -81,38 +114,68 @@ export default function PropertyDetail() {
           <div className="space-y-4">
             <div className="grid md:grid-cols-[100px_1fr] gap-4">
               {/* Thumbnails */}
-              <div className="flex md:flex-col gap-3 order-2 md:order-1 overflow-x-auto pb-2 md:pb-0">
-                {property.images.map((img, index) => (
+              <div className="flex md:flex-col gap-3 overflow-x-auto">
+                {media.map((item, index) => (
                   <button
                     key={index}
-                    onClick={() => setSelectedImage(index)}
-                    className={`relative shrink-0 w-20 h-20 md:w-full md:h-24 rounded-xl overflow-hidden transition-all duration-200 border-2 ${
-                      selectedImage === index
-                        ? "border-black scale-[0.98] ring-2 ring-gray-100"
-                        : "border-transparent opacity-60 hover:opacity-100"
-                    }`}
+                    onClick={() => setSelectedIndex(index)}
+                    className={`relative w-20 h-20 rounded-xl overflow-hidden border transition
+                      ${selectedIndex === index
+                        ? "border-black ring-2 ring-black/20"
+                        : "border-transparent opacity-60 hover:opacity-100"}
+                    `}
                   >
-                    <img src={img} className="w-full h-full object-cover" alt={`View ${index + 1}`} />
+                    {item.type === "image" ? (
+                      <img src={item.url} className="w-full h-full object-cover" />
+                    ) : (
+                      <>
+                        <video
+                          src={item.url}
+                          className="w-full h-full object-cover"
+                          preload="metadata"
+                        />
+                        <span className="absolute inset-0 flex items-center justify-center bg-black/40 text-white text-xs font-semibold">
+                          ▶ VIDEO
+                        </span>
+                      </>
+                    )}
                   </button>
                 ))}
               </div>
 
+
+
               {/* Main Image */}
-              <div 
-                className="group relative cursor-zoom-in order-1 md:order-2 overflow-hidden rounded-3xl bg-gray-100 shadow-sm"
-                onClick={() => setShowZoom(true)}
+              <div
+                  className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl bg-black shadow-lg"
+                  onClick={() => {
+                    if (currentItem.type === "image") setShowZoom(true);
+                  }}
               >
-                <img
-                  src={property.images[selectedImage]}
-                  className="w-full h-100 md:h-150 object-cover transition-transform duration-700 group-hover:scale-105"
-                  alt={property.title}
-                />
-                <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors" />
-                <button className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm hover:bg-white text-black rounded-full px-4 py-2 text-sm font-medium shadow-lg flex items-center gap-2 transition-all">
-                  <span>View Fullscreen</span>
-                  <span className="text-lg">🔍</span>
-                </button>
-              </div>
+                  {currentItem.type === "image" ? (
+                    <img
+                      src={currentItem.url}
+                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-105 cursor-zoom-in"
+                      alt={property.title}
+                    />
+                  ) : (
+                    <video
+                      src={currentItem.url}
+                      controls
+                      className="w-full h-full object-cover"
+                    />
+                  )}
+
+                  {/* Overlay gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+
+                  {/* Fullscreen CTA */}
+                  {currentItem.type === "image" && (
+                    <button className="absolute bottom-4 right-4 bg-white/90 backdrop-blur px-4 py-2 rounded-full text-sm font-medium shadow hover:bg-white">
+                      🔍 View Fullscreen
+                    </button>
+                  )}
+                </div>
             </div>
           </div>
 
@@ -299,18 +362,85 @@ export default function PropertyDetail() {
 
 
       {/* FULLSCREEN IMAGE ZOOM */}
-      {showZoom && (
+      {showZoom && currentItem.type === "image" && (
         <div
-          className="fixed inset-0 bg-black/95 z-100 flex items-center justify-center p-4 backdrop-blur-md transition-all animate-in zoom-in duration-300"
+          className="fixed inset-0 z-50 bg-black/95"
           onClick={() => setShowZoom(false)}
         >
-          <button className="absolute top-8 right-8 text-white/50 hover:text-white text-4xl">×</button>
-          <img
-            src={property.images[selectedImage]}
-            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
-          />
+          {/* CLOSE */}
+          <button
+            onClick={() => setShowZoom(false)}
+            className="absolute top-6 right-6 text-white/70 hover:text-white text-4xl z-50"
+          >
+            ×
+          </button>
+
+          {/* PREV */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              prevItem();
+            }}
+            className="absolute left-6 top-1/2 -translate-y-1/2 
+                      text-white/60 hover:text-white text-5xl z-50"
+          >
+            ‹
+          </button>
+
+          {/* NEXT */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              nextItem();
+            }}
+            className="absolute right-6 top-1/2 -translate-y-1/2 
+                      text-white/60 hover:text-white text-5xl z-50"
+          >
+            ›
+          </button>
+
+          {/* ZOOMABLE IMAGE */}
+          <TransformWrapper
+            key={selectedIndex} // 🔥 resets zoom when image changes
+            initialScale={1}
+            minScale={1}
+            maxScale={4}
+            centerOnInit
+            wheel={{ step: 0.15 }}
+            pinch={{ step: 5 }}
+            doubleClick={{ mode: "zoomIn" }}
+          >
+            <TransformComponent
+              wrapperStyle={{ width: "100vw", height: "100vh" }}
+              contentStyle={{
+                width: "100vw",
+                height: "100vh",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <img
+                src={currentItem.url}
+                style={{
+                  maxWidth: "95vw",
+                  maxHeight: "95vh",
+                  objectFit: "contain",
+                }}
+                draggable={false}
+              />
+
+            </TransformComponent>
+          </TransformWrapper>
+
+          {/* COUNTER */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/60 text-sm">
+            {selectedIndex + 1} / {property.media.length}
+          </div>
         </div>
       )}
+
+
     </>
 
   );

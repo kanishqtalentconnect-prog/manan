@@ -4,12 +4,24 @@ import cloudinary from "../config/cloudinary.js";
 
 const storage = new CloudinaryStorage({
   cloudinary,
-  params: {
-    folder: "properties",
-    allowed_formats: ["jpg", "png", "jpeg", "webp"],
+  params: async (req, file) => {
+    const isVideo = file.mimetype.startsWith("video");
+
+    return {
+      folder: isVideo ? "properties/videos" : "properties/images",
+      resource_type: isVideo ? "video" : "image",
+      allowed_formats: isVideo
+        ? ["mp4", "mov", "webm"]
+        : ["jpg", "jpeg", "png", "webp"],
+    };
   },
 });
 
-const upload = multer({ storage });
+const upload = multer({
+  storage,
+  limits: {
+    fileSize: 50 * 1024 * 1024, // 50MB (important for video)
+  },
+});
 
 export default upload;

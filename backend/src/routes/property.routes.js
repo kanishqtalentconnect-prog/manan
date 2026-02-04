@@ -16,14 +16,14 @@ router.post(
   "/",
   protect,
   adminOnly,
-  upload.array("images", 10),
+  upload.array("media", 10),
   createProperty
 );
 router.put(
   "/:id",
   protect,
   adminOnly,
-  upload.array("images", 10),
+  upload.array("media", 10),
   updateProperty
 );
 

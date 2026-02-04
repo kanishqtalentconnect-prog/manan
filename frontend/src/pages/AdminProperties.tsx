@@ -19,7 +19,10 @@ type Property = {
   dimensions?: string;
   category?: Category;
   tag:string;
-  images: string[];
+  media?: {
+    url: string;
+    type: "image" | "video";
+  }[];
   googleMapUrl?: string;
   status?: string;
 };
@@ -84,10 +87,13 @@ export default function AdminProperties() {
             {/* IMAGE */}
             <div className="relative h-48 overflow-hidden">
               <img
-                src={p.images?.[0]}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                alt={p.title}
-              />
+                  src={
+                    p.media?.find((m) => m.type === "image")?.url ||
+                    "/placeholder.jpg"
+                  }
+                  alt={p.title}
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
 
               {/* TYPE BADGE */}
               <div className="absolute top-3 left-3">

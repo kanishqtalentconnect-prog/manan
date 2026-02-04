@@ -3,6 +3,7 @@ import Category from "../models/Category.js";
 import slugify from "slugify";
 import { protect, adminOnly } from "../middlewares/auth.middleware.js";
 import Property from "../models/Property.js";
+import redisClient from "../utils/redis.js";
 
 const router = express.Router();
 
@@ -15,6 +16,7 @@ router.post("/", protect, adminOnly, async (req, res) => {
     slug: slugify(name, { lower: true }),
   });
 
+  await redisClient.del("admin:stats"); // 👈 ADD THIS
   res.json(category);
 });
 
@@ -50,6 +52,8 @@ router.delete("/:id", protect, adminOnly, async (req, res) => {
     }
 
     await Category.findByIdAndDelete(categoryId);
+
+    await redisClient.del("admin:stats"); // 👈 ADD THIS
 
     res.json({ message: "Category deleted successfully" });
   } catch (err) {
