@@ -1,6 +1,32 @@
 import { FaPhoneAlt, FaWhatsapp, FaEnvelope } from "react-icons/fa";
 
 export default function ContactSection() {
+  const openWhatsApp = () => {
+    const phoneNumber = "911234567890"; // country code + number
+    const message = encodeURIComponent(
+      "Hi, I’m interested in your properties. Please share more details."
+    );
+
+    window.open(
+      `https://wa.me/${phoneNumber}?text=${message}`,
+      "_blank"
+    );
+  };
+  const openEmail = () => {
+    const email = "info@mananllp.com";
+
+    const subject = encodeURIComponent(
+      "Property Enquiry – Mukteshwar Retreats"
+    );
+
+    const body = encodeURIComponent(
+      "Hello,\n\nI would like more details about your properties in Mukteshwar.\n\nThank you."
+    );
+
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+  };
+
+
   return (
     <section className="relative bg-[#0f0f0f] py-24">
       {/* glow */}
@@ -31,7 +57,11 @@ export default function ContactSection() {
           </div>
 
           {/* WHATSAPP */}
-          <div className="bg-[#161616] border border-white/10 rounded-2xl p-8 hover:border-[#c4a47c]/40 transition">
+          <div onClick={openWhatsApp}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === "Enter" && openWhatsApp()}
+            className="bg-[#161616] border border-white/10 rounded-2xl p-8 hover:border-[#c4a47c]/40 transition">
             <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-[#c4a47c]/15 border border-[#c4a47c]/30 flex items-center justify-center text-[#c4a47c] text-xl">
               <FaWhatsapp />
             </div>
@@ -45,7 +75,11 @@ export default function ContactSection() {
           </div>
 
           {/* EMAIL */}
-          <div className="bg-[#161616] border border-white/10 rounded-2xl p-8 hover:border-[#c4a47c]/40 transition">
+          <div onClick={openEmail}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === "Enter" && openEmail()}
+            className="bg-[#161616] border border-white/10 rounded-2xl p-8 hover:border-[#c4a47c]/40 transition">
             <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-[#c4a47c]/15 border border-[#c4a47c]/30 flex items-center justify-center text-[#c4a47c] text-xl">
               <FaEnvelope />
             </div>
