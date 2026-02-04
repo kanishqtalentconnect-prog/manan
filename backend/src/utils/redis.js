@@ -9,7 +9,7 @@ redisClient.on("error", (err) =>
 );
 
 redisClient.on("connect", () =>
-  console.log("✅ Redis Connected")
+  console.log("Redis Client Created")
 );
 
 await redisClient.connect();

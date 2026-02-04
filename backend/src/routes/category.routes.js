@@ -2,6 +2,7 @@ import express from "express";
 import Category from "../models/Category.js";
 import slugify from "slugify";
 import { protect, adminOnly } from "../middlewares/auth.middleware.js";
+import Property from "../models/Property.js";
 
 const router = express.Router();
 
