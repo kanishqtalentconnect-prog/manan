@@ -33,7 +33,7 @@ type Props = {
 
 
 export default function PropertyForm({ initialData, onSuccess }: Props) {
-  const [mediaFiles, setMediaFiles] = useState<FileList | null>(null);
+  const [mediaFiles, setMediaFiles] = useState<File[]>([]);
   const [loading, setLoading] = useState(false);
   const [removedMedia, setRemovedMedia] = useState<string[]>([]);
 
@@ -129,9 +129,9 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
       }
 
       if (mediaFiles) {
-        Array.from(mediaFiles).forEach((file) => {
-          formData.append("media", file);
-        });
+        mediaFiles.forEach((file) => {
+        formData.append("media", file);
+      });
       }
 
 
@@ -332,58 +332,56 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
       </div>
       {/* EXISTING IMAGES */}
       {existingMedia.length > 0 && (
-  <div>
-    <p className="font-medium mb-2">Existing Media</p>
+        <div>
+          <p className="font-medium mb-2">Existing Media</p>
 
-    <div className="grid grid-cols-3 gap-3">
-      {existingMedia.map((item, i) => {
-        const isRemoved = removedMedia.includes(item.url);
-        if (isRemoved) return null;
+          <div className="grid grid-cols-3 gap-3">
+            {existingMedia.map((item, i) => {
+              const isRemoved = removedMedia.includes(item.url);
+              if (isRemoved) return null;
 
-        return (
-          <div key={i} className="relative group">
-            {item.type === "image" ? (
-              <img
-                src={item.url}
-                className="h-24 w-full object-cover rounded"
-              />
-            ) : (
-              <video
-                src={item.url}
-                className="h-24 w-full object-cover rounded"
-                controls
-              />
-            )}
+              return (
+                <div key={i} className="relative group">
+                  {item.type === "image" ? (
+                    <img
+                      src={item.url}
+                      className="h-24 w-full object-cover rounded"
+                    />
+                  ) : (
+                    <video
+                      src={item.url}
+                      className="h-24 w-full object-cover rounded"
+                      controls
+                    />
+                  )}
 
-            {/* DELETE BUTTON */}
-            <button
-              type="button"
-              onClick={() =>
-                setRemovedMedia((prev) => [...prev, item.url])
-              }
-              className="absolute top-1 right-1 bg-black/70 text-white 
-                         rounded-full w-7 h-7 flex items-center justify-center
-                         opacity-0 group-hover:opacity-100 transition"
-            >
-              ×
-            </button>
+                  {/* DELETE BUTTON */}
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setRemovedMedia((prev) => [...prev, item.url])
+                    }
+                    className="absolute top-1 right-1 bg-black/70 text-white 
+                              rounded-full w-7 h-7 flex items-center justify-center
+                              opacity-0 group-hover:opacity-100 transition"
+                  >
+                    ×
+                  </button>
+                </div>
+              );
+            })}
           </div>
-        );
-      })}
-    </div>
 
-    <p className="text-sm text-gray-500 mt-2">
-      Removed media will be deleted after update
-    </p>
-  </div>
-)}
-
-
-
+          <p className="text-sm text-gray-500 mt-2">
+            Removed media will be deleted after update
+          </p>
+        </div>
+      )}
 
       {/* IMAGE UPLOAD */}
       <div>
-        <MediaUpload onChange={setMediaFiles} />
+        <MediaUpload files={mediaFiles} 
+        onChange={setMediaFiles} />
       </div>
 
       {/* SUBMIT */}
