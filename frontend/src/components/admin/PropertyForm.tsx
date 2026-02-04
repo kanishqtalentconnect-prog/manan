@@ -380,8 +380,9 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
 
       {/* IMAGE UPLOAD */}
       <div>
-        <MediaUpload files={mediaFiles} 
-        onChange={setMediaFiles} />
+        <MediaUpload
+          onChange={(files) => setMediaFiles(files)}
+        />
       </div>
 
       {/* SUBMIT */}
