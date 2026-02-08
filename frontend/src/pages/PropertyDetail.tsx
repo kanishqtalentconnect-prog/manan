@@ -24,6 +24,7 @@ type Property = {
   dimensions?: string;
   category?: Category;
   tag?: string;
+  numberProperty?: number;
   media: {
     url: string;
     type: "image" | "video";
@@ -237,6 +238,12 @@ export default function PropertyDetail() {
                 >
                   {property.tag}
                 </span>
+              )}
+
+              {property.numberProperty &&(
+                <p className="text-sm py-2 font-bold uppercase tracking-widest text-gray-900 mb-4">
+                  Number of Property Available: {property.numberProperty}
+                </p>
               )}
 
             </div>

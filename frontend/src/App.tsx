@@ -11,10 +11,8 @@ import AdminProperties from "./pages/AdminProperties";
 import AdminBookings from "./pages/AdminBookings";
 import AdminEnquiries from "./components/admin/AdminEnquiries";
 import AdminCategories from "./components/admin/Categories";
-import LegalDocumentation from "./pages/LegalDocumentation";
 import Faq from "./pages/FAQ";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import Terms from "./pages/Terms";
+import ContentManagement from "./pages/ContentManagement";
 
 export default function App() {
   return (
@@ -32,10 +30,8 @@ export default function App() {
         <Route path="/admin/bookings" element={<AdminBookings />} />
         <Route path="/admin/enquiries" element={<AdminEnquiries />} />
         <Route path="/admin/categories" element={<AdminCategories />} />
+        <Route path="/admin/content-management" element={<ContentManagement />} />
         <Route path="/faq" element={<Faq />} />
-        <Route path="/documentation" element={<LegalDocumentation />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/terms" element={<Terms />} />
       </Routes>
       <Footer />
     </BrowserRouter>

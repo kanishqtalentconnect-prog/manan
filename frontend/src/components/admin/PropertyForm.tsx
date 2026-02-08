@@ -19,6 +19,7 @@ type Property = {
   dimensions?: string;
   category?: Category;
   tag: string;
+  numberProperty: number;
   googleMapUrl?: string;
   media?: {
     url: string;
@@ -47,6 +48,7 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
     dimensions: initialData?.dimensions || "",
     category: initialData?.category ||"",
     tag: initialData?.tag || "",
+    numberProperty : initialData?.numberProperty || "",
     googleMapUrl: initialData?.googleMapUrl || "",
   });
 
@@ -70,6 +72,7 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
         dimensions: initialData.dimensions || "",
         category: initialData?.category ||"",
         tag: initialData.tag || "",
+        numberProperty: initialData.numberProperty || "",
         googleMapUrl: initialData.googleMapUrl || "",
       });
     }
@@ -104,6 +107,7 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
           : ""
       );
       formData.append("tag", form.tag);
+      formData.append("numberProperty", String(form.numberProperty));
       if (
         typeof form.category === "object" &&
         form.category !== null &&
@@ -327,6 +331,20 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
           type="string"
           placeholder="Limited availability"
           value={form.tag}
+          onChange={handleChange}
+        />
+      </div>
+
+      {/* NUMBER OF PROPERTY */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Number of Property
+        </label>
+        <Input
+          name="numberProperty"
+          type="number"
+          placeholder="Number of Property (Optional)"
+          value={form.numberProperty}
           onChange={handleChange}
         />
       </div>

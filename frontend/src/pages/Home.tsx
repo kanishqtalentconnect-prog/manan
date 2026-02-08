@@ -28,6 +28,7 @@ type Property = {
   dimensions?: string;
   category?: Category;
   tag?: string;
+  numberProperty?: number;
   media?: {
     url: string;
     type: "image" | "video";
@@ -192,6 +193,10 @@ export default function Home() {
                     ? `₹ ${property.price.toLocaleString()}`
                     : "Price on request"}
                 </p>
+
+                { property.numberProperty && (<p className="text-sm text-gray-400 mt-1">
+                  Number of Property Available: {property.numberProperty}
+                </p>)}
 
                 {/* Stats */}
                 <div className="mt-6 pt-6 border-t border-white/10 text-sm text-gray-400">

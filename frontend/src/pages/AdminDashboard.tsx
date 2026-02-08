@@ -89,7 +89,14 @@ export default function AdminDashboard() {
             </Link>
           </div>
 
-
+          <button
+            onClick={() => navigate("/admin/content-management", {
+              state: { from: "/admin" },
+            })}
+            className="bg-black text-white px-6 py-3 rounded-xl font-bold hover:bg-gray-800 transition-all flex items-center gap-2 shadow-lg shadow-gray-200"
+          >
+            Manage Content
+          </button>
           <button
             onClick={() => navigate("/admin/add-property", {
               state: { from: "/admin" },

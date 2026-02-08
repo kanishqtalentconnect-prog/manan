@@ -50,7 +50,7 @@ export default function MediaUpload({ onChange }: Props) {
   return (
     <div className="space-y-3">
       <label className="block font-medium text-sm">
-        Property Media
+        Media
       </label>
 
       {/* Hidden input */}

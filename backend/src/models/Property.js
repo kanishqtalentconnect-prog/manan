@@ -21,6 +21,7 @@ const propertySchema = new mongoose.Schema(
       required: true,
     },
     tag: String,
+    numberProperty: Number,
     media: [
       {
         url: String,

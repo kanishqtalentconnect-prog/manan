@@ -6,8 +6,26 @@ import {
   FiHome, 
   FiUsers 
 } from 'react-icons/fi';
+import { useEffect, useState, useRef } from "react";
+import api from "../api/axios";
+import { useMediaCarousel } from "../hooks/useMediaCarousel";
+
+type MediaItem = {
+  url: string;
+  type: "image" | "video";
+};
+
 
 const About = () => {
+  const [media, setMedia] = useState<MediaItem[]>([]);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    api.get("/content/about").then((res) => {
+      setMedia(res.data?.media || []);
+    });
+  }, []);
+
   const features = [
     {
       icon: <FiMapPin />,
@@ -40,6 +58,10 @@ const About = () => {
       desc: "Join a community of like-minded individuals seeking peace, well-being, and smart investments."
     }
   ];
+
+  const { index, next, prev } = useMediaCarousel(media);
+  const current = media[index];
+
 
   return (
     <div className="bg-[#0f0f0f] text-[#d1d1d1] py-24 px-6 font-sans">
@@ -105,14 +127,62 @@ const About = () => {
 
         {/* BOTTOM IMAGE */}
         <div className="rounded-2xl overflow-hidden shadow-2xl border border-white/10">
-          <img 
-            src="images/about.jpg" 
-            alt="Mountains" 
-            loading="eager"
-            className="w-full h-87.5 md:h-112.5 object-cover grayscale-20 hover:grayscale-0 transition-all duration-1000"
-          />
-        </div>
+          {media.length > 0 && (
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10">
 
+              {/* MEDIA */}
+              {current.type === "image" ? (
+                <img
+                  src={current.url}
+                  className="w-full h-87.5 md:h-112.5 object-cover grayscale-20 hover:grayscale-0 transition-all duration-1000"
+                />
+              ) : (
+                <video
+                  ref={videoRef}
+                  src={current.url}
+                  className="w-full h-87.5 md:h-112.5 object-cover"
+                  autoPlay
+                  muted
+                  onEnded={next}
+                />
+              )}
+
+              {/* CONTROLS (only if multiple) */}
+              {media.length > 1 && (
+                <>
+                  <button
+                    onClick={prev}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 
+                              bg-black/60 text-white w-10 h-10 rounded-full"
+                  >
+                    ‹
+                  </button>
+
+                  <button
+                    onClick={next}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 
+                              bg-black/60 text-white w-10 h-10 rounded-full"
+                  >
+                    ›
+                  </button>
+                </>
+              )}
+              {/* DOTS */}
+              {media.length > 1 && (
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                  {media.map((_, i) => (
+                    <span
+                      key={i}
+                      className={`h-2 w-2 rounded-full transition-all ${
+                        i === index ? "bg-[#c4a47c] w-4" : "bg-white/40"
+                      }`}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
