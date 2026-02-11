@@ -123,7 +123,7 @@ export default function Home() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
           {properties.map((property) => (
             <div
               key={property._id}
@@ -134,7 +134,7 @@ export default function Home() {
                         overflow-hidden flex flex-col cursor-pointer"
             >
               {/* Image Container */}
-              <div className="relative overflow-hidden h-64">
+              <div className="relative overflow-hidden h-52 sm:h-60 lg:h-64">
                 <img
                   src={
                     property.media?.find((m) => m.type === "image")?.url ||
@@ -148,58 +148,63 @@ export default function Home() {
                 {/* Dark overlay */}
                 <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
 
-                <div className="absolute top-4 left-4 flex gap-2">
+                <div className="absolute top-3 left-3 right-3 flex items-start justify-between gap-2 pointer-events-none">
                   <span
                     className="
-                      px-3 py-1
-                      text-[10px] font-medium tracking-widest uppercase
+                      px-2.5 py-1
+                      text-[9px] sm:text-[10px]
+                      font-medium tracking-widest uppercase
                       rounded-full
-                      bg-white/85 backdrop-blur-md
+                      bg-white/90 backdrop-blur-md
                       text-[#14110f]
                       border border-black/10
                       shadow-[0_2px_12px_rgba(0,0,0,0.25)]
+                      max-w-[70%]
+                      truncate
                     "
                   >
                     {property.category?.name}
                   </span>
-                </div>
 
-                {property.tag && (
-                  <div className="absolute top-4 right-4 flex gap-2">
+                  {property.tag && (
                     <span
                       className="
-                        px-3 py-1
-                        text-[10px] font-bold tracking-widest uppercase
+                        px-2.5 py-1
+                        text-[9px] sm:text-[10px]
+                        font-bold tracking-widest uppercase
                         rounded-full
-                        bg-black/75 backdrop-blur-md
+                        bg-black/70 backdrop-blur-md
                         text-white
-                        border border-white/30
+                        border border-white/20
                         shadow-[0_4px_20px_rgba(0,0,0,0.45)]
+                        max-w-[70%]
+                        truncate
                       "
                     >
                       {property.tag}
                     </span>
-                  </div>
-                )}
+                  )}
+                </div>
+
               </div>
 
-              <div className="p-6 flex flex-col grow text-gray-300">
-                <h3 className="text-lg font-semibold text-white group-hover:text-[#c4a47c] transition-colors">
+              <div className="p-4 sm:p-6 flex flex-col grow text-gray-300">
+                <h3 className="text-base sm:text-lg font-semibold text-white group-hover:text-[#c4a47c] transition-colors">
                   {property.title}
                 </h3>
 
-                <p className="text-sm text-gray-400 mt-1">
+                <p className="text-sm sm:text-base text-gray-400 mt-1">
                   {typeof property.price === "number"
                     ? `₹ ${property.price.toLocaleString()}`
                     : "Price on request"}
                 </p>
 
-                { property.numberProperty && (<p className="text-sm text-gray-400 mt-1">
+                { property.numberProperty && (<p className="text-sm sm:text-base text-gray-400 mt-1">
                   Number of Property Available: {property.numberProperty}
                 </p>)}
 
                 {/* Stats */}
-                <div className="mt-6 pt-6 border-t border-white/10 text-sm text-gray-400">
+                <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-white/10 text-sm text-gray-400">
                   {property.category?.slug === "land" ? (
                     <div className="flex flex-col text-center">
                       <span className="font-semibold text-white text-lg">
@@ -210,7 +215,7 @@ export default function Home() {
                       </span>
                     </div>
                   ) : (
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between gap-3">
                       <div className="flex flex-col text-center">
                         <span className="font-semibold text-white">
                           {property.bedrooms}
@@ -269,7 +274,7 @@ export default function Home() {
                       setShowModal(true);
                     }}
                     className="w-full bg-[#c4a47c] hover:bg-[#b39367] 
-                              text-black font-semibold py-3 rounded-xl 
+                              text-black font-semibold py-3 sm:py-3.5 rounded-xl 
                               transition-all active:scale-[0.98]"
                   >
                     Book Site Visit
@@ -281,7 +286,7 @@ export default function Home() {
                       setEnquiryPropertyId(property._id);
                     }}
                     className="w-full border border-[#c4a47c]/40 
-                              text-[#c4a47c] py-3 rounded-xl font-semibold 
+                              text-[#c4a47c] py-3 sm:py-3.5 active:scale-[0.98] rounded-xl font-semibold 
                               hover:bg-[#c4a47c]/10 transition-all"
                   >
                     Make an Enquiry

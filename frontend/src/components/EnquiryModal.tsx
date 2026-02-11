@@ -43,14 +43,26 @@ export default function EnquiryModal({ propertyId, onClose }: Props) {
 
   return (
     <div
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+      className="fixed inset-0 bg-black/50 z-50 overflow-y-auto flex items-end sm:items-center justify-center"
       onClick={onClose}   
     >
       <div
-        className="bg-white rounded-xl p-6 w-full max-w-md"
+        className="
+          relative bg-white rounded-t-2xl sm:rounded-xl
+          p-4 sm:p-6
+          w-full max-w-md
+          max-h-[90vh] overflow-y-auto
+          mx-2 sm:mx-0
+        "
         onClick={(e) => e.stopPropagation()}
       >
-
+        {/* Close */}
+          <button
+            onClick={onClose}
+            className="absolute top-3 right-3 text-gray-400 hover:text-black"
+          >
+            ✕
+          </button>
       
         <h2 className="text-xl font-semibold mb-1">Send an Enquiry</h2>
         <p className="text-sm text-gray-500 mb-4">
@@ -105,10 +117,10 @@ export default function EnquiryModal({ propertyId, onClose }: Props) {
           />
         </div>
 
-        <div className="flex justify-end gap-3 mt-6">
+        <div className="flex flex-col sm:flex-row justify-end gap-3 mt-6">
           <button
             onClick={onClose}
-            className="px-4 py-2 border rounded-lg"
+            className="w-full sm:w-auto px-4 py-2.5 border rounded-lg"
           >
             Cancel
           </button>
@@ -116,7 +128,7 @@ export default function EnquiryModal({ propertyId, onClose }: Props) {
           <button
             onClick={handleSubmit}
             disabled={loading}
-            className="px-4 py-2 bg-black text-white rounded-lg"
+            className="w-full sm:w-auto px-4 py-2.5 bg-black text-white rounded-lg"
           >
             {loading ? "Sending..." : "Submit"}
           </button>

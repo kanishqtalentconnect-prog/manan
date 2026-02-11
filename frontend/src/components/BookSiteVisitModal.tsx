@@ -48,93 +48,115 @@ export default function BookSiteVisitModal({ propertyId, onClose }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-xl p-6 w-full max-w-md">
-        <h2 className="text-xl font-semibold mb-4">
-          Book Site Visit
-        </h2>
-
-        <div className="space-y-3">
-          <input
-            name="name"
-            placeholder="Your Name"
-            value={form.name}
-            onChange={handleChange}
-            className="w-full border p-3 rounded-lg"
-            required
-          />
-
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            value={form.email}
-            onChange={handleChange}
-            className="w-full border p-3 rounded-lg"
-            required
-          />
-
-          <input
-            name="phone"
-            placeholder="Phone Number"
-            value={form.phone}
-            onChange={handleChange}
-            className="w-full border p-3 rounded-lg"
-            required
-          />
-
-          <input
-            name="visitDate"
-            type="date"
-            value={form.visitDate}
-            onChange={handleChange}
-            className="w-full border p-3 rounded-lg"
-            required
-          />
-
-          {/* TIME SLOT */}
-          <select
-            name="timeSlot"
-            value={form.timeSlot}
-            onChange={handleChange}
-            className="w-full border p-3 rounded-lg"
-            required
-          >
-            <option value="">Select Time Slot</option>
-            <option value="10:00 AM - 11:00 AM">10:00 AM – 11:00 AM</option>
-            <option value="11:00 AM - 12:00 PM">11:00 AM – 12:00 PM</option>
-            <option value="02:00 PM - 03:00 PM">02:00 PM – 03:00 PM</option>
-            <option value="04:00 PM - 05:00 PM">04:00 PM – 05:00 PM</option>
-          </select>
-
-          {/* COMING FROM */}
-          <input
-            name="comingFrom"
-            placeholder="Coming From (City / Area)"
-            value={form.comingFrom}
-            onChange={handleChange}
-            className="w-full border p-3 rounded-lg"
-            required
-          />
-        </div>
-
-        <div className="flex justify-end gap-3 mt-6">
+    <div
+      className="fixed inset-0 bg-black/50 z-50 overflow-y-auto"
+      onClick={onClose}
+    >
+      <div className="min-h-full flex items-end sm:items-center justify-center">
+        <div
+          className="
+            relative bg-white
+            rounded-t-2xl sm:rounded-xl
+            p-4 sm:p-6
+            w-full max-w-md
+            max-h-[90vh] overflow-y-auto
+            mx-2 sm:mx-0
+          "
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Close */}
           <button
             onClick={onClose}
-            className="px-4 py-2 border rounded-lg"
+            className="absolute top-3 right-3 text-gray-400 hover:text-black"
           >
-            Cancel
+            ✕
           </button>
 
-          <button
-            onClick={handleSubmit}
-            disabled={loading}
-            className="px-4 py-2 bg-black text-white rounded-lg"
-          >
-            {loading ? "Booking..." : "Confirm"}
-          </button>
+          <h2 className="text-lg sm:text-xl font-semibold mb-4">
+            Book Site Visit
+          </h2>
+
+          <div className="space-y-3">
+            <input
+              name="name"
+              placeholder="Your Name"
+              value={form.name}
+              onChange={handleChange}
+              className="w-full border p-3.5 rounded-lg text-base"
+              required
+            />
+
+            <input
+              name="email"
+              type="email"
+              placeholder="Email"
+              value={form.email}
+              onChange={handleChange}
+              className="w-full border p-3.5 rounded-lg text-base"
+              required
+            />
+
+            <input
+              name="phone"
+              placeholder="Phone Number"
+              value={form.phone}
+              onChange={handleChange}
+              className="w-full border p-3.5 rounded-lg text-base"
+              required
+            />
+
+            <input
+              name="visitDate"
+              type="date"
+              value={form.visitDate}
+              onChange={handleChange}
+              className="w-full border p-3.5 rounded-lg text-base"
+              required
+            />
+
+            <select
+              name="timeSlot"
+              value={form.timeSlot}
+              onChange={handleChange}
+              className="w-full border p-3.5 rounded-lg text-base"
+              required
+            >
+              <option value="">Select Time Slot</option>
+              <option value="10:00 AM - 11:00 AM">10:00 AM – 11:00 AM</option>
+              <option value="11:00 AM - 12:00 PM">11:00 AM – 12:00 PM</option>
+              <option value="02:00 PM - 03:00 PM">02:00 PM – 03:00 PM</option>
+              <option value="04:00 PM - 05:00 PM">04:00 PM – 05:00 PM</option>
+            </select>
+
+            <input
+              name="comingFrom"
+              placeholder="Coming From (City / Area)"
+              value={form.comingFrom}
+              onChange={handleChange}
+              className="w-full border p-3.5 rounded-lg text-base"
+              required
+            />
+          </div>
+
+          <div className="flex flex-col sm:flex-row justify-end gap-3 mt-6">
+            <button
+              onClick={onClose}
+              className="w-full sm:w-auto px-4 py-2.5 border rounded-lg"
+            >
+              Cancel
+            </button>
+
+            <button
+              onClick={handleSubmit}
+              disabled={loading}
+              className="w-full sm:w-auto px-4 py-2.5 bg-black text-white rounded-lg"
+            >
+              {loading ? "Booking..." : "Confirm"}
+            </button>
+          </div>
         </div>
       </div>
     </div>
   );
+
 }

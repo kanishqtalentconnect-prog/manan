@@ -47,64 +47,51 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="p-8 max-w-7xl mx-auto bg-gray-50/50 min-h-screen">
-      {/* HEADER */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-2 gap-6">
-        
+    <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto bg-gray-50/50 min-h-screen">
+
+    {/* HEADER */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-4 gap-6">
         <div>
-          <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
             Admin Dashboard
           </h1>
-          <p className="text-gray-500 mt-1 text-sm">Overview of your real estate portfolio performance.</p>
+          <p className="text-gray-500 mt-1 text-sm">
+            Overview of your real estate portfolio performance.
+          </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="flex bg-gray-100 p-1 rounded-xl border border-gray-200">
-            <Link
-              to="/admin/properties"
-              className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-white hover:shadow-sm rounded-lg transition-all"
-            >
-              Properties
-            </Link>
-
-            <Link
-              to="/admin/categories"
-              className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-white hover:shadow-sm rounded-lg transition-all"
-            >
-              Categories
-            </Link>
-
-            <Link
-              to="/admin/bookings"
-              className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-white hover:shadow-sm rounded-lg transition-all"
-            >
-              Bookings
-            </Link>
-
-            <Link
-              to="/admin/enquiries"
-              className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-white hover:shadow-sm rounded-lg transition-all"
-            >
-              Enquiries
-            </Link>
+        <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 w-full lg:w-auto">
+          <div className="flex flex-wrap bg-gray-100 p-1 rounded-xl border border-gray-200 w-full sm:w-auto">
+            {["Properties", "Categories", "Bookings", "Enquiries"].map((item) => (
+              <Link
+                key={item}
+                to={`/admin/${item.toLowerCase()}`}
+                className="px-3 py-2 text-sm font-medium text-gray-700 hover:bg-white hover:shadow-sm rounded-lg transition-all"
+              >
+                {item}
+              </Link>
+            ))}
           </div>
 
-          <button
-            onClick={() => navigate("/admin/content-management", {
-              state: { from: "/admin" },
-            })}
-            className="bg-black text-white px-6 py-3 rounded-xl font-bold hover:bg-gray-800 transition-all flex items-center gap-2 shadow-lg shadow-gray-200"
-          >
-            Manage Content
-          </button>
-          <button
-            onClick={() => navigate("/admin/add-property", {
-              state: { from: "/admin" },
-            })}
-            className="bg-black text-white px-6 py-2.5 rounded-xl font-bold hover:bg-gray-800 transition-all flex items-center gap-2 shadow-lg shadow-gray-200"
-          >
-            <span className="text-lg">+</span> Add Property
-          </button>
+          <div className="flex items-center gap-3 w-full sm:w-auto">
+            <button
+              onClick={() =>
+                navigate("/admin/content-management", { state: { from: "/admin" } })
+              }
+              className="bg-black text-white px-4 py-2.5 sm:px-6 sm:py-3 rounded-xl font-bold whitespace-nowrap"
+            >
+              Manage Content
+            </button>
+
+            <button
+              onClick={() =>
+                navigate("/admin/add-property", { state: { from: "/admin" } })
+              }
+              className="bg-black text-white px-4 py-2.5 sm:px-6 sm:py-3 rounded-xl font-bold whitespace-nowrap"
+            >
+              + Add Property
+            </button>
+          </div>
         </div>
       </div>
 
