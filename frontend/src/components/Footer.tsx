@@ -39,7 +39,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <p className="text-white font-semibold">Manan LLP</p>
-                  <p className="text-xs text-gray-400">Mukteshwar Retreats</p>
+                  <p className="text-xs text-gray-400">Nata Dol Retreats</p>
                 </div>
               </div>
 
@@ -91,9 +91,18 @@ export default function Footer() {
             <div>
               <h4 className="text-white font-semibold mb-4">Get in Touch</h4>
               <ul className="space-y-3 text-sm">
-                <li>📞 +91 12345 67890</li>
+                <li>📞 +91 7217816810</li>
                 <li>✉️ info@mananllp.com</li>
-                <li>📍 Mukteshwar, Uttarakhand</li>
+                <li>
+                  <a
+                    href="https://maps.app.goo.gl/m89aP73oVSRyC6FE8"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-indigo-600 transition"
+                  >
+                    📍 Nata Dol, Uttarakhand
+                  </a>
+                </li>
               </ul>
             </div>
           </div>

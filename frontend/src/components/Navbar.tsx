@@ -159,13 +159,13 @@ export default function Navbar() {
           </div>
           <div>
             <p className="text-white font-semibold leading-tight">Manan LLP</p>
-            <p className="text-[11px] text-gray-400">Mukteshwar Retreats</p>
+            <p className="text-[11px] text-gray-400">Nata Dol Retreats</p>
           </div>
         </Link>
 
         {!user && (
         <div className="hidden md:flex items-center gap-8">
-          <NavItem href="/#about" label="About Mukteshwar" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("about")}/>
+          <NavItem href="/#about" label="About Nata Dol" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("about")}/>
           <NavItem href="/#property" label="Properties" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("property")} />
           <NavItem href="/#hero2" label="Why Invest" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero2")} />
           <NavItem href="/#hero3" label="Gallery" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero3")} />
@@ -249,7 +249,7 @@ export default function Navbar() {
           }`}
         >
           <div className="px-6 pb-6 pt-4 space-y-4 bg-[#0f0f0f]/95 border-t border-white/10">
-            <NavItem href="/#about" label="About Mukteshwar" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("about")}/>
+            <NavItem href="/#about" label="About Nata Dol" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("about")}/>
             <NavItem href="/#property" label="Properties" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("property")} />
             <NavItem href="/#hero2" label="Why Invest" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero2")} />
             <NavItem href="/#hero3" label="Gallery" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero3")} />

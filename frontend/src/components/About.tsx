@@ -30,7 +30,7 @@ const About = () => {
     {
       icon: <FiMapPin />,
       title: "Pristine Location",
-      desc: "Nestled in the Kumaon Himalayas, Mukteshwar offers 360° panoramic views of snow-capped peaks and lush valleys."
+      desc: "Nestled in the Kumaon Himalayas, Nata Dol offers 360° panoramic views of snow-capped peaks and lush valleys."
     },
     {
       icon: <FiTrendingUp />,
@@ -70,7 +70,7 @@ const About = () => {
         {/* TOP MINI BADGE */}
         <div className="flex justify-center mb-10">
           <span className="text-[#c4a47c] text-[10px] uppercase tracking-[0.5em] font-bold border border-[#c4a47c]/20 px-4 py-1 rounded-full">
-            Invest Mukteshwar
+            Invest Nata Dol
           </span>
         </div>
 
@@ -81,7 +81,7 @@ const About = () => {
             <span className="text-[#c4a47c]">Destination</span>
           </h1>
           <p className="max-w-2xl mx-auto text-gray-400 leading-relaxed text-sm md:text-base font-light opacity-80">
-            At 2,286 meters elevation, Mukteshwar is where the Himalayas meet opportunity. 
+            At 2,286 meters elevation, Nata Dol is where the Himalayas meet opportunity. 
             A sanctuary for high achievers seeking mental clarity, peace, and genuine investment potential.
           </p>
         </div>

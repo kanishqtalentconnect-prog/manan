@@ -18,7 +18,7 @@ export default function Hero4() {
     },
     {
       quote:
-        "I was looking for a peaceful sanctuary away from the city chaos. Mukteshwar exceeded all expectations. The property appreciation has been an added bonus to the mental peace I found here.",
+        "I was looking for a peaceful sanctuary away from the city chaos. Nata Dol exceeded all expectations. The property appreciation has been an added bonus to the mental peace I found here.",
       name: "Dr. Meera Iyer",
       role: "Medical Professional, Bangalore",
       property: "Alpine Sanctuary",

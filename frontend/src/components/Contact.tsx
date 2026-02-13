@@ -2,7 +2,7 @@ import { FaPhoneAlt, FaWhatsapp, FaEnvelope } from "react-icons/fa";
 
 export default function ContactSection() {
   const openWhatsApp = () => {
-    const phoneNumber = "911234567890"; // country code + number
+    const phoneNumber = "917217816810"; // country code + number
     const message = encodeURIComponent(
       "Hi, I’m interested in your properties. Please share more details."
     );
@@ -16,11 +16,11 @@ export default function ContactSection() {
     const email = "info@mananllp.com";
 
     const subject = encodeURIComponent(
-      "Property Enquiry – Mukteshwar Retreats"
+      "Property Enquiry – Nata Dol Retreats"
     );
 
     const body = encodeURIComponent(
-      "Hello,\n\nI would like more details about your properties in Mukteshwar.\n\nThank you."
+      "Hello,\n\nI would like more details about your properties in Nata Dol.\n\nThank you."
     );
 
     window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
@@ -52,7 +52,7 @@ export default function ContactSection() {
               Mon–Sat, 9 AM – 7 PM
             </p>
             <p className="text-[#c4a47c] font-medium">
-              +91 12345 67890
+              +91 7217816810
             </p>
           </div>
 

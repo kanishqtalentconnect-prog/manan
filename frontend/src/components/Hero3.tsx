@@ -44,7 +44,7 @@ export default function Hero3() {
           </h2>
 
           <p className="max-w-xl mx-auto text-sm md:text-base text-gray-400 font-light leading-relaxed">
-            Explore stunning properties and breathtaking landscapes that define Mukteshwar.
+            Explore stunning properties and breathtaking landscapes that define Nata Dol.
           </p>
         </div>
 

@@ -40,7 +40,7 @@ export default function Hero2() {
 
           <h2 className="text-4xl md:text-5xl font-serif text-white mb-4">
             Why Invest in{" "}
-            <span className="text-[#c4a47c] italic">Mukteshwar?</span>
+            <span className="text-[#c4a47c] italic">Nata Dol?</span>
           </h2>
 
           <p className="max-w-xl mx-auto text-sm md:text-base text-gray-400 font-light leading-relaxed">
