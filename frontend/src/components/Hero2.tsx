@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import api from "../api/axios";
 import { useMediaCarousel } from "../hooks/useMediaCarousel";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
 
 type MediaItem = {
   url: string;
@@ -94,19 +96,38 @@ export default function Hero2() {
             {hasMedia && media.length > 1 && (
               <>
                 <button
-                  onClick={prev}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 
-                            bg-black/60 text-white w-10 h-10 rounded-full"
-                >
-                  ‹
-                </button>
-                <button
-                  onClick={next}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 
-                            bg-black/60 text-white w-10 h-10 rounded-full"
-                >
-                  ›
-                </button>
+                    onClick={prev}
+                    className="absolute 
+                      top-[65%] md:top-1/2 
+                      -translate-y-1/2 
+                      left-4 md:left-6
+                      z-30
+                      bg-black/60 hover:bg-black/80
+                      text-white text-2xl md:text-3xl
+                      w-10 h-10 md:w-12 md:h-12
+                      rounded-full
+                      flex items-center justify-center
+                      transition"
+                  >
+                    <ChevronLeft size={22} strokeWidth={2.5} />
+                  </button>
+
+                  <button
+                    onClick={next}
+                    className="absolute 
+                      top-[65%] md:top-1/2 
+                      -translate-y-1/2 
+                      right-4 md:right-6
+                      z-30
+                      bg-black/60 hover:bg-black/80
+                      text-white text-2xl md:text-3xl
+                      w-10 h-10 md:w-12 md:h-12
+                      rounded-full
+                      flex items-center justify-center
+                      transition"
+                  >
+                    <ChevronRight size={22} strokeWidth={2.5} />
+                  </button>
               </>
             )}
 

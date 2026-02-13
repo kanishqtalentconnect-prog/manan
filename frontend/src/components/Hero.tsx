@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import api from "../api/axios";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type MediaItem = {
   url: string;
@@ -91,9 +92,9 @@ export default function Hero() {
           <span className="text-[#c4a47c] italic">Mountain Retreat</span>
         </h1>
 
-        <p className="mt-6 max-w-2xl mx-auto text-sm md:text-base text-gray-400 font-light leading-relaxed">
-          Discover exclusive properties in the Himalayas where luxury meets
-          tranquility and long-term investment value.
+        <p className="mt-6 max-w-2xl mx-auto text-sm md:text-base text-gray-100 font-light leading-relaxed">
+          Own Your Second Home in the Sacred Hills.
+          Invest in a Legacy That Lasts Forever.
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -120,35 +121,48 @@ export default function Hero() {
         <>
           <button
             onClick={prev}
-            className="absolute left-6 top-1/2 -translate-y-1/2 z-30
-                       bg-black/100 hover:bg-black/60
-                       text-white text-3xl
-                       w-12 h-12 rounded-full
-                       flex items-center justify-center
-                       backdrop-blur transition"
+            className="absolute 
+              top-[65%] md:top-1/2 
+              -translate-y-1/2 
+              left-4 md:left-6
+              z-30
+              bg-black/60 hover:bg-black/80
+              text-white text-2xl md:text-3xl
+              w-10 h-10 md:w-12 md:h-12
+              rounded-full
+              flex items-center justify-center
+              transition"
             aria-label="Previous"
           >
-            ‹
+            <ChevronLeft size={22} strokeWidth={2.5} />
           </button>
 
           <button
             onClick={next}
-            className="absolute right-6 top-1/2 -translate-y-1/2 z-30
-                       bg-black/40 hover:bg-black/60
-                       text-white text-3xl
-                       w-12 h-12 rounded-full
-                       flex items-center justify-center
-                       backdrop-blur transition"
+            className="absolute 
+              top-[65%] md:top-1/2 
+              -translate-y-1/2 
+              right-4 md:right-6
+              z-30
+              bg-black/60 hover:bg-black/80
+              text-white text-2xl md:text-3xl
+              w-10 h-10 md:w-12 md:h-12
+              rounded-full
+              flex items-center justify-center
+              transition"
             aria-label="Next"
           >
-            ›
+            <ChevronRight size={22} strokeWidth={2.5} />
           </button>
         </>
       )}
 
       {/* ================= DOTS ================= */}
       {media.length > 1 && (
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex gap-2">
+        <div className="absolute 
+           bottom-2 sm:bottom-6 md:bottom-8
+           left-1/2 -translate-x-1/2 
+           z-30 flex gap-2">
           {media.map((_, i) => (
             <span
               key={i}
