@@ -43,6 +43,7 @@ export default function AdminProperties() {
   const handleDelete = async (id: string) => {
     if (!confirm("Delete this property?")) return;
     await api.delete(`/properties/${id}`);
+    alert("Property Deleted");
     fetchProperties();
   };
 
