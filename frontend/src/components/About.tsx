@@ -30,7 +30,7 @@ const About = () => {
     {
       icon: <FiMapPin />,
       title: "Pristine Location",
-      desc: "Nestled in the Kumaon Himalayas, Nata Dol offers 360° panoramic views of snow-capped peaks and lush valleys."
+      desc: "Nestled in the pristine Kumaon Himalayas, Nata Dol offers breathtaking 360° panoramic views of snow-capped peaks and lush green valleys."
     },
     {
       icon: <FiTrendingUp />,
@@ -81,8 +81,8 @@ const About = () => {
             <span className="text-[#c4a47c]">Destination</span>
           </h1>
           <p className="max-w-2xl mx-auto text-gray-400 leading-relaxed text-sm md:text-base font-light opacity-80">
-            At 2,286 meters elevation, Nata Dol is where the Himalayas meet opportunity. 
-            A sanctuary for high achievers seeking mental clarity, peace, and genuine investment potential.
+            Nestled in the pristine hills of Nata Dol, Uttarakhand, this elevated Himalayan haven offers unmatched tranquility and perspective.
+            A sanctuary designed for visionaries who value peace, clarity, and meaningful investment growth.
           </p>
         </div>
 
