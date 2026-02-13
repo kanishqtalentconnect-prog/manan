@@ -11,6 +11,7 @@ import MapModal from "../components/MapModal";
 import EnquiryModal from "../components/EnquiryModal";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { MapPin } from "lucide-react";
 
 type Category = {
   _id: string;
@@ -199,6 +200,21 @@ export default function Home() {
                     : "Price on request"}
                 </p>
 
+                {property.googleMapUrl && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (!property.googleMapUrl) return;
+                        setMapUrl(property.googleMapUrl);
+                      }}
+                      className="inline-flex items-center gap-1.5 text-sm font-medium 
+                                text-[#c4a47c] hover:text-[#e0c48f] transition-colors"
+                    >
+                      <MapPin size={16} className="inline-block" />
+                      View Location
+                    </button>
+                  )}
+
                 { property.numberProperty && (<p className="text-sm sm:text-base text-gray-400 mt-1">
                   Number of Property Available: {property.numberProperty}
                 </p>)}
@@ -252,19 +268,6 @@ export default function Home() {
 
                 {/* Actions */}
                 <div className="mt-auto pt-6 space-y-3">
-                  {property.googleMapUrl && (
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        if (!property.googleMapUrl) return;
-                        setMapUrl(property.googleMapUrl);
-                      }}
-                      className="inline-flex items-center text-sm font-medium 
-                                text-[#c4a47c] hover:text-[#e0c48f] transition-colors"
-                    >
-                      View Location
-                    </button>
-                  )}
 
                   <button
                     onClick={(e) => {

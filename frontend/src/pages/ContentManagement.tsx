@@ -13,7 +13,13 @@ type Content = {
   media?: MediaItem[];
 };
 
-const SECTIONS = ["hero", "about", "hero2", "hero3"];
+const SECTIONS = [
+  { key: "hero", label: "Hero" },
+  { key: "about", label: "About" },
+  { key: "hero2", label: "Why Invest" },
+  { key: "hero3", label: "Gallery" },
+];
+
 
 export default function ContentManagement() {
   const [section, setSection] = useState("hero");
@@ -96,16 +102,16 @@ export default function ContentManagement() {
         <aside className="bg-white rounded-xl border p-3 space-y-2">
           {SECTIONS.map((sec) => (
             <button
-              key={sec}
-              onClick={() => setSection(sec)}
+              key={sec.key}
+              onClick={() => setSection(sec.key)}
               className={`w-full text-left px-4 py-2 rounded-lg font-medium transition
                 ${
-                  section === sec
+                  section === sec.key
                     ? "bg-black text-white"
                     : "hover:bg-gray-100 text-gray-700"
                 }`}
             >
-              {sec.toUpperCase()}
+              {sec.label}
             </button>
           ))}
         </aside>

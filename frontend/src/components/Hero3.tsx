@@ -20,7 +20,9 @@ export default function Hero3() {
 
   /* ================= CAROUSEL ================= */
   const { index, next, prev } = useMediaCarousel(media);
-  const current = media[index];
+  const hasMedia = media && media.length > 0;
+  const current = hasMedia ? media[index] : null;
+
 
   return (
     <section className="relative bg-[#0f0f0f] py-28 overflow-hidden">
@@ -50,39 +52,49 @@ export default function Hero3() {
 
         {/* CAROUSEL */}
         <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10">
-          {!current ? (
-            /* Fallback */
-            <img
-              src="/images/hero3_1.jpg"
-              className="w-full h-[420px] md:h-[520px] object-cover"
-            />
-          ) : current.type === "image" ? (
-            <img
-              src={current.url}
-              className="w-full h-[420px] md:h-[520px] object-cover transition-opacity duration-700"
-            />
+          {hasMedia && current ? (
+            current.type === "image" ? (
+              <img
+                src={current.url}
+                className="w-full h-[420px] md:h-[520px] object-cover transition-opacity duration-700"
+              />
+            ) : (
+              <video
+                ref={videoRef}
+                src={current.url}
+                autoPlay
+                muted
+                className="w-full h-[420px] md:h-[520px] object-cover"
+                onEnded={next}
+              />
+            )
           ) : (
-            <video
-              ref={videoRef}
-              src={current.url}
-              autoPlay
-              muted
-              className="w-full h-[420px] md:h-[520px] object-cover"
-              onEnded={next}
-            />
+            /* PREMIUM FALLBACK */
+            <div className="w-full h-[420px] md:h-[520px] 
+                            bg-gradient-to-br from-[#0f0f0f] via-[#1a1a1a] to-black
+                            flex items-center justify-center text-center p-8">
+              <div>
+                <p className="text-[#c4a47c] text-xl font-serif mb-2">
+                  Visual Experience Coming Soon
+                </p>
+                <p className="text-gray-400 text-sm">
+                  Gallery visuals for this section will be updated shortly.
+                </p>
+              </div>
+            </div>
           )}
 
           {/* OVERLAY */}
-          <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
           {/* CONTROLS */}
-          {media.length > 1 && (
+          {hasMedia && media.length > 1 && (
             <>
               <button
                 onClick={prev}
                 className="absolute left-4 top-1/2 -translate-y-1/2 
-                           bg-black/60 text-white w-11 h-11 rounded-full 
-                           flex items-center justify-center hover:bg-black transition"
+                          bg-black/60 text-white w-11 h-11 rounded-full 
+                          flex items-center justify-center hover:bg-black transition"
               >
                 ‹
               </button>
@@ -90,8 +102,8 @@ export default function Hero3() {
               <button
                 onClick={next}
                 className="absolute right-4 top-1/2 -translate-y-1/2 
-                           bg-black/60 text-white w-11 h-11 rounded-full 
-                           flex items-center justify-center hover:bg-black transition"
+                          bg-black/60 text-white w-11 h-11 rounded-full 
+                          flex items-center justify-center hover:bg-black transition"
               >
                 ›
               </button>
@@ -99,7 +111,7 @@ export default function Hero3() {
           )}
 
           {/* DOTS */}
-          {media.length > 1 && (
+          {hasMedia && media.length > 1 && (
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
               {media.map((_, i) => (
                 <span
@@ -112,6 +124,7 @@ export default function Hero3() {
             </div>
           )}
         </div>
+
       </div>
     </section>
   );

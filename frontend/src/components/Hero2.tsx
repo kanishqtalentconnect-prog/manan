@@ -20,7 +20,10 @@ export default function Hero2() {
 
   /* ================= CAROUSEL ================= */
   const { index, next, prev } = useMediaCarousel(media);
-  const current = media[index];
+
+  const hasMedia = media && media.length > 0;
+  const current = hasMedia ? media[index] : null;
+
 
   return (
     <section className="relative bg-[#0f0f0f] py-28 overflow-hidden">
@@ -55,48 +58,60 @@ export default function Hero2() {
           <div className="relative">
             <div className="absolute -inset-2 rounded-3xl bg-[#c4a47c]/20 blur-xl opacity-30" />
 
-            {!current ? (
-              <img
-                src="/images/hero2.jpg"
-                className="relative rounded-3xl shadow-2xl object-cover"
-              />
-            ) : current.type === "image" ? (
-              <img
-                src={current.url}
-                className="relative rounded-3xl shadow-2xl object-cover"
-              />
+            {hasMedia && current ? (
+              current.type === "image" ? (
+                <img
+                  src={current.url}
+                  className="relative rounded-3xl shadow-2xl object-cover w-full"
+                />
+              ) : (
+                <video
+                  ref={videoRef}
+                  src={current.url}
+                  autoPlay
+                  muted
+                  className="relative rounded-3xl shadow-2xl object-cover w-full"
+                  onEnded={next}
+                />
+              )
             ) : (
-              <video
-                ref={videoRef}
-                src={current.url}
-                autoPlay
-                muted
-                className="relative rounded-3xl shadow-2xl object-cover"
-                onEnded={next}
-              />
+              /* FALLBACK UI */
+              <div className="relative rounded-3xl shadow-2xl bg-gradient-to-br 
+                              from-[#1a1a1a] to-[#0f0f0f] 
+                              h-80 flex items-center justify-center text-center p-8">
+                <div>
+                  <p className="text-[#c4a47c] text-lg font-serif mb-2">
+                    Coming Soon
+                  </p>
+                  <p className="text-gray-400 text-sm">
+                    Visual content for this section will be available shortly.
+                  </p>
+                </div>
+              </div>
             )}
 
             {/* CONTROLS (only if multiple) */}
-            {media.length > 1 && (
+            {hasMedia && media.length > 1 && (
               <>
                 <button
                   onClick={prev}
                   className="absolute left-3 top-1/2 -translate-y-1/2 
-                             bg-black/60 text-white w-10 h-10 rounded-full"
+                            bg-black/60 text-white w-10 h-10 rounded-full"
                 >
                   ‹
                 </button>
                 <button
                   onClick={next}
                   className="absolute right-3 top-1/2 -translate-y-1/2 
-                             bg-black/60 text-white w-10 h-10 rounded-full"
+                            bg-black/60 text-white w-10 h-10 rounded-full"
                 >
                   ›
                 </button>
               </>
             )}
+
             {/* DOTS */}
-            {media.length > 1 && (
+            {hasMedia && media.length > 1 && (
               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
                 {media.map((_, i) => (
                   <span
@@ -109,6 +124,7 @@ export default function Hero2() {
               </div>
             )}
           </div>
+
 
           {/* TEXT (unchanged) */}
           <div>
