@@ -8,6 +8,7 @@ type Stats = {
   enquiries: number;
   siteVisits: number;
   categories: number;
+  reviews: number;
 };
 
 type RecentProperty = {
@@ -107,7 +108,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* STATS */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
         <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-emerald-500">
           <p className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-1">Categories</p>
           <h3 className="text-3xl font-black text-gray-900">{stats?.categories || 0}</h3>
@@ -123,6 +124,10 @@ export default function AdminDashboard() {
         <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-purple-500">
           <p className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-1">Site Visits</p>
           <h3 className="text-3xl font-black text-gray-900">{stats?.siteVisits || 0}</h3>
+        </div>
+        <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-orange-600">
+          <p className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-1">Verified Reviews</p>
+          <h3 className="text-3xl font-black text-gray-900">{stats?.reviews || 0}</h3>
         </div>
       </div>
 

@@ -4,6 +4,7 @@ import Property from "../models/Property.js";
 import Booking from "../models/Booking.js";
 import Enquiry from "../models/Enquiry.js";
 import Category from "../models/Category.js";
+import Reviews from "../models/Review.js";
 import redisClient from "../utils/redis.js";
 
 const router = express.Router();
@@ -24,11 +25,15 @@ router.get("/stats", protect, adminOnly, async (req, res) => {
       siteVisits,
       enquiries,
       categories,
+      reviews,
     ] = await Promise.all([
       Property.countDocuments(),
       Booking.countDocuments(),
       Enquiry.countDocuments(),
       Category.countDocuments(),
+      Reviews.countDocuments({
+        isVerified: true,
+      }),
     ]);
 
     const stats = {
@@ -36,6 +41,7 @@ router.get("/stats", protect, adminOnly, async (req, res) => {
       enquiries,
       siteVisits,
       categories,
+      reviews,
     };
 
     // 3️⃣ Save to Redis (cache for 60 seconds)
