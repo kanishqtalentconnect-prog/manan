@@ -48,7 +48,7 @@ export default function Hero2() {
             <span className="text-[#c4a47c] italic">Nata Dol?</span>
           </h2>
 
-          <p className="max-w-xl mx-auto text-sm md:text-base text-gray-400 font-light leading-relaxed">
+          <p className="max-w-xl mx-auto text-sm md:text-base text-gray-100 font-light leading-relaxed">
             A rising destination that offers lifestyle, serenity, and strong returns.
           </p>
         </div>
@@ -150,19 +150,41 @@ export default function Hero2() {
           {/* TEXT (unchanged) */}
           <div>
             <h3 className="text-2xl md:text-3xl font-serif text-white mb-6">
-              Understanding the{" "}
-              <span className="text-[#c4a47c] italic">Modern Property Buyer</span>
+              Why Invest in{" "}
+              <span className="text-[#c4a47c] italic">Nata Dol, Uttarakhand</span>
             </h3>
 
-            <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Today’s buyers are research-driven and value transparency.
+            <p className="text-gray-200 text-sm leading-relaxed mb-6">
+              Nata Dol is emerging as a high-potential Himalayan destination,
+              offering serene mountain living combined with strong long-term appreciation
+              and limited premium inventory.
             </p>
 
-            <ul className="space-y-4 text-gray-400 text-sm">
-              <li className="flex gap-3"><span className="text-[#c4a47c]">•</span>Research-first mindset</li>
-              <li className="flex gap-3"><span className="text-[#c4a47c]">•</span>Legal trust & clarity</li>
-              <li className="flex gap-3"><span className="text-[#c4a47c]">•</span>Digital validation</li>
-              <li className="flex gap-3"><span className="text-[#c4a47c]">•</span>Lifestyle + ROI</li>
+            <ul className="space-y-4 text-gray-200 text-sm">
+              <li className="flex gap-3">
+                <span className="text-[#c4a47c]">•</span>
+                Unmatched 360° Himalayan views & pristine surroundings
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#c4a47c]">•</span>
+                Limited land availability ensuring future value growth
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#c4a47c]">•</span>
+                Rapidly growing demand for premium second homes
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#c4a47c]">•</span>
+                High rental potential driven by tourism & remote work culture
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#c4a47c]">•</span>
+                Peaceful, low-density environment with luxury lifestyle appeal
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#c4a47c]">•</span>
+                Strategic location within the Kumaon Himalayas
+              </li>
             </ul>
           </div>
 

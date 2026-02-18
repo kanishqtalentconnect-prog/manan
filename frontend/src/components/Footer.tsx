@@ -71,7 +71,7 @@ export default function Footer() {
             <div>
               <h4 className="text-white font-semibold mb-4">Company</h4>
               <ul className="space-y-3 text-sm">
-                <li><a href="/#about" className="hover:text-white">About Us</a></li>
+                <li><a href="/#about" className="hover:text-white">About Nata Dol</a></li>
                 <li><a href="/#property" className="hover:text-white">Properties</a></li>
                 <li><a href="/#hero2" className="hover:text-white">Why Invest</a></li>
                 <li><a href="/#hero4" className="hover:text-white">Testimonials</a></li>

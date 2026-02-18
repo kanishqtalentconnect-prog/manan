@@ -81,7 +81,7 @@ const About = () => {
             A Rising Investment <br />
             <span className="text-[#c4a47c]">Destination</span>
           </h1>
-          <p className="max-w-2xl mx-auto text-gray-400 leading-relaxed text-sm md:text-base font-light opacity-80">
+          <p className="max-w-2xl mx-auto text-gray-50 leading-relaxed text-sm md:text-base font-light opacity-80">
             Nestled in the pristine hills of Nata Dol, Uttarakhand, this elevated Himalayan haven offers unmatched tranquility and perspective.
             A sanctuary designed for visionaries who value peace, clarity, and meaningful investment growth.
           </p>
@@ -118,7 +118,7 @@ const About = () => {
                 </h3>
 
                 {/* description */}
-                <p className="relative z-10 text-gray-400 text-xs leading-relaxed font-light">
+                <p className="relative z-10 text-gray-100 text-xs leading-relaxed font-light">
                     {f.desc}
                 </p>
                 </div>

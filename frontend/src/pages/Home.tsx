@@ -73,6 +73,17 @@ export default function Home() {
       .finally(() => setLoading(false));
   }, []);
 
+  const formatIndianPriceShort = (price: number) => {
+    if (price >= 10000000) {
+      return `₹ ${(price / 10000000).toFixed(1).replace(/\.0$/, "")} Cr`;
+    }
+    if (price >= 100000) {
+      return `₹ ${(price / 100000).toFixed(1).replace(/\.0$/, "")} Lakhs`;
+    }
+    return `₹ ${price.toLocaleString("en-IN")}`;
+  };
+
+
   return (
     <div className="min-h-screen bg-gray-50/50">
       <section id="hero">
@@ -104,7 +115,7 @@ export default function Home() {
             </h2>
 
             {/* subtitle */}
-            <p className="max-w-xl mx-auto text-sm md:text-base text-gray-400 font-light leading-relaxed">
+            <p className="max-w-xl mx-auto text-sm md:text-base text-gray-100 font-light leading-relaxed">
               Handpicked properties that offer the perfect blend of luxury,
               location, and lifestyle.
             </p>
@@ -194,11 +205,10 @@ export default function Home() {
                   {property.title}
                 </h3>
 
-                <p className="text-sm sm:text-base text-gray-400 mt-1">
-                  {typeof property.price === "number"
-                    ? `₹ ${property.price.toLocaleString()}`
-                    : "Price on request"}
-                </p>
+                {typeof property.price === "number"
+                  ? formatIndianPriceShort(property.price)
+                  : "Price on request"
+                }
 
                 {property.googleMapUrl && (
                     <button
@@ -215,18 +225,18 @@ export default function Home() {
                     </button>
                   )}
 
-                { property.numberProperty && (<p className="text-sm sm:text-base text-gray-400 mt-1">
+                { property.numberProperty && (<p className="text-sm sm:text-base text-gray-200 mt-1">
                   Number of Property Available: {property.numberProperty}
                 </p>)}
 
                 {/* Stats */}
-                <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-white/10 text-sm text-gray-400">
+                <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-white/10 text-sm text-gray-200">
                   {property.category?.slug === "land" ? (
                     <div className="flex flex-col text-center">
                       <span className="font-semibold text-white text-lg">
                         {property.dimensions}
                       </span>
-                      <span className="text-[10px] uppercase tracking-widest text-gray-500">
+                      <span className="text-[10px] uppercase tracking-widest text-gray-200">
                         Plot Dimensions
                       </span>
                     </div>
@@ -236,7 +246,7 @@ export default function Home() {
                         <span className="font-semibold text-white">
                           {property.bedrooms}
                         </span>
-                        <span className="text-[10px] uppercase tracking-widest text-gray-500">
+                        <span className="text-[10px] uppercase tracking-widest text-gray-200">
                           Beds
                         </span>
                       </div>
@@ -247,7 +257,7 @@ export default function Home() {
                         <span className="font-semibold text-white">
                           {property.bathrooms}
                         </span>
-                        <span className="text-[10px] uppercase tracking-widest text-gray-500">
+                        <span className="text-[10px] uppercase tracking-widest text-gray-200">
                           Baths
                         </span>
                       </div>
@@ -258,7 +268,7 @@ export default function Home() {
                         <span className="font-semibold text-white">
                           {property.area}
                         </span>
-                        <span className="text-[10px] uppercase tracking-widest text-gray-500">
+                        <span className="text-[10px] uppercase tracking-widest text-gray-200">
                           Sq Ft
                         </span>
                       </div>

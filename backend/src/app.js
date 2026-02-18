@@ -8,7 +8,7 @@ import adminRoutes from "./routes/admin.routes.js";
 import enquiryRoutes from "./routes/enquiry.routes.js";
 import categoryRoutes from "./routes/category.routes.js";
 import contentRoutes from "./routes/content.routes.js";
-
+import reviewRoutes from "./routes/review.routes.js";
 
 const app = express();
 const allowedOrigins = [
@@ -37,5 +37,6 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/enquiries", enquiryRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/content", contentRoutes);
+app.use("/api/reviews", reviewRoutes);
 
 export default app;

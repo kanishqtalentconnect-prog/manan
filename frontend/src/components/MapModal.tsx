@@ -6,7 +6,7 @@ type Props = {
 export default function MapModal({ url, onClose }: Props) {
   return (
     <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center">
-      <div className="bg-white rounded-xl w-[90%] max-w-3xl p-4 relative">
+      <div className="bg-white rounded-xl w-[90%] h-[80%] max-w-3xl p-4 relative">
 
         <button
           onClick={onClose}
@@ -17,7 +17,7 @@ export default function MapModal({ url, onClose }: Props) {
 
         <iframe
           src={url}
-          className="w-full h-100 rounded-lg"
+          className="w-full h-full rounded-lg"
           loading="lazy"
           allowFullScreen
         />

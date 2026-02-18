@@ -37,7 +37,7 @@ export default function ContactSection() {
           Prefer to Reach Out{" "}
           <span className="text-[#c4a47c] italic">Directly?</span>
         </h2>
-        <p className="text-gray-400 text-sm mb-14">
+        <p className="text-gray-100 text-sm mb-14">
           Choose your preferred method of communication
         </p>
 
@@ -48,7 +48,7 @@ export default function ContactSection() {
               <FaPhoneAlt />
             </div>
             <h4 className="text-white font-semibold mb-2">Call Us</h4>
-            <p className="text-xs text-gray-400 mb-2">
+            <p className="text-xs text-gray-200 mb-2">
               Mon–Sat, 9 AM – 7 PM
             </p>
             <p className="text-[#c4a47c] font-medium">
@@ -66,7 +66,7 @@ export default function ContactSection() {
               <FaWhatsapp />
             </div>
             <h4 className="text-white font-semibold mb-2">WhatsApp</h4>
-            <p className="text-xs text-gray-400 mb-2">
+            <p className="text-xs text-gray-200 mb-2">
               Quick response guaranteed
             </p>
             <p className="text-[#c4a47c] font-medium">
@@ -84,7 +84,7 @@ export default function ContactSection() {
               <FaEnvelope />
             </div>
             <h4 className="text-white font-semibold mb-2">Email</h4>
-            <p className="text-xs text-gray-400 mb-2">
+            <p className="text-xs text-gray-200 mb-2">
               Detailed inquiries welcome
             </p>
             <p className="text-[#c4a47c] font-medium">

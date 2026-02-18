@@ -62,7 +62,7 @@ export default function AdminDashboard() {
 
         <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 w-full lg:w-auto">
           <div className="flex flex-wrap bg-gray-100 p-1 rounded-xl border border-gray-200 w-full sm:w-auto">
-            {["Properties", "Categories", "Bookings", "Enquiries"].map((item) => (
+            {["Properties", "Categories", "Bookings", "Enquiries", "Reviews"].map((item) => (
               <Link
                 key={item}
                 to={`/admin/${item.toLowerCase()}`}

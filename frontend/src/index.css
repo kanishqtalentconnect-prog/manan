@@ -9,3 +9,10 @@
 #contact {
   scroll-margin-top: 96px;
 }
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
