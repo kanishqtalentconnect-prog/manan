@@ -236,7 +236,7 @@ export default function PropertyDetail() {
             <div className="py-8 border-y border-[#ece6dd] mb-8">
               {property.category?.slug === "land" ? (
                 <div className="text-center">
-                  <p className="text-xs text-[#9c8a6a] uppercase tracking-widest mb-1">
+                  <p className="text-sm text-[#9c8a6a] uppercase tracking-widest mb-1">
                     Plot Dimensions
                   </p>
                   <p className="text-2xl font-serif text-[#1e1e1e]">
