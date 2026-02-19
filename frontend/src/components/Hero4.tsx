@@ -76,245 +76,241 @@ export default function Hero4() {
   };
 
   return (
-    <section className="relative bg-[#0f0f0f] py-28 overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(196,164,124,0.08),transparent_65%)]" />
+  <section className="relative bg-[#f5f2ea] py-28 overflow-hidden">
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,0,0,0.04),transparent_65%)]" />
 
-      <div className="relative max-w-7xl mx-auto px-6">
+    <div className="relative max-w-7xl mx-auto px-6">
 
-        {/* Header */}
-        <div className="text-center mb-20">
-          <div className="flex justify-center mb-4">
-            <span className="text-[10px] uppercase tracking-[0.3em] font-bold 
-              text-[#c4a47c] bg-[#c4a47c]/10 
-              border border-[#c4a47c]/30 px-4 py-1.5 rounded-full">
-              Client Stories
-            </span>
-          </div>
-
-          <h2 className="text-4xl md:text-5xl font-serif text-white mb-4">
-            What Our Clients{" "}
-            <span className="text-[#c4a47c] italic">Say About Us</span>
-          </h2>
-
-          <p className="max-w-xl mx-auto text-sm md:text-base text-gray-300 font-light leading-relaxed">
-            Real experiences from verified investors who found their perfect
-            mountain sanctuary.
-          </p>
+      {/* Header */}
+      <div className="text-center mb-20">
+        <div className="flex justify-center mb-4">
+          <span className="text-[10px] uppercase tracking-[0.3em] font-semibold 
+            text-[#8c7b63] bg-white
+            border border-[#e6dfd3] px-4 py-1.5 rounded-full">
+            Client Stories
+          </span>
         </div>
 
-        {/* Reviews */}
-        {loading ? (
-          <p className="text-center text-gray-400">Loading reviews...</p>
-        ) : reviews.length === 0 ? (
-          <p className="text-center text-gray-400">
-            No verified reviews yet.
-          </p>
-        ) : (
-          <>
-            <div className="relative mb-16">
+        <h2 className="text-4xl md:text-5xl font-serif text-[#2a2a2a] mb-4">
+          What Our Clients{" "}
+          <span className="text-[#8c7b63] italic">Say About Us</span>
+        </h2>
 
-              {/* Arrows */}
-              {totalPages > 1 && (
-                <>
-                  <button
-                    onClick={prevPage}
-                    disabled={page === 0}
-                    className="flex md:flex absolute left-0 top-1/2 -translate-y-1/2 
-                      bg-black/70 hover:bg-black
-                      text-white w-12 h-12 rounded-full 
-                      items-center justify-center transition 
-                      disabled:opacity-30 z-30 shadow-lg"
-                  >
-                    <ChevronLeft size={20} />
-                  </button>
+        <p className="max-w-xl mx-auto text-sm md:text-base text-[#6b6b6b] font-light leading-relaxed">
+          Real experiences from verified investors who found their perfect
+          mountain sanctuary.
+        </p>
+      </div>
 
-                  <button
-                    onClick={nextPage}
-                    disabled={page === totalPages - 1}
-                    className="flex md:flex absolute right-0 top-1/2 -translate-y-1/2 
-                      bg-black/70 hover:bg-black
-                      text-white w-12 h-12 rounded-full 
-                      items-center justify-center transition 
-                      disabled:opacity-30 z-30 shadow-lg"
-                  >
-                    <ChevronRight size={20} />
-                  </button>
-                </>
-              )}
-              
-              {/* Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 md:px-0">
-                {currentReviews.map((r) => (
-                  <div
-                    key={r._id}
-                    className="
-                      flex flex-col
-                      bg-[#161616] border border-white/10
-                      rounded-2xl p-8 shadow-xl
-                      transition-all duration-500
-                      hover:-translate-y-1 hover:shadow-2xl
-                    "
-                  >
-                    <div className="flex-1">
+      {/* Reviews Section */}
+      {loading ? (
+        <p className="text-center text-[#777]">Loading reviews...</p>
+      ) : reviews.length === 0 ? (
+        <p className="text-center text-[#777]">
+          No verified reviews yet.
+        </p>
+      ) : (
+        <>
+          <div className="relative mb-16">
 
-                      <div className="w-10 h-10 rounded-full bg-[#c4a47c]/15 
-                                      border border-[#c4a47c]/30 flex items-center 
-                                      justify-center text-[#c4a47c] mb-6">
-                        ❝
-                      </div>
+            {/* Arrows */}
+            {totalPages > 1 && (
+              <>
+                <button
+                  onClick={prevPage}
+                  disabled={page === 0}
+                  className="absolute left-0 top-1/2 -translate-y-1/2
+                    bg-white border border-[#e6dfd3]
+                    text-[#2a2a2a] w-12 h-12 rounded-full
+                    flex items-center justify-center
+                    shadow-md transition
+                    disabled:opacity-30 z-30"
+                >
+                  <ChevronLeft size={20} />
+                </button>
 
-                      <div className="flex gap-1 text-[#c4a47c] text-sm mb-4">
-                        {"★".repeat(r.rating)}
-                      </div>
+                <button
+                  onClick={nextPage}
+                  disabled={page === totalPages - 1}
+                  className="absolute right-0 top-1/2 -translate-y-1/2
+                    bg-white border border-[#e6dfd3]
+                    text-[#2a2a2a] w-12 h-12 rounded-full
+                    flex items-center justify-center
+                    shadow-md transition
+                    disabled:opacity-30 z-30"
+                >
+                  <ChevronRight size={20} />
+                </button>
+              </>
+            )}
 
-                      <p className="text-sm text-gray-300 leading-relaxed mb-6 break-words">
-                        “{r.description}”
-                      </p>
+            {/* Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 md:px-0">
+              {currentReviews.map((r) => (
+                <div
+                  key={r._id}
+                  className="flex flex-col bg-white border border-[#e6dfd3]
+                    rounded-2xl p-8 shadow-sm
+                    transition-all duration-500
+                    hover:-translate-y-1 hover:shadow-lg"
+                >
+                  <div className="flex-1">
 
-                      {r.propertyBought && (
-                        <span
-                          className="inline-block text-[10px] uppercase tracking-wider 
-                                    text-[#c4a47c] bg-[#c4a47c]/10 
-                                    border border-[#c4a47c]/30 
-                                    px-3 py-1 rounded-full mb-6"
-                        >
-                          {r.propertyBought}
+                    <div className="w-10 h-10 rounded-full bg-[#f0ebe2]
+                      border border-[#e6dfd3]
+                      flex items-center justify-center 
+                      text-[#8c7b63] mb-6">
+                      ❝
+                    </div>
+
+                    <div className="flex gap-1 text-[#8c7b63] text-sm mb-4">
+                      {"★".repeat(r.rating)}
+                    </div>
+
+                    <p className="text-sm text-[#555] leading-relaxed mb-6 break-words">
+                      “{r.description}”
+                    </p>
+
+                    {r.propertyBought && (
+                      <span className="inline-block text-[10px] uppercase tracking-wider 
+                        text-[#8c7b63] bg-[#f5f2ea]
+                        border border-[#e6dfd3]
+                        px-3 py-1 rounded-full mb-6">
+                        {r.propertyBought}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="flex items-center gap-3 pt-6 border-t border-[#eee] mt-6">
+                    <div className="w-10 h-10 rounded-full overflow-hidden 
+                      bg-[#f0ebe2] border border-[#e6dfd3]
+                      flex items-center justify-center">
+                      {r.image ? (
+                        <img
+                          src={r.image}
+                          alt={r.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <span className="text-[#8c7b63] font-semibold text-sm">
+                          {getInitials(r.name)}
                         </span>
                       )}
                     </div>
 
-                    <div className="flex items-center gap-3 pt-6 border-t border-white/10 mt-6">
-                      <div
-                        className="w-10 h-10 rounded-full overflow-hidden 
-                                  bg-[#c4a47c]/15 border border-[#c4a47c]/30 
-                                  flex items-center justify-center"
-                      >
-                        {r.image ? (
-                          <img
-                            src={r.image}
-                            alt={r.name}
-                            className="w-full h-full object-cover"
-                          />
-                        ) : (
-                          <span className="text-[#c4a47c] font-semibold text-sm">
-                            {getInitials(r.name)}
-                          </span>
-                        )}
-                      </div>
+                    <div>
+                      <p className="text-[#2a2a2a] font-semibold text-sm">
+                        {r.name}
+                      </p>
 
-                      <div>
-                        <p className="text-white font-semibold text-sm">
-                          {r.name}
+                      {r.address && (
+                        <p className="text-xs text-[#777]">
+                          {r.address}
                         </p>
-
-                        {r.address && (
-                          <p className="text-xs text-gray-400">
-                            {r.address}
-                          </p>
-                        )}
-                      </div>
+                      )}
                     </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
-
-            {/* Dots */}
-            {totalPages > 1 && (
-              <div className="flex justify-center gap-3 mb-12">
-                {Array.from({ length: totalPages }).map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setPage(i)}
-                    className={`transition-all duration-300 rounded-full ${
-                      i === page
-                        ? "w-8 h-2 bg-[#c4a47c]"
-                        : "w-2 h-2 bg-white/30 hover:bg-white/50"
-                    }`}
-                  />
-                ))}
-              </div>
-            )}
-          </>
-        )}
-
-        {/* Write Review */}
-        <div className="flex justify-center mt-4 mb-16">
-          <button
-            onClick={() => setShowForm(true)}
-            className="px-6 py-3 rounded-xl bg-[#c4a47c] text-black font-semibold
-              hover:bg-[#b08f63] transition-all shadow-lg"
-          >
-            Write a Review
-          </button>
-        </div>
-
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-10 text-center">
-          <div>
-            <p className="text-3xl font-serif text-[#c4a47c] mb-1">
-              {averageRating}/5
-            </p>
-            <p className="text-xs uppercase tracking-widest text-gray-300">
-              Average Rating
-            </p>
           </div>
 
-          <div>
-            <p className="text-3xl font-serif text-[#c4a47c] mb-1">
-              {reviews.length}+
-            </p>
-            <p className="text-xs uppercase tracking-widest text-gray-300">
-              Verified Reviews
-            </p>
-          </div>
+          {/* Dots */}
+          {totalPages > 1 && (
+            <div className="flex justify-center gap-3 mb-12">
+              {Array.from({ length: totalPages }).map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setPage(i)}
+                  className={`transition-all duration-300 rounded-full ${
+                    i === page
+                      ? "w-8 h-2 bg-[#8c7b63]"
+                      : "w-2 h-2 bg-[#d8d2c8]"
+                  }`}
+                />
+              ))}
+            </div>
+          )}
+        </>
+      )}
 
-          <div>
-            <p className="text-3xl font-serif text-[#c4a47c] mb-1">
-              100%
-            </p>
-            <p className="text-xs uppercase tracking-widest text-gray-300">
-              Transparency
-            </p>
-          </div>
-        </div>
+      {/* Write Review Button */}
+      <div className="flex justify-center mt-4 mb-16">
+        <button
+          onClick={() => setShowForm(true)}
+          className="px-6 py-3 rounded-xl 
+            bg-[#8c7b63] text-white font-semibold
+            hover:bg-[#766652] transition-all shadow-md"
+        >
+          Write a Review
+        </button>
       </div>
 
-      {/* REVIEW MODAL */}
-      {showForm && (
-        <div
-          className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm 
-                    flex items-center justify-center p-4"
-          onClick={() => setShowForm(false)}
-        >
-          <div
-            className="relative w-full max-w-xl
-                      bg-[#161616] border border-white/10
-                      rounded-2xl shadow-2xl
-                      p-6 md:p-8
-                      max-h-[90vh] overflow-y-auto
-                      animate-fadeIn"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close Button */}
-            <button
-              onClick={() => setShowForm(false)}
-              className="absolute top-4 right-4 
-                        text-gray-400 hover:text-white 
-                        text-xl transition"
-            >
-              ✕
-            </button>
-
-            <ReviewForm
-              onSuccess={() => {
-                setShowForm(false);
-                api.get("/reviews").then((res) => setReviews(res.data));
-              }}
-            />
-          </div>
+      {/* Stats */}
+      <div className="grid grid-cols-3 gap-10 text-center">
+        <div>
+          <p className="text-3xl font-serif text-[#8c7b63] mb-1">
+            {averageRating}/5
+          </p>
+          <p className="text-xs uppercase tracking-widest text-[#777]">
+            Average Rating
+          </p>
         </div>
-      )}
-    </section>
-  );
+
+        <div>
+          <p className="text-3xl font-serif text-[#8c7b63] mb-1">
+            {reviews.length}+
+          </p>
+          <p className="text-xs uppercase tracking-widest text-[#777]">
+            Verified Reviews
+          </p>
+        </div>
+
+        <div>
+          <p className="text-3xl font-serif text-[#8c7b63] mb-1">
+            100%
+          </p>
+          <p className="text-xs uppercase tracking-widest text-[#777]">
+            Transparency
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* REVIEW MODAL */}
+    {showForm && (
+      <div
+        className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm 
+          flex items-center justify-center p-4"
+        onClick={() => setShowForm(false)}
+      >
+        <div
+          className="relative w-full max-w-xl
+            bg-white border border-[#e6dfd3]
+            rounded-2xl shadow-2xl
+            p-6 md:p-8
+            max-h-[90vh] overflow-y-auto"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            onClick={() => setShowForm(false)}
+            className="absolute top-4 right-4 
+              text-[#777] hover:text-[#2a2a2a] 
+              text-xl transition"
+          >
+            ✕
+          </button>
+
+          <ReviewForm
+            onSuccess={() => {
+              setShowForm(false);
+              api.get("/reviews").then((res) => setReviews(res.data));
+            }}
+          />
+        </div>
+      </div>
+    )}
+  </section>
+);
+
 }

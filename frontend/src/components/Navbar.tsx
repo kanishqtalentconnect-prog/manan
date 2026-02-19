@@ -73,17 +73,19 @@ function NavItem({
       }}
       className="relative group
         block md:inline-block
-        text-base md:text-sm
-        text-gray-300 hover:text-white
-        py-2 md:py-0
-        transition"
+        text-[16px] md:text-[15px]
+        font-light tracking-wide
+        text-[#2b2b2b] hover:text-black
+        py-3 md:py-0
+        transition-all duration-300"
     >
       {label}
 
       {!disableUnderline && (
         <span
           className={`
-            absolute left-0 -bottom-2 h-[2px] hidden md:block w-full bg-[#c4a47c]
+            absolute left-0 -bottom-2 h-[1px] hidden md:block w-full
+            bg-black
             transform origin-left transition-transform duration-300
             ${isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}
           `}
@@ -149,76 +151,96 @@ export default function Navbar() {
   }, [location]);
 
   return (
-    <nav className="sticky top-0 z-50 bg-[#0f0f0f]/90 backdrop-blur-md border-b border-white/10">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        
+    <nav className="sticky top-0 z-50 bg-[#e9e6dd] border-b border-black/10">
+      <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+
         {/* LOGO */}
-        <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-9 h-9 rounded-lg bg-[#c4a47c]/20 border border-[#c4a47c]/40 flex items-center justify-center text-[#c4a47c] font-bold">
-            M
-          </div>
+        <Link to="/" className="flex items-center gap-3">
           <div>
-            <p className="text-white font-semibold leading-tight">Manan LLP</p>
-            <p className="text-[11px] text-gray-400">Nata Dol Retreats</p>
+            <p className="text-xl font-light tracking-wide text-[#2b2b2b]">
+              Manan LLP
+            </p>
+            <p className="text-[12px] text-black/60 tracking-wide">
+              Nata Dol Retreats
+            </p>
           </div>
         </Link>
 
+        {/* CENTER NAV (UNCHANGED ITEMS) */}
         {!user && (
-        <div className="hidden md:flex items-center gap-8">
-          <NavItem href="/#about" label="About Nata Dol" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("about")}/>
-          <NavItem href="/#property" label="Properties" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("property")} />
-          <NavItem href="/#hero2" label="Why Invest" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero2")} />
-          <NavItem href="/#hero3" label="Gallery" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero3")} />
-          <NavItem href="/#hero4" label="Testimonials" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero4")} />
-        </div>
+          <div className="hidden md:flex items-center gap-10 text-[15px] font-light text-[#2b2b2b] tracking-wide">
+            <NavItem href="/#about" label="About Nata Dol" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("about")} />
+            <NavItem href="/#property" label="Properties" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("property")} />
+            <NavItem href="/#hero2" label="Why Invest" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero2")} />
+            <NavItem href="/#hero3" label="Gallery" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero3")} />
+            <NavItem href="/#hero4" label="Testimonials" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero4")} />
+          </div>
         )}
 
-        {/* RIGHT ACTIONS */}
-        <div className="flex items-center gap-4">
+        {/* RIGHT ACTIONS (SAME BUTTONS, NEW STYLE) */}
+        <div className="flex items-center gap-6">
+
           {!user && (
-           <Link to="/login" className="hidden md:inline-flex bg-gray-900 text-white px-6 py-2.5 rounded-xl font-semibold hover:bg-black transition">
-             Login
-           </Link>
-          )}
-          {!user && (<button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition"
-            aria-label="Toggle menu"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {menuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
+            <>
+              {/* Login Button (same route, same label) */}
+              <Link
+                to="/login"
+                className="hidden md:inline-flex 
+                  border border-black/30 
+                  px-6 py-2.5 
+                  text-[14px] font-medium tracking-wide 
+                  text-[#2b2b2b] 
+                  hover:bg-black hover:text-white 
+                  transition-all duration-300"
+              >
+                Login
+              </Link>
+
+              {/* Mobile Toggle */}
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="md:hidden text-[#2b2b2b] p-2"
+                aria-label="Toggle menu"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  {menuOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+
+              {/* Contact Us (same label, same link) */}
+              <a
+                href="/#contact"
+                className="hidden sm:inline-flex 
+                  border border-black/30 
+                  px-6 py-2.5 
+                  text-[14px] font-medium tracking-wide 
+                  text-[#2b2b2b] 
+                  hover:bg-black hover:text-white 
+                  transition-all duration-300"
+              >
+                Contact Us
+              </a>
+            </>
           )}
 
-          {/* CONTACT CTA */}
-          {!user && (
-          <a
-            href="/#contact"
-            className="hidden sm:inline-flex items-center gap-2 bg-[#c4a47c] text-black px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#d6b88c] transition"
-          >
-            Contact Us
-          </a>
-          )}
-
-          {/* AUTH AREA */}
+          {/* AUTH AREA (NO LOGIC CHANGE, LIGHT STYLE) */}
           {user && (
-            <div className="flex items-center gap-4 pl-4 border-l border-white/10">
+            <div className="flex items-center gap-4 pl-4 border-l border-black/20">
               <div className="hidden md:flex items-center gap-2">
-                <div className="w-9 h-9 rounded-full bg-[#c4a47c]/20 border border-[#c4a47c]/40 flex items-center justify-center text-[#c4a47c] text-sm font-bold">
+                <div className="w-9 h-9 rounded-full border border-black/30 flex items-center justify-center text-sm font-medium text-black">
                   {user.name.charAt(0).toUpperCase()}
                 </div>
-                <span className="text-xs text-gray-400">
+                <span className="text-sm text-black">
                   {user.name}
                 </span>
               </div>
@@ -226,7 +248,7 @@ export default function Navbar() {
               {user.role === "admin" && (
                 <Link
                   to="/admin"
-                  className="text-xs px-3 py-1.5 rounded-md bg-white/10 text-white hover:bg-white/20 transition"
+                  className="text-sm px-4 py-2 border border-black/30 hover:bg-black hover:text-white transition"
                 >
                   Dashboard
                 </Link>
@@ -234,7 +256,7 @@ export default function Navbar() {
 
               <button
                 onClick={handleLogout}
-                className="text-xs text-gray-400 hover:text-red-400 transition"
+                className="text-sm text-black/70 hover:text-red-500 transition"
               >
                 Logout
               </button>
@@ -242,14 +264,17 @@ export default function Navbar() {
           )}
         </div>
       </div>
+
+      {/* MOBILE MENU (NO FUNCTION CHANGE) */}
       {!user && (
         <div
           className={`md:hidden overflow-hidden transition-all duration-300 ${
             menuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="px-6 pb-6 pt-4 space-y-4 bg-[#0f0f0f]/95 border-t border-white/10">
-            <NavItem href="/#about" label="About Nata Dol" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("about")}/>
+          <div className="px-6 pb-6 pt-4 space-y-4 bg-[#e9e6dd] border-t border-black/10 text-[#2b2b2b]">
+
+            <NavItem href="/#about" label="About Nata Dol" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("about")} />
             <NavItem href="/#property" label="Properties" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("property")} />
             <NavItem href="/#hero2" label="Why Invest" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero2")} />
             <NavItem href="/#hero3" label="Gallery" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero3")} />
@@ -257,7 +282,7 @@ export default function Navbar() {
 
             <Link
               to="/login"
-              className="block w-full text-center bg-gray-900 text-white py-2.5 rounded-xl font-semibold"
+              className="block w-full text-center border border-black/30 py-2.5 font-medium hover:bg-black hover:text-white transition"
               onClick={() => setMenuOpen(false)}
             >
               Login
@@ -265,7 +290,7 @@ export default function Navbar() {
 
             <a
               href="/#contact"
-              className="block w-full text-center bg-[#c4a47c] text-black py-2.5 rounded-xl font-semibold"
+              className="block w-full text-center border border-black/30 py-2.5 font-medium hover:bg-black hover:text-white transition"
               onClick={() => setMenuOpen(false)}
             >
               Contact Us

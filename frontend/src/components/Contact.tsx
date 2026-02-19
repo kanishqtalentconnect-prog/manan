@@ -28,71 +28,101 @@ export default function ContactSection() {
 
 
   return (
-    <section className="relative bg-[#0f0f0f] py-24">
-      {/* glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(196,164,124,0.06),transparent_70%)]" />
+  <section className="relative bg-[#ffffff] py-24">
+    {/* subtle warm glow */}
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(196,164,124,0.08),transparent_70%)]" />
 
-      <div className="relative max-w-6xl mx-auto px-6 text-center">
-        <h2 className="text-3xl md:text-4xl font-serif text-white mb-3">
-          Prefer to Reach Out{" "}
-          <span className="text-[#c4a47c] italic">Directly?</span>
-        </h2>
-        <p className="text-gray-100 text-sm mb-14">
-          Choose your preferred method of communication
-        </p>
+    <div className="relative max-w-6xl mx-auto px-6 text-center">
+      <h2 className="text-3xl md:text-4xl font-serif text-[#1a1a1a] mb-3">
+        Prefer to Reach Out{" "}
+        <span className="text-[#c4a47c] italic">Directly?</span>
+      </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* CALL */}
-          <div className="bg-[#161616] border border-white/10 rounded-2xl p-8 hover:border-[#c4a47c]/40 transition">
-            <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-[#c4a47c]/15 border border-[#c4a47c]/30 flex items-center justify-center text-[#c4a47c] text-xl">
-              <FaPhoneAlt />
-            </div>
-            <h4 className="text-white font-semibold mb-2">Call Us</h4>
-            <p className="text-xs text-gray-200 mb-2">
-              Mon–Sat, 9 AM – 7 PM
-            </p>
-            <p className="text-[#c4a47c] font-medium">
-              +91 7217816810
-            </p>
+      <p className="text-[#6a6a6a] text-sm mb-14">
+        Choose your preferred method of communication
+      </p>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        {/* CALL */}
+        <div className="bg-[#f9f7f2] border border-[#e5e0d8] rounded-2xl p-8 
+                        hover:border-[#c4a47c]/50 hover:shadow-md transition-all duration-300">
+          <div className="w-14 h-14 mx-auto mb-5 rounded-full 
+                          bg-[#c4a47c]/15 border border-[#c4a47c]/30 
+                          flex items-center justify-center 
+                          text-[#c4a47c] text-xl">
+            <FaPhoneAlt />
           </div>
 
-          {/* WHATSAPP */}
-          <div onClick={openWhatsApp}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => e.key === "Enter" && openWhatsApp()}
-            className="bg-[#161616] border border-white/10 rounded-2xl p-8 hover:border-[#c4a47c]/40 transition">
-            <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-[#c4a47c]/15 border border-[#c4a47c]/30 flex items-center justify-center text-[#c4a47c] text-xl">
-              <FaWhatsapp />
-            </div>
-            <h4 className="text-white font-semibold mb-2">WhatsApp</h4>
-            <p className="text-xs text-gray-200 mb-2">
-              Quick response guaranteed
-            </p>
-            <p className="text-[#c4a47c] font-medium">
-              Chat with Us
-            </p>
-          </div>
+          <h4 className="text-[#1a1a1a] font-semibold mb-2">Call Us</h4>
 
-          {/* EMAIL */}
-          <div onClick={openEmail}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => e.key === "Enter" && openEmail()}
-            className="bg-[#161616] border border-white/10 rounded-2xl p-8 hover:border-[#c4a47c]/40 transition">
-            <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-[#c4a47c]/15 border border-[#c4a47c]/30 flex items-center justify-center text-[#c4a47c] text-xl">
-              <FaEnvelope />
-            </div>
-            <h4 className="text-white font-semibold mb-2">Email</h4>
-            <p className="text-xs text-gray-200 mb-2">
-              Detailed inquiries welcome
-            </p>
-            <p className="text-[#c4a47c] font-medium">
-              info@mananllp.com
-            </p>
-          </div>
+          <p className="text-xs text-[#7a7a7a] mb-2">
+            Mon–Sat, 9 AM – 7 PM
+          </p>
+
+          <p className="text-[#c4a47c] font-medium">
+            +91 7217816810
+          </p>
         </div>
+
+        {/* WHATSAPP */}
+        <div
+          onClick={openWhatsApp}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === "Enter" && openWhatsApp()}
+          className="bg-[#f9f7f2] border border-[#e5e0d8] rounded-2xl p-8 
+                     hover:border-[#c4a47c]/50 hover:shadow-md 
+                     transition-all duration-300 cursor-pointer"
+        >
+          <div className="w-14 h-14 mx-auto mb-5 rounded-full 
+                          bg-[#c4a47c]/15 border border-[#c4a47c]/30 
+                          flex items-center justify-center 
+                          text-[#c4a47c] text-xl">
+            <FaWhatsapp />
+          </div>
+
+          <h4 className="text-[#1a1a1a] font-semibold mb-2">WhatsApp</h4>
+
+          <p className="text-xs text-[#7a7a7a] mb-2">
+            Quick response guaranteed
+          </p>
+
+          <p className="text-[#c4a47c] font-medium">
+            Chat with Us
+          </p>
+        </div>
+
+        {/* EMAIL */}
+        <div
+          onClick={openEmail}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === "Enter" && openEmail()}
+          className="bg-[#f9f7f2] border border-[#e5e0d8] rounded-2xl p-8 
+                     hover:border-[#c4a47c]/50 hover:shadow-md 
+                     transition-all duration-300 cursor-pointer"
+        >
+          <div className="w-14 h-14 mx-auto mb-5 rounded-full 
+                          bg-[#c4a47c]/15 border border-[#c4a47c]/30 
+                          flex items-center justify-center 
+                          text-[#c4a47c] text-xl">
+            <FaEnvelope />
+          </div>
+
+          <h4 className="text-[#1a1a1a] font-semibold mb-2">Email</h4>
+
+          <p className="text-xs text-[#7a7a7a] mb-2">
+            Detailed inquiries welcome
+          </p>
+
+          <p className="text-[#c4a47c] font-medium">
+            info@mananllp.com
+          </p>
+        </div>
+
       </div>
-    </section>
-  );
+    </div>
+  </section>
+);
 }

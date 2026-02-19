@@ -28,27 +28,27 @@ export default function Hero2() {
 
 
   return (
-    <section className="relative bg-[#0f0f0f] py-28 overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(196,164,124,0.12),transparent_60%)]" />
+    <section className="relative bg-[#f5f2ea] py-28 overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,0,0,0.04),transparent_60%)]" />
 
       <div className="relative max-w-7xl mx-auto px-6">
 
-        {/* HEADER (unchanged) */}
+        {/* HEADER */}
         <div className="text-center mb-20">
           <div className="flex justify-center mb-4">
-            <span className="text-[10px] uppercase tracking-[0.3em] font-bold 
-                             text-[#c4a47c] bg-[#c4a47c]/10 
-                             border border-[#c4a47c]/30 px-4 py-1.5 rounded-full">
+            <span className="text-[10px] uppercase tracking-[0.3em] font-semibold 
+                            text-[#8c7b63] bg-white 
+                            border border-[#e2dbcf] px-4 py-1.5 rounded-full">
               Investment Opportunity
             </span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-serif text-white mb-4">
+          <h2 className="text-4xl md:text-5xl font-serif text-[#2a2a2a] mb-4">
             Why Invest in{" "}
-            <span className="text-[#c4a47c] italic">Nata Dol?</span>
+            <span className="text-[#8c7b63] italic">Nata Dol?</span>
           </h2>
 
-          <p className="max-w-xl mx-auto text-sm md:text-base text-gray-100 font-light leading-relaxed">
+          <p className="max-w-xl mx-auto text-sm md:text-base text-[#6b6b6b] font-light leading-relaxed">
             A rising destination that offers lifestyle, serenity, and strong returns.
           </p>
         </div>
@@ -58,13 +58,13 @@ export default function Hero2() {
 
           {/* MEDIA */}
           <div className="relative">
-            <div className="absolute -inset-2 rounded-3xl bg-[#c4a47c]/20 blur-xl opacity-30" />
+            <div className="absolute -inset-2 rounded-3xl bg-[#8c7b63]/20 blur-xl opacity-20" />
 
             {hasMedia && current ? (
               current.type === "image" ? (
                 <img
                   src={current.url}
-                  className="relative rounded-3xl shadow-2xl object-cover w-full"
+                  className="relative rounded-3xl shadow-xl object-cover w-full"
                 />
               ) : (
                 <video
@@ -72,62 +72,51 @@ export default function Hero2() {
                   src={current.url}
                   autoPlay
                   muted
-                  className="relative rounded-3xl shadow-2xl object-cover w-full"
+                  className="relative rounded-3xl shadow-xl object-cover w-full"
                   onEnded={next}
                 />
               )
             ) : (
-              /* FALLBACK UI */
-              <div className="relative rounded-3xl shadow-2xl bg-gradient-to-br 
-                              from-[#1a1a1a] to-[#0f0f0f] 
+              <div className="relative rounded-3xl shadow-xl 
+                              bg-white border border-[#e2dbcf]
                               h-80 flex items-center justify-center text-center p-8">
                 <div>
-                  <p className="text-[#c4a47c] text-lg font-serif mb-2">
+                  <p className="text-[#8c7b63] text-lg font-serif mb-2">
                     Coming Soon
                   </p>
-                  <p className="text-gray-400 text-sm">
+                  <p className="text-[#777] text-sm">
                     Visual content for this section will be available shortly.
                   </p>
                 </div>
               </div>
             )}
 
-            {/* CONTROLS (only if multiple) */}
+            {/* CONTROLS */}
             {hasMedia && media.length > 1 && (
               <>
                 <button
-                    onClick={prev}
-                    className="absolute 
-                      top-[65%] md:top-1/2 
-                      -translate-y-1/2 
-                      left-4 md:left-6
-                      z-30
-                      bg-black/60 hover:bg-black/80
-                      text-white text-2xl md:text-3xl
-                      w-10 h-10 md:w-12 md:h-12
-                      rounded-full
-                      flex items-center justify-center
-                      transition"
-                  >
-                    <ChevronLeft size={22} strokeWidth={2.5} />
-                  </button>
+                  onClick={prev}
+                  className="absolute top-1/2 -translate-y-1/2 left-6
+                    z-30 bg-white shadow-md
+                    text-[#2a2a2a]
+                    w-10 h-10 rounded-full
+                    flex items-center justify-center
+                    hover:bg-[#f0ebe3] transition"
+                >
+                  <ChevronLeft size={20} strokeWidth={2.5} />
+                </button>
 
-                  <button
-                    onClick={next}
-                    className="absolute 
-                      top-[65%] md:top-1/2 
-                      -translate-y-1/2 
-                      right-4 md:right-6
-                      z-30
-                      bg-black/60 hover:bg-black/80
-                      text-white text-2xl md:text-3xl
-                      w-10 h-10 md:w-12 md:h-12
-                      rounded-full
-                      flex items-center justify-center
-                      transition"
-                  >
-                    <ChevronRight size={22} strokeWidth={2.5} />
-                  </button>
+                <button
+                  onClick={next}
+                  className="absolute top-1/2 -translate-y-1/2 right-6
+                    z-30 bg-white shadow-md
+                    text-[#2a2a2a]
+                    w-10 h-10 rounded-full
+                    flex items-center justify-center
+                    hover:bg-[#f0ebe3] transition"
+                >
+                  <ChevronRight size={20} strokeWidth={2.5} />
+                </button>
               </>
             )}
 
@@ -138,7 +127,9 @@ export default function Hero2() {
                   <span
                     key={i}
                     className={`h-2 w-2 rounded-full transition-all ${
-                      i === index ? "bg-[#c4a47c] w-4" : "bg-white/40"
+                      i === index
+                        ? "bg-[#8c7b63] w-4"
+                        : "bg-[#cfc7bb]"
                     }`}
                   />
                 ))}
@@ -146,45 +137,35 @@ export default function Hero2() {
             )}
           </div>
 
-
-          {/* TEXT (unchanged) */}
+          {/* TEXT */}
           <div>
-            <h3 className="text-2xl md:text-3xl font-serif text-white mb-6">
+            <h3 className="text-2xl md:text-3xl font-serif text-[#2a2a2a] mb-6">
               Why Invest in{" "}
-              <span className="text-[#c4a47c] italic">Nata Dol, Uttarakhand</span>
+              <span className="text-[#8c7b63] italic">
+                Nata Dol, Uttarakhand
+              </span>
             </h3>
 
-            <p className="text-gray-200 text-sm leading-relaxed mb-6">
+            <p className="text-[#5f5f5f] text-sm leading-relaxed mb-6">
               Nata Dol is emerging as a high-potential Himalayan destination,
               offering serene mountain living combined with strong long-term appreciation
               and limited premium inventory.
             </p>
 
-            <ul className="space-y-4 text-gray-200 text-sm">
-              <li className="flex gap-3">
-                <span className="text-[#c4a47c]">•</span>
-                Unmatched 360° Himalayan views & pristine surroundings
-              </li>
-              <li className="flex gap-3">
-                <span className="text-[#c4a47c]">•</span>
-                Limited land availability ensuring future value growth
-              </li>
-              <li className="flex gap-3">
-                <span className="text-[#c4a47c]">•</span>
-                Rapidly growing demand for premium second homes
-              </li>
-              <li className="flex gap-3">
-                <span className="text-[#c4a47c]">•</span>
-                High rental potential driven by tourism & remote work culture
-              </li>
-              <li className="flex gap-3">
-                <span className="text-[#c4a47c]">•</span>
-                Peaceful, low-density environment with luxury lifestyle appeal
-              </li>
-              <li className="flex gap-3">
-                <span className="text-[#c4a47c]">•</span>
-                Strategic location within the Kumaon Himalayas
-              </li>
+            <ul className="space-y-4 text-[#555] text-sm">
+              {[
+                "Unmatched 360° Himalayan views & pristine surroundings",
+                "Limited land availability ensuring future value growth",
+                "Rapidly growing demand for premium second homes",
+                "High rental potential driven by tourism & remote work culture",
+                "Peaceful, low-density environment with luxury lifestyle appeal",
+                "Strategic location within the Kumaon Himalayas"
+              ].map((item, i) => (
+                <li key={i} className="flex gap-3">
+                  <span className="text-[#8c7b63]">•</span>
+                  {item}
+                </li>
+              ))}
             </ul>
           </div>
 

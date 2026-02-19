@@ -78,40 +78,47 @@ export default function Hero() {
       <div className="absolute inset-0 bg-linear-to-b from-black/40 via-black/70 to-black z-10" />
 
       {/* ================= CONTENT ================= */}
-      <div className="relative z-20 max-w-4xl mx-auto px-6">
-        <div className="flex justify-center mb-6">
-          <span className="text-[11px] uppercase tracking-[0.35em] font-semibold text-[#c4a47c] 
-                           bg-[#c4a47c]/10 border border-[#c4a47c]/30 px-5 py-2 rounded-full">
-            Premium Real Estate
-          </span>
-        </div>
+      <div className="relative z-20 max-w-5xl mx-auto px-6 text-left">
 
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-white leading-tight">
-          Find Your Perfect
-          <br />
-          <span className="text-[#c4a47c] italic">Mountain Retreat</span>
+        <h1 className="text-[38px] sm:text-[48px] md:text-[64px] lg:text-[72px]
+                      font-light tracking-tight
+                      text-gray-50 leading-[1.1]">
+          Your Mountain Sanctuary Awaits
         </h1>
 
-        <p className="mt-6 max-w-2xl mx-auto text-sm md:text-base text-gray-100 font-light leading-relaxed">
-          Own Your Second Home in the Sacred Hills.
-          Invest in a Legacy That Lasts Forever.
+        <p className="mt-6 max-w-2xl
+                      text-[16px] md:text-[18px]
+                      font-light leading-relaxed
+                      text-white">
+          Premium plots and villas in Mukteshwar. We handle everything
+          from acquisition to business setup.
         </p>
 
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-6">
           <a
             href="#property"
-            className="px-8 py-3.5 rounded-xl bg-[#c4a47c] text-black font-semibold
-                       hover:bg-[#b08f63] transition-all shadow-lg"
+            className="inline-flex items-center justify-center
+                      px-10 py-4
+                      border border-white/70
+                      text-white
+                      font-medium tracking-wide
+                      transition-all duration-300
+                      hover:bg-white hover:text-black"
           >
             Explore Properties
           </a>
-
           <a
             href="#contact"
-            className="px-8 py-3.5 rounded-xl border border-white/20 text-white font-semibold
-                       hover:bg-white/10 transition-all"
+            className="inline-flex items-center
+                      h-[56px]               /* match button height */
+                      text-white
+                      font-medium tracking-wide
+                      gap-2
+                      transition-all duration-300
+                      hover:gap-3"
           >
-            Contact Us
+            Get in Touch
+            <span className="text-xl">›</span>
           </a>
         </div>
       </div>
