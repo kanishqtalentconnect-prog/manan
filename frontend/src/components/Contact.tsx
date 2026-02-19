@@ -38,7 +38,7 @@ export default function ContactSection() {
         <span className="text-[#c4a47c] italic">Directly?</span>
       </h2>
 
-      <p className="text-[#6a6a6a] text-sm mb-14">
+      <p className="text-[#6a6a6a] text-base mb-14">
         Choose your preferred method of communication
       </p>
 
@@ -56,7 +56,7 @@ export default function ContactSection() {
 
           <h4 className="text-[#1a1a1a] font-semibold mb-2">Call Us</h4>
 
-          <p className="text-xs text-[#7a7a7a] mb-2">
+          <p className="text-sm text-[#7a7a7a] mb-1">
             Mon–Sat, 9 AM – 7 PM
           </p>
 
@@ -84,7 +84,7 @@ export default function ContactSection() {
 
           <h4 className="text-[#1a1a1a] font-semibold mb-2">WhatsApp</h4>
 
-          <p className="text-xs text-[#7a7a7a] mb-2">
+          <p className="text-sm text-[#7a7a7a] mb-2">
             Quick response guaranteed
           </p>
 
@@ -112,7 +112,7 @@ export default function ContactSection() {
 
           <h4 className="text-[#1a1a1a] font-semibold mb-2">Email</h4>
 
-          <p className="text-xs text-[#7a7a7a] mb-2">
+          <p className="text-sm text-[#7a7a7a] mb-2">
             Detailed inquiries welcome
           </p>
 

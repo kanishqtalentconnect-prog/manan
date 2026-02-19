@@ -96,7 +96,7 @@ export default function Hero4() {
           <span className="text-[#8c7b63] italic">Say About Us</span>
         </h2>
 
-        <p className="max-w-xl mx-auto text-sm md:text-base text-[#6b6b6b] font-light leading-relaxed">
+        <p className="max-w-xl mx-auto text-sm md:text-base text-[#6b6b6b] font-normal leading-relaxed">
           Real experiences from verified investors who found their perfect
           mountain sanctuary.
         </p>
@@ -252,7 +252,7 @@ export default function Hero4() {
           <p className="text-3xl font-serif text-[#8c7b63] mb-1">
             {averageRating}/5
           </p>
-          <p className="text-xs uppercase tracking-widest text-[#777]">
+          <p className="text-sm uppercase tracking-widest text-[#777]">
             Average Rating
           </p>
         </div>
@@ -261,7 +261,7 @@ export default function Hero4() {
           <p className="text-3xl font-serif text-[#8c7b63] mb-1">
             {reviews.length}+
           </p>
-          <p className="text-xs uppercase tracking-widest text-[#777]">
+          <p className="text-sm uppercase tracking-widest text-[#777]">
             Verified Reviews
           </p>
         </div>
@@ -270,7 +270,7 @@ export default function Hero4() {
           <p className="text-3xl font-serif text-[#8c7b63] mb-1">
             100%
           </p>
-          <p className="text-xs uppercase tracking-widest text-[#777]">
+          <p className="text-sm uppercase tracking-widest text-[#777]">
             Transparency
           </p>
         </div>

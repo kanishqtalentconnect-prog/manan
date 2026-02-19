@@ -91,7 +91,7 @@ const About = () => {
           </h1>
 
           <p className="max-w-3xl mx-auto text-[#5c5c5c] leading-relaxed 
-                        text-sm md:text-base font-light tracking-wide">
+                        text-sm md:text-base font-normal tracking-wide">
             Nestled in the pristine hills of Nata Dol, Uttarakhand, this elevated 
             Himalayan haven offers unmatched tranquility and perspective. 
             A sanctuary designed for visionaries who value peace, clarity, 
@@ -129,7 +129,7 @@ const About = () => {
               </h3>
 
               {/* description */}
-              <p className="text-[#666] text-sm leading-relaxed font-light">
+              <p className="text-[#666] text-sm leading-relaxed font-normal">
                 {f.desc}
               </p>
             </div>

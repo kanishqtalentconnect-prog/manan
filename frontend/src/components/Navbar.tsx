@@ -74,7 +74,7 @@ function NavItem({
       className="relative group
         block md:inline-block
         text-[16px] md:text-[15px]
-        font-light tracking-wide
+        font-normal tracking-wide
         text-[#2b2b2b] hover:text-black
         py-3 md:py-0
         transition-all duration-300"
@@ -84,8 +84,8 @@ function NavItem({
       {!disableUnderline && (
         <span
           className={`
-            absolute left-0 -bottom-2 h-[1px] hidden md:block w-full
-            bg-black
+            absolute left-0 -bottom-2 h-[1.5px] hidden md:block w-full
+            bg-gray-900
             transform origin-left transition-transform duration-300
             ${isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}
           `}
@@ -157,10 +157,10 @@ export default function Navbar() {
         {/* LOGO */}
         <Link to="/" className="flex items-center gap-3">
           <div>
-            <p className="text-xl font-light tracking-wide text-[#2b2b2b]">
+            <p className="text-xl font-normal tracking-wide text-[#2b2b2b]">
               Manan LLP
             </p>
-            <p className="text-[12px] text-black/60 tracking-wide">
+            <p className="text-[12px] text-black tracking-wide">
               Nata Dol Retreats
             </p>
           </div>

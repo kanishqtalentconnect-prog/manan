@@ -175,8 +175,8 @@ export default function Hero() {
               key={i}
               className={`h-2 rounded-full transition-all ${
                 i === index
-                  ? "bg-[#c4a47c] w-5"
-                  : "bg-white/40 w-2"
+                  ? "bg-[#8c7b63] w-8"
+                  : "bg-white/60 w-2 border border-[#ccc]"
               }`}
             />
           ))}

@@ -119,7 +119,7 @@ export default function Home() {
             </h2>
 
             <p className="max-w-2xl mx-auto text-[#6b6b6b] 
-                          text-sm md:text-base font-light leading-relaxed">
+                          text-sm md:text-base font-normal leading-relaxed">
               Handpicked properties that offer the perfect blend of luxury,
               location, and lifestyle.
             </p>
@@ -240,7 +240,7 @@ export default function Home() {
                         <span className="font-semibold text-[#2a2a2a] text-lg">
                           {property.dimensions}
                         </span>
-                        <span className="text-[10px] uppercase tracking-widest text-[#777]">
+                        <span className="text-[10px] uppercase font-medium tracking-widest text-[#494949]">
                           Plot Dimensions
                         </span>
                       </div>
@@ -256,7 +256,7 @@ export default function Home() {
                             <span className="font-semibold text-[#2a2a2a]">
                               {item.value}
                             </span>
-                            <span className="text-[10px] uppercase tracking-widest text-[#777]">
+                            <span className="text-[10px] uppercase font-medium tracking-widest text-[#494949]">
                               {item.label}
                             </span>
                           </div>

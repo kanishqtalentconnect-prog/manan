@@ -48,7 +48,7 @@ export default function Hero2() {
             <span className="text-[#8c7b63] italic">Nata Dol?</span>
           </h2>
 
-          <p className="max-w-xl mx-auto text-sm md:text-base text-[#6b6b6b] font-light leading-relaxed">
+          <p className="max-w-xl mx-auto text-sm md:text-base text-[#6b6b6b] font-normal leading-relaxed">
             A rising destination that offers lifestyle, serenity, and strong returns.
           </p>
         </div>
@@ -146,13 +146,13 @@ export default function Hero2() {
               </span>
             </h3>
 
-            <p className="text-[#5f5f5f] text-sm leading-relaxed mb-6">
+            <p className="text-[#434343] text-base font-normal leading-relaxed mb-6">
               Nata Dol is emerging as a high-potential Himalayan destination,
               offering serene mountain living combined with strong long-term appreciation
               and limited premium inventory.
             </p>
 
-            <ul className="space-y-4 text-[#555] text-sm">
+            <ul className="space-y-4 text-[#434343] text-base">
               {[
                 "Unmatched 360° Himalayan views & pristine surroundings",
                 "Limited land availability ensuring future value growth",

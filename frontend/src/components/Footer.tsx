@@ -41,7 +41,7 @@ export default function Footer() {
             </div>
             <div>
               <p className="text-[#1a1a1a] font-semibold">Manan LLP</p>
-              <p className="text-xs text-[#8a8a8a]">Nata Dol Retreats</p>
+              <p className="text-sm text-[#8a8a8a]">Nata Dol Retreats</p>
             </div>
           </div>
 

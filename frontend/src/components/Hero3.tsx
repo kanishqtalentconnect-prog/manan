@@ -46,7 +46,7 @@ export default function Hero3() {
             <span className="text-[#8c7b63] italic">Beauty</span>
           </h2>
 
-          <p className="max-w-xl mx-auto text-sm md:text-base text-[#6b6b6b] font-light leading-relaxed">
+          <p className="max-w-xl mx-auto text-sm md:text-base text-[#6b6b6b] font-normal leading-relaxed">
             Explore stunning properties and breathtaking landscapes that define Nata Dol.
           </p>
         </div>
