@@ -13,16 +13,24 @@ import reviewRoutes from "./routes/review.routes.js";
 const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://manan-xi.vercel.app",
-  "https://manan-4vefzj2oh-kanishqtalentconnect-progs-projects.vercel.app",
+  "https://manan-xi.vercel.app", // production
 ];
+
 app.use(
   cors({
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
+
+      // Allow exact origins
       if (allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
+
+      // Allow all Vercel preview deployments
+      if (origin.endsWith(".vercel.app")) {
+        return callback(null, true);
+      }
+
       return callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
