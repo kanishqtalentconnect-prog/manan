@@ -49,40 +49,45 @@ export default function BookSiteVisitModal({ propertyId, onClose }: Props) {
 
   return (
     <div
-      className="fixed inset-0 bg-black/50 z-50 overflow-y-auto"
+      className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 overflow-y-auto"
       onClick={onClose}
     >
       <div className="min-h-full flex items-end sm:items-center justify-center">
         <div
           className="
             relative bg-white
-            rounded-t-2xl sm:rounded-xl
-            p-4 sm:p-6
+            rounded-t-2xl sm:rounded-2xl
+            p-6 sm:p-8
             w-full max-w-md
             max-h-[90vh] overflow-y-auto
             mx-2 sm:mx-0
+            shadow-2xl
+            border border-[#ece6dd]
           "
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close */}
           <button
             onClick={onClose}
-            className="absolute top-3 right-3 text-gray-400 hover:text-black"
+            className="absolute top-4 right-4 text-[#9c8a6a] hover:text-[#c4a47c] transition"
           >
             ✕
           </button>
 
-          <h2 className="text-lg sm:text-xl font-semibold mb-4">
+          <h2 className="text-2xl font-serif text-[#1e1e1e] mb-6">
             Book Site Visit
           </h2>
 
-          <div className="space-y-3">
+          <div className="space-y-4">
+
             <input
               name="name"
               placeholder="Your Name"
               value={form.name}
               onChange={handleChange}
-              className="w-full border p-3.5 rounded-lg text-base"
+              className="w-full border border-[#ece6dd] p-3.5 rounded-xl text-sm 
+                        focus:outline-none focus:border-[#c4a47c] 
+                        focus:ring-2 focus:ring-[#c4a47c]/20 transition"
               required
             />
 
@@ -92,7 +97,9 @@ export default function BookSiteVisitModal({ propertyId, onClose }: Props) {
               placeholder="Email"
               value={form.email}
               onChange={handleChange}
-              className="w-full border p-3.5 rounded-lg text-base"
+              className="w-full border border-[#ece6dd] p-3.5 rounded-xl text-sm 
+                        focus:outline-none focus:border-[#c4a47c] 
+                        focus:ring-2 focus:ring-[#c4a47c]/20 transition"
               required
             />
 
@@ -101,7 +108,9 @@ export default function BookSiteVisitModal({ propertyId, onClose }: Props) {
               placeholder="Phone Number"
               value={form.phone}
               onChange={handleChange}
-              className="w-full border p-3.5 rounded-lg text-base"
+              className="w-full border border-[#ece6dd] p-3.5 rounded-xl text-sm 
+                        focus:outline-none focus:border-[#c4a47c] 
+                        focus:ring-2 focus:ring-[#c4a47c]/20 transition"
               required
             />
 
@@ -110,7 +119,9 @@ export default function BookSiteVisitModal({ propertyId, onClose }: Props) {
               type="date"
               value={form.visitDate}
               onChange={handleChange}
-              className="w-full border p-3.5 rounded-lg text-base"
+              className="w-full border border-[#ece6dd] p-3.5 rounded-xl text-sm 
+                        focus:outline-none focus:border-[#c4a47c] 
+                        focus:ring-2 focus:ring-[#c4a47c]/20 transition"
               required
             />
 
@@ -118,7 +129,9 @@ export default function BookSiteVisitModal({ propertyId, onClose }: Props) {
               name="timeSlot"
               value={form.timeSlot}
               onChange={handleChange}
-              className="w-full border p-3.5 rounded-lg text-base"
+              className="w-full border border-[#ece6dd] p-3.5 rounded-xl text-sm 
+                        focus:outline-none focus:border-[#c4a47c] 
+                        focus:ring-2 focus:ring-[#c4a47c]/20 transition"
               required
             >
               <option value="">Select Time Slot</option>
@@ -133,15 +146,20 @@ export default function BookSiteVisitModal({ propertyId, onClose }: Props) {
               placeholder="Coming From (City / Area)"
               value={form.comingFrom}
               onChange={handleChange}
-              className="w-full border p-3.5 rounded-lg text-base"
+              className="w-full border border-[#ece6dd] p-3.5 rounded-xl text-sm 
+                        focus:outline-none focus:border-[#c4a47c] 
+                        focus:ring-2 focus:ring-[#c4a47c]/20 transition"
               required
             />
           </div>
 
-          <div className="flex flex-col sm:flex-row justify-end gap-3 mt-6">
+          <div className="flex flex-col sm:flex-row justify-end gap-3 mt-8">
+
             <button
               onClick={onClose}
-              className="w-full sm:w-auto px-4 py-2.5 border rounded-lg"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl 
+                        border border-[#ece6dd] 
+                        text-[#5f5f5f] hover:bg-[#f5f2ea] transition"
             >
               Cancel
             </button>
@@ -149,14 +167,16 @@ export default function BookSiteVisitModal({ propertyId, onClose }: Props) {
             <button
               onClick={handleSubmit}
               disabled={loading}
-              className="w-full sm:w-auto px-4 py-2.5 bg-black text-white rounded-lg"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl 
+                        bg-[#c4a47c] text-white 
+                        hover:bg-[#b8935f] transition shadow-md"
             >
               {loading ? "Booking..." : "Confirm"}
             </button>
+
           </div>
         </div>
       </div>
     </div>
   );
-
 }

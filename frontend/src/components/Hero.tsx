@@ -133,8 +133,8 @@ export default function Hero() {
               -translate-y-1/2 
               left-4 md:left-6
               z-30
-              bg-black/60 hover:bg-black/80
-              text-white text-2xl md:text-3xl
+              bg-white hover:bg-[#f0ebe3]
+              text-[#2a2a2a] text-2xl md:text-3xl
               w-10 h-10 md:w-12 md:h-12
               rounded-full
               flex items-center justify-center
@@ -151,8 +151,8 @@ export default function Hero() {
               -translate-y-1/2 
               right-4 md:right-6
               z-30
-              bg-black/60 hover:bg-black/80
-              text-white text-2xl md:text-3xl
+              bg-white hover:bg-[#f0ebe3]
+              text-[#2a2a2a] text-2xl md:text-3xl
               w-10 h-10 md:w-12 md:h-12
               rounded-full
               flex items-center justify-center

@@ -28,7 +28,7 @@ export default function Hero2() {
 
 
   return (
-    <section className="relative bg-[#f5f2ea] py-28 overflow-hidden">
+    <section className="relative bg-[#f5f2ea] py-20 overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,0,0,0.04),transparent_60%)]" />
 
       <div className="relative max-w-7xl mx-auto px-6">

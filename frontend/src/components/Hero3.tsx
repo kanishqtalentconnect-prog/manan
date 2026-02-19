@@ -26,7 +26,7 @@ export default function Hero3() {
 
 
   return (
-    <section className="relative bg-[#ffffff] py-28 overflow-hidden">
+    <section className="relative bg-[#ffffff] py-20 overflow-hidden">
       {/* Subtle light glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,0,0,0.04),transparent_60%)]" />
 

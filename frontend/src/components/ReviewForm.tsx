@@ -87,15 +87,17 @@ export default function ReviewForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-4 bg-white p-6 rounded-xl border"
+      className="space-y-6 bg-white p-8 rounded-2xl border border-[#ece6dd] shadow-sm"
     >
-      <h2 className="text-lg font-semibold">
+      <h2 className="text-2xl font-serif text-[#1e1e1e]">
         {isAdmin ? "Add Verified Review" : "Write a Review"}
       </h2>
 
       {/* Name */}
       <input
-        className="w-full border p-2 rounded"
+        className="w-full border border-[#ece6dd] p-3.5 rounded-xl text-sm
+                  focus:outline-none focus:border-[#c4a47c]
+                  focus:ring-2 focus:ring-[#c4a47c]/20 transition"
         placeholder="Full Name"
         value={form.name}
         onChange={(e) =>
@@ -107,7 +109,9 @@ export default function ReviewForm({
       {/* Email */}
       <input
         type="email"
-        className="w-full border p-2 rounded"
+        className="w-full border border-[#ece6dd] p-3.5 rounded-xl text-sm
+                  focus:outline-none focus:border-[#c4a47c]
+                  focus:ring-2 focus:ring-[#c4a47c]/20 transition"
         placeholder="Email Address"
         value={form.email}
         onChange={(e) =>
@@ -116,9 +120,11 @@ export default function ReviewForm({
         required
       />
 
-      {/* Property Bought (Optional) */}
+      {/* Property Bought */}
       <input
-        className="w-full border p-2 rounded"
+        className="w-full border border-[#ece6dd] p-3.5 rounded-xl text-sm
+                  focus:outline-none focus:border-[#c4a47c]
+                  focus:ring-2 focus:ring-[#c4a47c]/20 transition"
         placeholder="Property Bought (Optional)"
         value={form.propertyBought}
         onChange={(e) =>
@@ -126,9 +132,11 @@ export default function ReviewForm({
         }
       />
 
-      {/* Address (Optional) */}
+      {/* Address */}
       <input
-        className="w-full border p-2 rounded"
+        className="w-full border border-[#ece6dd] p-3.5 rounded-xl text-sm
+                  focus:outline-none focus:border-[#c4a47c]
+                  focus:ring-2 focus:ring-[#c4a47c]/20 transition"
         placeholder="City / Location (Optional)"
         value={form.address}
         onChange={(e) =>
@@ -139,7 +147,9 @@ export default function ReviewForm({
       {/* Review */}
       <textarea
         maxLength={1000}
-        className="w-full border p-2 rounded"
+        className="w-full border border-[#ece6dd] p-3.5 rounded-xl text-sm
+                  focus:outline-none focus:border-[#c4a47c]
+                  focus:ring-2 focus:ring-[#c4a47c]/20 transition resize-none"
         placeholder="Write your experience..."
         value={form.description}
         onChange={(e) =>
@@ -150,20 +160,23 @@ export default function ReviewForm({
 
       {/* Rating */}
       <div>
-        <p className="text-sm font-medium mb-2">Rating</p>
-        <div className="flex gap-1">
+        <p className="text-sm font-semibold text-[#1e1e1e] mb-3 uppercase tracking-wider">
+          Rating
+        </p>
+
+        <div className="flex gap-2">
           {[1, 2, 3, 4, 5].map((star) => (
             <button
               type="button"
               key={star}
               onClick={() => setForm({ ...form, rating: star })}
-              className="text-2xl transition-transform hover:scale-110"
+              className="text-2xl transition-all duration-200 hover:scale-110"
             >
               <span
                 className={
                   star <= form.rating
                     ? "text-[#c4a47c]"
-                    : "text-gray-300"
+                    : "text-[#d6d6d6]"
                 }
               >
                 ★
@@ -173,24 +186,34 @@ export default function ReviewForm({
         </div>
       </div>
 
-      {/* Image Upload (Optional) */}
-      <p className="text-sm font-medium mb-2">Profile Photo (Optional)</p>
-      <input
-        type="file"
-        accept="image/*"
-        className="w-full"
-        onChange={(e) =>
-          setForm({
-            ...form,
-            image: e.target.files?.[0] || null,
-          })
-        }
-      />
+      {/* Image Upload */}
+      <div>
+        <p className="text-sm font-semibold text-[#1e1e1e] mb-2 uppercase tracking-wider">
+          Profile Photo (Optional)
+        </p>
+
+        <input
+          type="file"
+          accept="image/*"
+          className="w-full text-sm text-[#7a7a7a] file:mr-4 file:py-2 file:px-4
+                    file:rounded-xl file:border-0
+                    file:bg-[#f5f2ea] file:text-[#5f5f5f]
+                    hover:file:bg-[#ece6dd] transition"
+          onChange={(e) =>
+            setForm({
+              ...form,
+              image: e.target.files?.[0] || null,
+            })
+          }
+        />
+      </div>
 
       <button
         type="submit"
         disabled={loading}
-        className="px-4 py-2 bg-black text-white rounded hover:opacity-90"
+        className="w-full py-3.5 rounded-xl
+                  bg-[#c4a47c] text-white font-semibold
+                  hover:bg-[#b8935f] transition shadow-md"
       >
         {loading ? "Submitting..." : "Submit Review"}
       </button>

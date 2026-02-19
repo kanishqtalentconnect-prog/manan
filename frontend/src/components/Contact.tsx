@@ -28,7 +28,7 @@ export default function ContactSection() {
 
 
   return (
-  <section className="relative bg-[#ffffff] py-24">
+  <section className="relative bg-[#ffffff] py-20">
     {/* subtle warm glow */}
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(196,164,124,0.08),transparent_70%)]" />
 

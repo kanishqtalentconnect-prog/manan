@@ -65,7 +65,7 @@ const About = () => {
 
 
   return (
-    <section className="relative bg-[#f5f2ea] text-[#2a2a2a] py-28 px-6 overflow-hidden">
+    <section className="relative bg-[#f5f2ea] text-[#2a2a2a] py-20 px-6 overflow-hidden">
 
       {/* soft beige glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,0,0,0.04),transparent_65%)]" />

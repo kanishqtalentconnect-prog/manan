@@ -93,7 +93,7 @@ export default function Home() {
       <section id="about">
         <About />
       </section>
-      <section id="property" className="relative bg-[#ffffff] py-28">
+      <section id="property" className="relative bg-[#ffffff] py-20">
         {/* soft subtle top glow */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,0,0,0.03),transparent_60%)]" />
 
@@ -218,7 +218,7 @@ export default function Home() {
                         setMapUrl(property.googleMapUrl);
                       }}
                       className="inline-flex items-center gap-1.5 
-                                text-sm font-medium 
+                                text-sm font-medium mt-1
                                 text-[#8c7b63] hover:text-[#6f604b] transition-colors"
                     >
                       <MapPin size={16} />

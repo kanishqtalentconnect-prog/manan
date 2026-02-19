@@ -85,7 +85,7 @@ function NavItem({
         <span
           className={`
             absolute left-0 -bottom-2 h-[1.5px] hidden md:block w-full
-            bg-gray-900
+            bg-[#8c7b63]
             transform origin-left transition-transform duration-300
             ${isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}
           `}
