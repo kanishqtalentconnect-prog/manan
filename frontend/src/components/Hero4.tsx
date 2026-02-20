@@ -76,8 +76,8 @@ export default function Hero4() {
   };
 
   return (
-  <section className="relative bg-[#f5f2ea] py-20 overflow-hidden">
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,0,0,0.04),transparent_65%)]" />
+    <section className="relative bg-[#f5f2ea] py-20 overflow-hidden">
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(15,59,46,0.04),transparent_65%)]" />
 
     <div className="relative max-w-7xl mx-auto px-6">
 
@@ -85,18 +85,18 @@ export default function Hero4() {
       <div className="text-center mb-20">
         <div className="flex justify-center mb-4">
           <span className="text-[10px] uppercase tracking-[0.3em] font-semibold 
-            text-[#8c7b63] bg-white
-            border border-[#e6dfd3] px-4 py-1.5 rounded-full">
+            text-[#0f3b2e] bg-white
+            border border-[#0f3b2e]/20 px-4 py-1.5 rounded-full">
             Client Stories
           </span>
         </div>
 
-        <h2 className="text-4xl md:text-5xl font-serif text-[#2a2a2a] mb-4">
+        <h2 className="text-4xl md:text-6xl font-serif text-[#0f3b2e] mb-4">
           What Our Clients{" "}
-          <span className="text-[#8c7b63] italic">Say About Us</span>
+          <span className="text-[#b8955b] italic">Say About Us</span>
         </h2>
 
-        <p className="max-w-xl mx-auto text-sm md:text-base text-[#6b6b6b] font-normal leading-relaxed">
+        <p className="max-w-xl mx-auto text-sm md:text-base text-[#5c5c5c] leading-relaxed">
           Real experiences from verified investors who found their perfect
           mountain sanctuary.
         </p>
@@ -120,8 +120,8 @@ export default function Hero4() {
                   onClick={prevPage}
                   disabled={page === 0}
                   className="absolute left-0 top-1/2 -translate-y-1/2
-                    bg-white border border-[#e6dfd3]
-                    text-[#2a2a2a] w-12 h-12 rounded-full
+                    bg-white border border-[#e8e8e8]
+                    text-[#0f3b2e] w-12 h-12 rounded-full
                     flex items-center justify-center
                     shadow-md transition
                     disabled:opacity-30 z-30"
@@ -133,8 +133,8 @@ export default function Hero4() {
                   onClick={nextPage}
                   disabled={page === totalPages - 1}
                   className="absolute right-0 top-1/2 -translate-y-1/2
-                    bg-white border border-[#e6dfd3]
-                    text-[#2a2a2a] w-12 h-12 rounded-full
+                    bg-white border border-[#e8e8e8]
+                    text-[#0f3b2e] w-12 h-12 rounded-full
                     flex items-center justify-center
                     shadow-md transition
                     disabled:opacity-30 z-30"
@@ -149,21 +149,21 @@ export default function Hero4() {
               {currentReviews.map((r) => (
                 <div
                   key={r._id}
-                  className="flex flex-col bg-white border border-[#e6dfd3]
+                  className="flex flex-col bg-white border border-[#e8e8e8]
                     rounded-2xl p-8 shadow-sm
                     transition-all duration-500
-                    hover:-translate-y-1 hover:shadow-lg"
+                    hover:-translate-y-1 hover:shadow-xl"
                 >
                   <div className="flex-1">
 
-                    <div className="w-10 h-10 rounded-full bg-[#f0ebe2]
-                      border border-[#e6dfd3]
+                    <div className="w-10 h-10 rounded-full bg-[#eef3f1]
+                      border border-[#d9e3df]
                       flex items-center justify-center 
-                      text-[#8c7b63] mb-6">
+                      text-[#b8955b] mb-6">
                       ❝
                     </div>
 
-                    <div className="flex gap-1 text-[#8c7b63] text-sm mb-4">
+                    <div className="flex gap-1 text-[#b8955b] text-sm mb-4">
                       {"★".repeat(r.rating)}
                     </div>
 
@@ -173,8 +173,8 @@ export default function Hero4() {
 
                     {r.propertyBought && (
                       <span className="inline-block text-[10px] uppercase tracking-wider 
-                        text-[#8c7b63] bg-[#f5f2ea]
-                        border border-[#e6dfd3]
+                        text-[#0f3b2e] bg-[#f0f5f3]
+                        border border-[#d9e3df]
                         px-3 py-1 rounded-full mb-6">
                         {r.propertyBought}
                       </span>
@@ -183,7 +183,7 @@ export default function Hero4() {
 
                   <div className="flex items-center gap-3 pt-6 border-t border-[#eee] mt-6">
                     <div className="w-10 h-10 rounded-full overflow-hidden 
-                      bg-[#f0ebe2] border border-[#e6dfd3]
+                      bg-[#eef3f1] border border-[#d9e3df]
                       flex items-center justify-center">
                       {r.image ? (
                         <img
@@ -192,14 +192,14 @@ export default function Hero4() {
                           className="w-full h-full object-cover"
                         />
                       ) : (
-                        <span className="text-[#8c7b63] font-semibold text-sm">
+                        <span className="text-[#0f3b2e] font-semibold text-sm">
                           {getInitials(r.name)}
                         </span>
                       )}
                     </div>
 
                     <div>
-                      <p className="text-[#2a2a2a] font-semibold text-sm">
+                      <p className="text-[#0f3b2e] font-semibold text-sm">
                         {r.name}
                       </p>
 
@@ -224,8 +224,8 @@ export default function Hero4() {
                   onClick={() => setPage(i)}
                   className={`transition-all duration-300 rounded-full ${
                     i === page
-                      ? "w-8 h-2 bg-[#8c7b63]"
-                      : "w-2 h-2 bg-[#d8d2c8]"
+                      ? "w-8 h-2 bg-[#0f3b2e]"
+                      : "w-2 h-2 bg-[#d8d8d8]"
                   }`}
                 />
               ))}
@@ -239,8 +239,8 @@ export default function Hero4() {
         <button
           onClick={() => setShowForm(true)}
           className="px-6 py-3 rounded-xl 
-            bg-[#8c7b63] text-white font-semibold
-            hover:bg-[#766652] transition-all shadow-md"
+            bg-[#0f3b2e] text-white font-semibold
+            hover:bg-[#0c2f25] transition-all shadow-md"
         >
           Write a Review
         </button>
@@ -249,7 +249,7 @@ export default function Hero4() {
       {/* Stats */}
       <div className="grid grid-cols-3 gap-10 text-center">
         <div>
-          <p className="text-3xl font-serif text-[#8c7b63] mb-1">
+          <p className="text-3xl font-serif text-[#0f3b2e] mb-1">
             {averageRating}/5
           </p>
           <p className="text-sm uppercase tracking-widest text-[#777]">
@@ -258,7 +258,7 @@ export default function Hero4() {
         </div>
 
         <div>
-          <p className="text-3xl font-serif text-[#8c7b63] mb-1">
+          <p className="text-3xl font-serif text-[#0f3b2e] mb-1">
             {reviews.length}+
           </p>
           <p className="text-sm uppercase tracking-widest text-[#777]">
@@ -267,7 +267,7 @@ export default function Hero4() {
         </div>
 
         <div>
-          <p className="text-3xl font-serif text-[#8c7b63] mb-1">
+          <p className="text-3xl font-serif text-[#0f3b2e] mb-1">
             100%
           </p>
           <p className="text-sm uppercase tracking-widest text-[#777]">
@@ -275,6 +275,7 @@ export default function Hero4() {
           </p>
         </div>
       </div>
+
     </div>
 
     {/* REVIEW MODAL */}
@@ -286,7 +287,7 @@ export default function Hero4() {
       >
         <div
           className="relative w-full max-w-xl
-            bg-white border border-[#e6dfd3]
+            bg-white border border-[#e8e8e8]
             rounded-2xl shadow-2xl
             p-6 md:p-8
             max-h-[90vh] overflow-y-auto"
@@ -295,7 +296,7 @@ export default function Hero4() {
           <button
             onClick={() => setShowForm(false)}
             className="absolute top-4 right-4 
-              text-[#777] hover:text-[#2a2a2a] 
+              text-[#777] hover:text-[#0f3b2e] 
               text-xl transition"
           >
             ✕
@@ -311,6 +312,7 @@ export default function Hero4() {
       </div>
     )}
   </section>
+
 );
 
 }

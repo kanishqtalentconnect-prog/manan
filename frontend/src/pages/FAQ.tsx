@@ -56,93 +56,101 @@ export default function FAQ() {
   };
 
   return (
-  <div className="max-w-4xl mx-auto px-6 py-16 animate-in fade-in duration-700">
+    <div className="max-w-4xl mx-auto px-6 py-20 bg-white">
 
-    {/* Back Button */}
-    <div className="flex justify-end mb-10">
-      <button
-        onClick={() => navigate('/')}
-        className="flex items-center gap-2 px-5 py-2.5 rounded-xl 
-          bg-[#f5f2ea] border border-[#ece6dd] text-sm font-medium 
-          text-[#3a3a3a] hover:bg-[#ece6dd] transition"
-      >
-        ← Back
-      </button>
-    </div>
+      {/* Back Button */}
+      <div className="flex justify-end mb-12">
+        <button
+          onClick={() => navigate('/')}
+          className="flex items-center gap-2 px-6 py-2.5 rounded-xl 
+            border border-[#0f3b2e]/20 
+            text-sm font-medium tracking-wide
+            text-[#0f3b2e] 
+            hover:bg-[#0f3b2e]/5 transition"
+        >
+          ← Back
+        </button>
+      </div>
 
-    {/* Header */}
-    <div className="mb-16 text-center">
-      <h1 className="text-4xl md:text-5xl font-serif text-[#1e1e1e] mb-6">
-        Frequently Asked{" "}
-        <span className="text-[#c4a47c] italic">Questions</span>
-      </h1>
+      {/* Header */}
+      <div className="mb-20 text-center">
+        <h1 className="text-4xl md:text-5xl font-serif text-[#0f3b2e] leading-tight mb-6">
+          Frequently Asked{" "}
+          <span className="italic text-[#8c7b63]">
+            Questions
+          </span>
+        </h1>
 
-      <p className="text-base md:text-lg text-[#6f6f6f] max-w-2xl mx-auto leading-relaxed">
-        Find answers to the most common questions about properties, site visits,
-        pricing, and the buying process.
-      </p>
-    </div>
+        <p className="text-base md:text-lg text-[#555] max-w-2xl mx-auto leading-relaxed">
+          Find answers to the most common questions about properties, site visits,
+          pricing, and the buying process.
+        </p>
+      </div>
 
-    {/* FAQ List */}
-    <div className="space-y-5">
-      {faqs.map((faq, index) => {
-        const isOpen = activeIndex === index;
+      {/* FAQ List */}
+      <div className="space-y-6">
+        {faqs.map((faq, index) => {
+          const isOpen = activeIndex === index;
 
-        return (
-          <div
-            key={index}
-            className="border border-[#ece6dd] rounded-2xl overflow-hidden 
-                       bg-white shadow-sm transition-all"
-          >
-            <button
-              onClick={() => toggleFAQ(index)}
-              className="w-full flex items-center justify-between 
-                px-6 py-6 text-left transition"
+          return (
+            <div
+              key={index}
+              className="border border-[#e9e5dd] rounded-2xl 
+                        bg-white transition-all duration-300
+                        hover:shadow-md"
             >
-              <span className="text-lg font-semibold text-[#1e1e1e]">
-                {faq.question}
-              </span>
-
-              <span
-                className={`text-3xl font-normal text-[#c4a47c] transition-transform duration-300 ${
-                  isOpen ? "rotate-45" : ""
-                }`}
+              <button
+                onClick={() => toggleFAQ(index)}
+                className="w-full flex items-center justify-between 
+                  px-8 py-6 text-left transition"
               >
-                +
-              </span>
-            </button>
+                <span className="text-lg font-serif text-[#1f1f1f]">
+                  {faq.question}
+                </span>
 
-            {isOpen && (
-              <div className="px-6 pt-6 pb-6 text-[#6f6f6f] text-base leading-relaxed border-t border-[#f1ece4]">
-                {faq.answer}
-              </div>
-            )}
-          </div>
-        );
-      })}
+                <span
+                  className={`text-4xl font-light text-[#8c7b63] transition-transform duration-300 ${
+                    isOpen ? "rotate-45" : ""
+                  }`}
+                >
+                  +
+                </span>
+              </button>
+
+              {isOpen && (
+                <div className="px-8 pb-8 pt-6 text-[#555] text-base leading-relaxed border-t border-[#f1ece4]">
+                  {faq.answer}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Support CTA */}
+      <div className="mt-24 text-center border-t border-[#eee] pt-14">
+        <h3 className="text-2xl font-serif text-[#0f3b2e] mb-4">
+          Still have{" "}
+          <span className="italic text-[#8c7b63]">
+            questions?
+          </span>
+        </h3>
+
+        <p className="text-[#555] mb-8">
+          Our team is happy to guide you through every step of your property journey.
+        </p>
+
+        <a
+          href="/#contact"
+          className="inline-flex items-center justify-center px-10 py-4 
+            rounded-2xl bg-[#0f3b2e] text-white 
+            font-medium tracking-wide
+            hover:opacity-90 transition shadow-md"
+        >
+          Contact Support
+        </a>
+      </div>
+
     </div>
-
-    {/* Support CTA */}
-    <div className="mt-20 text-center border-t border-[#ece6dd] pt-12">
-      <h3 className="text-2xl font-serif text-[#1e1e1e] mb-4">
-        Still have{" "}
-        <span className="text-[#c4a47c] italic">questions?</span>
-      </h3>
-
-      <p className="text-[#6f6f6f] mb-8">
-        Our team is happy to help you with any queries you may have.
-      </p>
-
-      <a
-        href="/#contact"
-        className="inline-flex items-center justify-center px-10 py-4 
-          rounded-2xl bg-[#c4a47c] text-white font-semibold text-lg 
-          hover:bg-[#b8935f] transition shadow-md active:scale-[0.98]"
-      >
-        Contact Support
-      </a>
-    </div>
-
-  </div>
-);
+  );
 }

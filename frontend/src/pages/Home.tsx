@@ -1,9 +1,10 @@
 import Hero from "../components/Hero";
-import Hero2 from "../components/Hero2";
+import About from "../components/About";
 import Hero3 from "../components/Hero3";
 import Hero4 from "../components/Hero4";
 import Contact from "../components/Contact";
-import About from "../components/About";
+import Offerings from "../components/Offering";
+import NataDol from "../components/NataDol";
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 import BookSiteVisitModal from "../components/BookSiteVisitModal";
@@ -11,7 +12,7 @@ import MapModal from "../components/MapModal";
 import EnquiryModal from "../components/EnquiryModal";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { MapPin } from "lucide-react";
+import { MapPin, Headphones, ShieldCheck, DollarSign } from "lucide-react";
 
 type Category = {
   _id: string;
@@ -89,37 +90,76 @@ export default function Home() {
       <section id="hero">
         <Hero />
       </section>
+      
+      <section>
+        {/* ================= FEATURE STRIP ================= */}
+        <div className="relative z-30 bg-[#f4f4f4] py-10 px-6 md:px-12">
+          <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-10 text-center">
 
-      <section id="about">
-        <About />
+            <div className="flex flex-col items-center gap-4">
+              <ShieldCheck className="text-[#b8955b]" size={36} strokeWidth={1.5} />
+              <p className="text-[18px] font-medium text-[#1a1a1a]">
+                Verified Legal Titles
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center gap-4">
+              <DollarSign className="text-[#b8955b]" size={36} strokeWidth={1.5} />
+              <p className="text-[18px] font-medium text-[#1a1a1a]">
+                Transparent Pricing Structure
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center gap-4">
+              <MapPin className="text-[#b8955b]" size={36} strokeWidth={1.5} />
+              <p className="text-[18px] font-medium text-[#1a1a1a]">
+                Guided Site Visits Available
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center gap-4">
+              <Headphones className="text-[#b8955b]" size={36} strokeWidth={1.5} />
+              <p className="text-[18px] font-medium text-[#1a1a1a]">
+                End-to-End Ownership Support
+              </p>
+            </div>
+
+          </div>
+        </div>
       </section>
-      <section id="property" className="relative bg-[#ffffff] py-20">
-        {/* soft subtle top glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,0,0,0.03),transparent_60%)]" />
+      <section id="about">
+        <NataDol />
+      </section>
+      <section>
+        <Offerings />
+      </section>
+      <section id="property" className="relative bg-white py-20">
+        {/* subtle top glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(15,59,46,0.04),transparent_60%)]" />
 
         <div className="relative max-w-7xl mx-auto px-6">
 
           {/* SECTION HEADER */}
-          <div className="text-center mb-20">
+          <div className="text-center mb-24">
 
             <div className="flex justify-center mb-6">
               <span className="text-[11px] uppercase tracking-[0.4em] 
-                              font-medium text-[#7a6b57] 
-                              border border-[#ddd6c8] 
+                              font-medium text-[#0f3b2e] 
+                              border border-[#0f3b2e]/20 
                               bg-white px-6 py-2 rounded-full">
                 Featured Properties
               </span>
             </div>
 
-            <h2 className="text-4xl md:text-6xl font-serif text-[#2a2a2a] mb-6">
+            <h2 className="text-4xl md:text-6xl font-serif text-[#0f3b2e] mb-6">
               Exclusive Mountain{" "}
-              <span className="italic text-[#8c7b63]">
+              <span className="italic text-[#b8955b]">
                 Retreats
               </span>
             </h2>
 
-            <p className="max-w-2xl mx-auto text-[#6b6b6b] 
-                          text-sm md:text-base font-normal leading-relaxed">
+            <p className="max-w-2xl mx-auto text-[#5c5c5c] 
+                          text-sm md:text-base leading-relaxed">
               Handpicked properties that offer the perfect blend of luxury,
               location, and lifestyle.
             </p>
@@ -128,35 +168,36 @@ export default function Home() {
           {/* PROPERTY LIST */}
           {loading && (
             <div className="flex flex-col items-center py-20">
-              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-[#8c7b63] mb-4"></div>
-              <p className="text-[#777] animate-pulse">Searching for properties...</p>
+              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-[#0f3b2e] mb-4"></div>
+              <p className="text-[#666] animate-pulse">Searching for properties...</p>
             </div>
           )}
 
           {!loading && properties.length === 0 && (
-            <div className="text-center py-20 rounded-2xl border border-[#e6dfd2] bg-white">
+            <div className="text-center py-20 rounded-2xl border border-[#e6e6e6] bg-white">
               <p className="text-[#666] text-lg">
                 No properties available at the moment.
               </p>
             </div>
           )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
             {properties.map((property) => (
               <div
                 key={property._id}
                 onClick={() => navigate(`/properties/${property._id}`)}
                 className="
-                  group bg-white rounded-3xl shadow-md
-                  border border-[#e6dfd2]
-                  hover:shadow-xl
+                  group bg-white rounded-3xl
+                  border border-[#e8e8e8]
+                  hover:shadow-2xl
                   hover:-translate-y-2
                   transition-all duration-500
                   overflow-hidden flex flex-col cursor-pointer
                 "
               >
+
                 {/* IMAGE */}
-                <div className="relative overflow-hidden h-56">
+                <div className="relative overflow-hidden h-64">
                   <img
                     src={
                       property.media?.find((m) => m.type === "image")?.url ||
@@ -166,18 +207,16 @@ export default function Home() {
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
 
-                  {/* Light gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
 
-                  {/* CATEGORY */}
                   <div className="absolute top-4 left-4 right-4 flex justify-between gap-2 pointer-events-none">
 
                     <span className="
                       px-3 py-1 text-[10px]
                       font-medium tracking-widest uppercase
                       rounded-full
-                      bg-white text-[#2a2a2a]
-                      border border-[#ddd]
+                      bg-white text-[#0f3b2e]
+                      border border-[#e5e5e5]
                       shadow-sm truncate
                     ">
                       {property.category?.name}
@@ -188,7 +227,7 @@ export default function Home() {
                         px-3 py-1 text-[10px]
                         font-semibold tracking-widest uppercase
                         rounded-full
-                        bg-[#8c7b63] text-white
+                        bg-[#b8955b] text-white
                         shadow-sm truncate
                       ">
                         {property.tag}
@@ -200,15 +239,16 @@ export default function Home() {
                 {/* CONTENT */}
                 <div className="p-6 flex flex-col grow text-[#444]">
 
-                  <h3 className="text-lg font-serif text-[#2a2a2a] 
-                                group-hover:text-[#8c7b63] transition-colors">
+                  <h3 className="text-xl font-serif text-[#0f3b2e] 
+                                group-hover:text-[#b8955b] transition-colors">
                     {property.title}
                   </h3>
 
-                  {typeof property.price === "number"
-                    ? formatIndianPriceShort(property.price)
-                    : "Price on request"
-                  }
+                  <div className="mt-2 text-[#333] font-medium">
+                    {typeof property.price === "number"
+                      ? formatIndianPriceShort(property.price)
+                      : "Price on request"}
+                  </div>
 
                   {property.googleMapUrl && (
                     <button
@@ -218,8 +258,8 @@ export default function Home() {
                         setMapUrl(property.googleMapUrl);
                       }}
                       className="inline-flex items-center gap-1.5 
-                                text-sm font-medium mt-1
-                                text-[#8c7b63] hover:text-[#6f604b] transition-colors"
+                                text-sm font-medium mt-2
+                                text-[#b8955b] hover:text-[#8c7b63] transition-colors"
                     >
                       <MapPin size={16} />
                       View Location
@@ -237,31 +277,29 @@ export default function Home() {
 
                     {property.category?.slug === "land" ? (
                       <div className="flex flex-col text-center">
-                        <span className="font-semibold text-[#2a2a2a] text-lg">
+                        <span className="font-semibold text-[#0f3b2e] text-lg">
                           {property.dimensions}
                         </span>
-                        <span className="text-[10px] uppercase font-medium tracking-widest text-[#494949]">
+                        <span className="text-[10px] uppercase font-medium tracking-widest text-[#777]">
                           Plot Dimensions
                         </span>
                       </div>
                     ) : (
                       <div className="flex items-center justify-between">
-
                         {[
                           { value: property.bedrooms, label: "Beds" },
                           { value: property.bathrooms, label: "Baths" },
                           { value: property.area, label: "Sq Ft" },
                         ].map((item, i) => (
                           <div key={i} className="flex flex-col text-center">
-                            <span className="font-semibold text-[#2a2a2a]">
+                            <span className="font-semibold text-[#0f3b2e]">
                               {item.value}
                             </span>
-                            <span className="text-[10px] uppercase font-medium tracking-widest text-[#494949]">
+                            <span className="text-[10px] uppercase font-medium tracking-widest text-[#777]">
                               {item.label}
                             </span>
                           </div>
                         ))}
-
                       </div>
                     )}
                   </div>
@@ -276,7 +314,7 @@ export default function Home() {
                         setSelectedPropertyId(property._id);
                         setShowModal(true);
                       }}
-                      className="w-full bg-[#8c7b63] hover:bg-[#7a6b57] 
+                      className="w-full bg-[#0f3b2e] hover:bg-[#0c2f25] 
                                 text-white font-semibold py-3 rounded-xl 
                                 transition-all"
                     >
@@ -288,9 +326,9 @@ export default function Home() {
                         e.stopPropagation();
                         setEnquiryPropertyId(property._id);
                       }}
-                      className="w-full border border-[#8c7b63]/40 
-                                text-[#8c7b63] py-3 rounded-xl font-semibold 
-                                hover:bg-[#8c7b63]/10 transition-all"
+                      className="w-full border border-[#0f3b2e]/40 
+                                text-[#0f3b2e] py-3 rounded-xl font-semibold 
+                                hover:bg-[#0f3b2e]/10 transition-all"
                     >
                       Make an Enquiry
                     </button>
@@ -304,7 +342,6 @@ export default function Home() {
 
         </div>
       </section>
-
       {/* ENQUIRY MODAL */}
       {enquiryPropertyId && (
         <EnquiryModal
@@ -332,7 +369,7 @@ export default function Home() {
         />
       )}
       <section id="hero2">
-        <Hero2 />
+        <About />
       </section>
       <section id="hero3">
         <Hero3 />

@@ -42,121 +42,123 @@ export default function EnquiryModal({ propertyId, onClose }: Props) {
   };
 
   return (
-    <div
-      className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 overflow-y-auto flex items-end sm:items-center justify-center"
+  <div
+  className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 overflow-y-auto flex items-end sm:items-center justify-center"
+  onClick={onClose}
+>
+  <div
+    className="
+      relative bg-white rounded-t-2xl sm:rounded-2xl
+      p-6 sm:p-8
+      w-full max-w-md
+      max-h-[90vh] overflow-y-auto
+      mx-2 sm:mx-0
+      shadow-[0_20px_60px_rgba(0,0,0,0.12)]
+      border border-[#e9e5dd]
+    "
+    onClick={(e) => e.stopPropagation()}
+  >
+    {/* Close */}
+    <button
       onClick={onClose}
+      className="absolute top-4 right-4 
+                 text-[#8c7b63] hover:text-[#0f3b2e] transition"
     >
-      <div
-        className="
-          relative bg-white rounded-t-2xl sm:rounded-2xl
-          p-6 sm:p-8
-          w-full max-w-md
-          max-h-[90vh] overflow-y-auto
-          mx-2 sm:mx-0
-          shadow-2xl
-          border border-[#ece6dd]
-        "
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Close */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-[#9c8a6a] hover:text-[#c4a47c] transition"
-        >
-          ✕
-        </button>
+      ✕
+    </button>
 
-        <h2 className="text-2xl font-serif text-[#1e1e1e] mb-1">
-          Send an Enquiry
-        </h2>
-        <p className="text-sm text-[#7a7a7a] mb-6">
-          We’ll get back to you shortly.
-        </p>
+    <h2 className="text-2xl font-serif text-[#0f3b2e] mb-1">
+      Send an Enquiry
+    </h2>
 
-        <div className="space-y-4">
+    <p className="text-sm text-[#666] mb-6">
+      We’ll get back to you shortly.
+    </p>
 
-          <input
-            name="name"
-            placeholder="Your Name"
-            value={form.name}
-            onChange={handleChange}
-            className="w-full border border-[#ece6dd] p-3.5 rounded-xl text-sm
-                      focus:outline-none focus:border-[#c4a47c]
-                      focus:ring-2 focus:ring-[#c4a47c]/20 transition"
-            required
-          />
+    <div className="space-y-4">
 
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            value={form.email}
-            onChange={handleChange}
-            className="w-full border border-[#ece6dd] p-3.5 rounded-xl text-sm
-                      focus:outline-none focus:border-[#c4a47c]
-                      focus:ring-2 focus:ring-[#c4a47c]/20 transition"
-            required
-          />
+      <input
+        name="name"
+        placeholder="Your Name"
+        value={form.name}
+        onChange={handleChange}
+        className="w-full border border-[#e9e5dd] p-3.5 rounded-xl text-sm
+                   focus:outline-none focus:border-[#0f3b2e]
+                   focus:ring-2 focus:ring-[#0f3b2e]/10 transition"
+        required
+      />
 
-          <input
-            name="phone"
-            placeholder="Phone Number"
-            value={form.phone}
-            onChange={handleChange}
-            className="w-full border border-[#ece6dd] p-3.5 rounded-xl text-sm
-                      focus:outline-none focus:border-[#c4a47c]
-                      focus:ring-2 focus:ring-[#c4a47c]/20 transition"
-            required
-          />
+      <input
+        name="email"
+        type="email"
+        placeholder="Email"
+        value={form.email}
+        onChange={handleChange}
+        className="w-full border border-[#e9e5dd] p-3.5 rounded-xl text-sm
+                   focus:outline-none focus:border-[#0f3b2e]
+                   focus:ring-2 focus:ring-[#0f3b2e]/10 transition"
+        required
+      />
 
-          <input
-            name="bestTimeToReach"
-            placeholder="Best Time to Reach (e.g. Evening)"
-            value={form.bestTimeToReach}
-            onChange={handleChange}
-            className="w-full border border-[#ece6dd] p-3.5 rounded-xl text-sm
-                      focus:outline-none focus:border-[#c4a47c]
-                      focus:ring-2 focus:ring-[#c4a47c]/20 transition"
-          />
+      <input
+        name="phone"
+        placeholder="Phone Number"
+        value={form.phone}
+        onChange={handleChange}
+        className="w-full border border-[#e9e5dd] p-3.5 rounded-xl text-sm
+                   focus:outline-none focus:border-[#0f3b2e]
+                   focus:ring-2 focus:ring-[#0f3b2e]/10 transition"
+        required
+      />
 
-          <textarea
-            name="question"
-            placeholder="Your Question"
-            rows={4}
-            value={form.question}
-            onChange={handleChange}
-            className="w-full border border-[#ece6dd] p-3.5 rounded-xl text-sm
-                      focus:outline-none focus:border-[#c4a47c]
-                      focus:ring-2 focus:ring-[#c4a47c]/20 transition resize-none"
-            required
-          />
+      <input
+        name="bestTimeToReach"
+        placeholder="Best Time to Reach (e.g. Evening)"
+        value={form.bestTimeToReach}
+        onChange={handleChange}
+        className="w-full border border-[#e9e5dd] p-3.5 rounded-xl text-sm
+                   focus:outline-none focus:border-[#0f3b2e]
+                   focus:ring-2 focus:ring-[#0f3b2e]/10 transition"
+      />
 
-        </div>
+      <textarea
+        name="question"
+        placeholder="Your Question"
+        rows={4}
+        value={form.question}
+        onChange={handleChange}
+        className="w-full border border-[#e9e5dd] p-3.5 rounded-xl text-sm
+                   focus:outline-none focus:border-[#0f3b2e]
+                   focus:ring-2 focus:ring-[#0f3b2e]/10 transition resize-none"
+        required
+      />
 
-        <div className="flex flex-col sm:flex-row justify-end gap-3 mt-8">
-
-          <button
-            onClick={onClose}
-            className="w-full sm:w-auto px-6 py-3 rounded-xl
-                      border border-[#ece6dd]
-                      text-[#5f5f5f]
-                      hover:bg-[#f5f2ea] transition"
-          >
-            Cancel
-          </button>
-
-          <button
-            onClick={handleSubmit}
-            disabled={loading}
-            className="w-full sm:w-auto px-6 py-3 rounded-xl
-                      bg-[#c4a47c] text-white
-                      hover:bg-[#b8935f] transition shadow-md"
-          >
-            {loading ? "Sending..." : "Submit"}
-          </button>
-
-        </div>
-      </div>
     </div>
+
+    <div className="flex flex-col sm:flex-row justify-end gap-3 mt-8">
+
+      <button
+        onClick={onClose}
+        className="w-full sm:w-auto px-6 py-3 rounded-xl
+                   border border-[#e9e5dd]
+                   text-[#555]
+                   hover:bg-[#f5f2ea] transition"
+      >
+        Cancel
+      </button>
+
+      <button
+        onClick={handleSubmit}
+        disabled={loading}
+        className="w-full sm:w-auto px-6 py-3 rounded-xl
+                   bg-[#0f3b2e] text-white
+                   hover:opacity-90 transition shadow-md"
+      >
+        {loading ? "Sending..." : "Submit"}
+      </button>
+
+    </div>
+  </div>
+</div>
   );
 }

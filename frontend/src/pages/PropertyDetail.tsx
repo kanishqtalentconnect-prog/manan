@@ -108,217 +108,242 @@ export default function PropertyDetail() {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto p-6 lg:p-12 animate-in fade-in duration-700">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+      <div className="bg-[#f5f2ea]">
+  <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12 animate-in fade-in duration-700">
 
-          {/* LEFT: IMAGE GALLERY */}
-          <div className="space-y-4">
-            <div className="grid md:grid-cols-[100px_1fr] gap-4">
+    {/* ================= TOP SECTION ================= */}
+    <div className="grid lg:grid-cols-2 gap-16 items-start">
 
-              {/* Thumbnails */}
-              <div className="flex md:flex-col gap-3 overflow-x-auto">
-                {media.map((item, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedIndex(index)}
-                    className={`relative w-20 h-20 rounded-xl overflow-hidden border transition
-                      ${selectedIndex === index
-                        ? "border-[#c4a47c] ring-2 ring-[#c4a47c]/20"
-                        : "border-transparent opacity-60 hover:opacity-100"}
-                    `}
-                  >
-                    {item.type === "image" ? (
-                      <img src={item.url} className="w-full h-full object-cover" />
-                    ) : (
-                      <>
-                        <video
-                          src={item.url}
-                          className="w-full h-full object-cover"
-                          preload="metadata"
-                        />
-                        <span className="absolute inset-0 flex items-center justify-center bg-black/40 text-white text-xs font-semibold">
-                          ▶ VIDEO
-                        </span>
-                      </>
-                    )}
-                  </button>
-                ))}
-              </div>
+      {/* ================= LEFT: IMAGE GALLERY ================= */}
+      <div>
 
-              {/* Main Image */}
-              <div
-                className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl bg-black shadow-lg"
-                onClick={() => {
-                  if (currentItem.type === "image") setShowZoom(true);
-                }}
+        <div className="grid md:grid-cols-[110px_1fr] gap-6">
+
+          {/* Thumbnails */}
+          <div className="flex md:flex-col gap-4 overflow-x-auto">
+            {media.map((item, index) => (
+              <button
+                key={index}
+                onClick={() => setSelectedIndex(index)}
+                className={`relative w-24 h-24 rounded-2xl overflow-hidden border transition-all duration-300
+                  ${selectedIndex === index
+                    ? "border-[#0f3b2e] ring-2 ring-[#0f3b2e]/20"
+                    : "border-transparent opacity-60 hover:opacity-100"}
+                `}
               >
-                {currentItem.type === "image" ? (
-                  <img
-                    src={currentItem.url}
-                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-105 cursor-zoom-in"
-                    alt={property.title}
-                  />
+                {item.type === "image" ? (
+                  <img src={item.url} className="w-full h-full object-cover" />
                 ) : (
-                  <video
-                    src={currentItem.url}
-                    controls
-                    className="w-full h-full object-cover"
-                  />
+                  <>
+                    <video
+                      src={item.url}
+                      className="w-full h-full object-cover"
+                      preload="metadata"
+                    />
+                    <span className="absolute inset-0 flex items-center justify-center bg-black/40 text-white text-xs font-medium">
+                      ▶
+                    </span>
+                  </>
                 )}
-
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
-
-                {currentItem.type === "image" && (
-                  <button className="absolute bottom-4 right-4 bg-white/90 backdrop-blur px-4 py-2 rounded-full text-sm font-medium shadow hover:bg-white transition">
-                    🔍 View Fullscreen
-                  </button>
-                )}
-              </div>
-            </div>
+              </button>
+            ))}
           </div>
 
-          {/* RIGHT: DETAILS */}
-          <div className="flex flex-col">
-            <div className="mb-8">
+          {/* Main Image */}
+          <div
+            className="relative aspect-[16/10] w-full overflow-hidden rounded-3xl bg-black shadow-2xl"
+            onClick={() => {
+              if (currentItem.type === "image") setShowZoom(true);
+            }}
+          >
+            {currentItem.type === "image" ? (
+              <img
+                src={currentItem.url}
+                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105 cursor-zoom-in"
+                alt={property.title}
+              />
+            ) : (
+              <video
+                src={currentItem.url}
+                controls
+                className="w-full h-full object-cover"
+              />
+            )}
 
-              <div className="flex items-center gap-3 mb-4">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
 
-                <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#9c8a6a]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#c4a47c]" />
-                  {property.category?.name}
-                </span>
-
-                <div className="ml-auto flex items-center gap-2">
-                  <button
-                    onClick={handleShare}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg 
-                      bg-white border border-gray-200 text-sm font-medium 
-                      text-gray-600 hover:bg-gray-50 transition"
-                  >
-                    <FiShare2 className="text-lg" />
-                  </button>
-
-                  <button
-                    onClick={() => navigate('/#property')}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg 
-                      bg-white border border-gray-200 text-sm font-medium 
-                      text-gray-600 hover:bg-gray-50 transition"
-                  >
-                    ← Back
-                  </button>
-                </div>
-              </div>
-
-              <h1 className="text-3xl md:text-5xl font-serif text-[#1e1e1e] leading-tight mb-4">
-                {property.title}
-              </h1>
-
-              <p className="text-2xl md:text-3xl font-serif text-[#c4a47c] mb-3">
-                {typeof property.price === "number"
-                  ? `₹${property.price.toLocaleString()}`
-                  : "Price on request"}
-              </p>
-
-              {property.tag && (
-                <span className="inline-block mt-3 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest rounded-full bg-[#c4a47c]/10 text-[#9c8a6a] border border-[#c4a47c]/30">
-                  {property.tag}
-                </span>
-              )}
-
-              {property.numberProperty && (
-                <p className="text-xs mt-4 font-semibold uppercase tracking-widest text-[#1e1e1e]">
-                  Number of Property Available: {property.numberProperty}
-                </p>
-              )}
-            </div>
-
-            {/* Quick Stats */}
-            <div className="py-8 border-y border-[#ece6dd] mb-8">
-              {property.category?.slug === "land" ? (
-                <div className="text-center">
-                  <p className="text-sm text-[#9c8a6a] uppercase tracking-widest mb-1">
-                    Plot Dimensions
-                  </p>
-                  <p className="text-2xl font-serif text-[#1e1e1e]">
-                    {property.dimensions}
-                  </p>
-                </div>
-              ) : (
-                <div className="grid grid-cols-3 gap-4">
-                  {[
-                    { label: "Bedrooms", value: property.bedrooms },
-                    { label: "Bathrooms", value: property.bathrooms },
-                    { label: "Area", value: `${property.area} sqft` },
-                  ].map((item, i) => (
-                    <div key={i} className="text-center">
-                      <p className="text-sm text-[#9c8a6a] uppercase tracking-widest mb-1">
-                        {item.label}
-                      </p>
-                      <p className="text-xl font-serif text-[#1e1e1e]">
-                        {item.value}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Description */}
-            <div className="mb-10">
-              <h3 className="text-sm font-semibold uppercase tracking-widest text-[#1e1e1e] mb-4">
-                About this property
-              </h3>
-
-              <div className="whitespace-pre-line text-[#5f5f5f] leading-relaxed text-base font-normal border-l-4 border-[#ece6dd] pl-6">
-                {property.description}
-              </div>
-            </div>
-
-            {/* CTA BUTTONS */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-              <button
-                onClick={() => {
-                  setSelectedPropertyId(property._id);
-                  setShowModal(true);
-                }}
-                className="w-full bg-[#c4a47c] hover:bg-[#b8935f] text-white py-4 rounded-2xl font-medium tracking-wide transition-all shadow-md"
-              >
-                Schedule a Private Tour
+            {currentItem.type === "image" && (
+              <button className="absolute bottom-6 right-6 bg-white/90 backdrop-blur px-5 py-2.5 rounded-full text-sm font-medium shadow hover:bg-white transition">
+                View Fullscreen
               </button>
+            )}
+          </div>
 
-              <button
-                onClick={() => setShowEnquiry(true)}
-                className="w-full border border-[#c4a47c] text-[#c4a47c] py-4 rounded-2xl font-medium tracking-wide hover:bg-[#c4a47c]/10 transition-all"
-              >
-                Send Enquiry
-              </button>
+        </div>
+      </div>
 
-            </div>
+
+      {/* ================= RIGHT: PROPERTY DETAILS ================= */}
+      <div className="flex flex-col">
+
+        {/* Category + Actions */}
+        <div className="flex items-center gap-4 mb-6">
+
+          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#8c7b63]">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#8c7b63]" />
+            {property.category?.name}
+          </span>
+
+          <div className="ml-auto flex items-center gap-3">
+            <button
+              onClick={handleShare}
+              className="px-4 py-2 rounded-lg 
+                bg-white border border-[#e5dfd2] text-sm 
+                text-[#555] hover:bg-[#f3efe6] transition"
+            >
+              <FiShare2 className="text-lg" />
+            </button>
+
+            <button
+              onClick={() => navigate('/#property')}
+              className="px-4 py-2 rounded-lg 
+                bg-white border border-[#e5dfd2] text-sm 
+                text-[#555] hover:bg-[#f3efe6] transition"
+            >
+              Back
+            </button>
           </div>
         </div>
 
-        {/* LOCATION */}
-        {property.googleMapUrl && (
-          <div className="mt-20">
-            <div className="flex items-center gap-4 mb-8">
-              <h2 className="text-2xl font-serif text-[#1e1e1e]">
-                Neighborhood & Location
-              </h2>
-              <div className="h-px flex-1 bg-[#ece6dd]" />
-            </div>
+        {/* Title */}
+        <h1 className="text-4xl md:text-5xl font-serif text-[#0f3b2e] leading-tight mb-6">
+          {property.title}
+        </h1>
 
-            <div className="relative rounded-3xl overflow-hidden shadow-xl border border-[#ece6dd]">
-              <iframe
-                src={property.googleMapUrl}
-                className="w-full h-96"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
-          </div>
+        {/* Price */}
+        <p className="text-3xl font-serif text-[#8c7b63] mb-4">
+          {typeof property.price === "number"
+            ? `₹${property.price.toLocaleString()}`
+            : "Price on request"}
+        </p>
+
+        {/* Tag */}
+        {property.tag && (
+          <span className="inline-flex w-fit px-5 py-2 text-xs uppercase tracking-widest 
+                           rounded-full bg-[#8c7b63]/10 text-[#8c7b63] 
+                           border border-[#8c7b63]/30 mb-8">
+            {property.tag}
+          </span>
         )}
+
+        {property.numberProperty && (
+          <p className="text-base mb-4 font-semibold uppercase tracking-widest text-[#8c7b63]">
+            Number of Properties Available:{" "}
+            <span className="text-[#0f3b2e] font-serif text-lg normal-case tracking-normal ml-1">
+              {property.numberProperty}
+            </span>
+          </p>
+        )}
+
+        {/* Quick Stats */}
+        <div className="py-10 border-y border-[#e5dfd2] mb-10">
+          {property.category?.slug === "land" ? (
+            <div className="text-center">
+              <p className="text-xs text-[#8c7b63] uppercase tracking-widest mb-2">
+                Plot Dimensions
+              </p>
+              <p className="text-3xl font-serif text-[#0f3b2e]">
+                {property.dimensions}
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-3 gap-6">
+              {[
+                { label: "Bedrooms", value: property.bedrooms },
+                { label: "Bathrooms", value: property.bathrooms },
+                { label: "Area", value: `${property.area} sqft` },
+              ].map((item, i) => (
+                <div key={i} className="text-center">
+                  <p className="text-xs text-[#8c7b63] uppercase tracking-widest mb-2">
+                    {item.label}
+                  </p>
+                  <p className="text-2xl font-serif text-[#0f3b2e]">
+                    {item.value}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* CTA */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+          <button
+            onClick={() => {
+              setSelectedPropertyId(property._id);
+              setShowModal(true);
+            }}
+            className="w-full bg-[#0f3b2e] hover:opacity-90 text-white py-4 rounded-2xl font-medium tracking-wide transition-all shadow-lg"
+          >
+            Schedule Visit
+          </button>
+
+          <button
+            onClick={() => setShowEnquiry(true)}
+            className="w-full border border-[#0f3b2e] text-[#0f3b2e] py-4 rounded-2xl font-medium tracking-wide hover:bg-[#0f3b2e]/5 transition-all"
+          >
+            Send Enquiry
+          </button>
+
+        </div>
+
       </div>
+    </div>
+
+
+    {/* ================= ABOUT PROPERTY (FULL WIDTH BELOW IMAGE) ================= */}
+    <div className="mt-24 bg-white rounded-3xl px-10 py-16 shadow-sm border border-[#e5dfd2]">
+
+      <div className="flex items-center gap-6 mb-10">
+        <h2 className="text-3xl font-serif text-[#0f3b2e]">
+          About This Property
+        </h2>
+        <div className="flex-1 h-px bg-[#e5dfd2]" />
+      </div>
+
+      <div className="max-w-4xl text-[#555] text-lg leading-relaxed whitespace-pre-line">
+        {property.description}
+      </div>
+
+    </div>
+
+
+    {/* ================= LOCATION ================= */}
+    {property.googleMapUrl && (
+      <div className="mt-28">
+
+        <div className="flex items-center gap-6 mb-10">
+          <h2 className="text-3xl font-serif text-[#0f3b2e]">
+            Neighborhood & Location
+          </h2>
+          <div className="flex-1 h-px bg-[#e5dfd2]" />
+        </div>
+
+        <div className="rounded-3xl overflow-hidden shadow-2xl border border-[#e5dfd2]">
+          <iframe
+            src={property.googleMapUrl}
+            className="w-full h-[520px]"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
+
+      </div>
+    )}
+
+  </div>
+</div>
       {/* BOOKING MODAL */}
       {showModal && selectedPropertyId && (
         <BookSiteVisitModal

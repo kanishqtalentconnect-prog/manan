@@ -75,7 +75,7 @@ function NavItem({
         block md:inline-block
         text-[16px] md:text-[15px]
         font-normal tracking-wide
-        text-[#2b2b2b] hover:text-black
+        text-white/90 hover:text-white
         py-3 md:py-0
         transition-all duration-300"
     >
@@ -85,7 +85,7 @@ function NavItem({
         <span
           className={`
             absolute left-0 -bottom-2 h-[1.5px] hidden md:block w-full
-            bg-[#8c7b63]
+            bg-[#c7a463]
             transform origin-left transition-transform duration-300
             ${isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}
           `}
@@ -106,7 +106,7 @@ export default function Navbar() {
     location.pathname === "/faq" ||
     location.pathname === "/documentation";
   const activeSection = useScrollSpy(
-    ["about", "property", "hero2", "hero3", "hero4"],
+    ["", "about", "property", "hero2", "hero3", "hero4"],
     isHomePage
   );
   const handleLogout = () => {
@@ -151,46 +151,46 @@ export default function Navbar() {
   }, [location]);
 
   return (
-    <nav className="sticky top-0 z-50 bg-[#e9e6dd] border-b border-black/10">
-      <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+    <nav className="sticky top-0 z-50 bg-[#0f3b2e] text-white">
+      <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
 
         {/* LOGO */}
         <Link to="/" className="flex items-center gap-3">
           <div>
-            <p className="text-xl font-normal tracking-wide text-[#2b2b2b]">
+            <p className="text-2xl font-serif tracking-wide text-white">
               Manan LLP
             </p>
-            <p className="text-[12px] text-black tracking-wide">
+            <p className="text-[12px] text-white/80 tracking-wide">
               Nata Dol Retreats
             </p>
           </div>
         </Link>
 
-        {/* CENTER NAV (UNCHANGED ITEMS) */}
+        {/* CENTER NAV */}
         {!user && (
-          <div className="hidden md:flex items-center gap-10 text-[15px] font-light text-[#2b2b2b] tracking-wide">
-            <NavItem href="/#about" label="About Nata Dol" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("about")} />
+          <div className="hidden md:flex items-center gap-10 text-[15px] font-light tracking-wide text-white">
+            <NavItem href="/#about" label="Nata Dol" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("about")} />
             <NavItem href="/#property" label="Properties" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("property")} />
-            <NavItem href="/#hero2" label="Why Invest" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero2")} />
+            <NavItem href="/#hero2" label="About" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero2")} />
             <NavItem href="/#hero3" label="Gallery" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero3")} />
             <NavItem href="/#hero4" label="Testimonials" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero4")} />
           </div>
         )}
 
-        {/* RIGHT ACTIONS (SAME BUTTONS, NEW STYLE) */}
+        {/* RIGHT SIDE */}
         <div className="flex items-center gap-6">
 
           {!user && (
             <>
-              {/* Login Button (same route, same label) */}
               <Link
                 to="/login"
                 className="hidden md:inline-flex 
-                  border border-black/30 
+                  border border-white/40 
                   px-6 py-2.5 
                   text-[14px] font-medium tracking-wide 
-                  text-[#2b2b2b] 
-                  hover:bg-black hover:text-white 
+                  text-white 
+                  rounded-md
+                  hover:bg-white hover:text-[#0f3b2e] 
                   transition-all duration-300"
               >
                 Login
@@ -199,7 +199,7 @@ export default function Navbar() {
               {/* Mobile Toggle */}
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
-                className="md:hidden text-[#2b2b2b] p-2"
+                className="md:hidden text-white p-2"
                 aria-label="Toggle menu"
               >
                 <svg
@@ -217,15 +217,15 @@ export default function Navbar() {
                 </svg>
               </button>
 
-              {/* Contact Us (same label, same link) */}
               <a
                 href="/#contact"
                 className="hidden sm:inline-flex 
-                  border border-black/30 
+                  bg-[#c7a463] 
+                  text-[#0f3b2e] 
                   px-6 py-2.5 
+                  rounded-lg 
                   text-[14px] font-medium tracking-wide 
-                  text-[#2b2b2b] 
-                  hover:bg-black hover:text-white 
+                  hover:opacity-90 
                   transition-all duration-300"
               >
                 Contact Us
@@ -233,14 +233,13 @@ export default function Navbar() {
             </>
           )}
 
-          {/* AUTH AREA (NO LOGIC CHANGE, LIGHT STYLE) */}
           {user && (
-            <div className="flex items-center gap-4 pl-4 border-l border-black/20">
+            <div className="flex items-center gap-4 pl-4 border-l border-white/20">
               <div className="hidden md:flex items-center gap-2">
-                <div className="w-9 h-9 rounded-full border border-black/30 flex items-center justify-center text-sm font-medium text-black">
+                <div className="w-9 h-9 rounded-full bg-[#c7a463] text-[#0f3b2e] flex items-center justify-center text-sm font-medium">
                   {user.name.charAt(0).toUpperCase()}
                 </div>
-                <span className="text-sm text-black">
+                <span className="text-sm text-white">
                   {user.name}
                 </span>
               </div>
@@ -248,7 +247,7 @@ export default function Navbar() {
               {user.role === "admin" && (
                 <Link
                   to="/admin"
-                  className="text-sm px-4 py-2 border border-black/30 hover:bg-black hover:text-white transition"
+                  className="text-sm px-4 py-2 border border-white/40 rounded-md hover:bg-white hover:text-[#0f3b2e] transition"
                 >
                   Dashboard
                 </Link>
@@ -256,7 +255,7 @@ export default function Navbar() {
 
               <button
                 onClick={handleLogout}
-                className="text-sm text-black/70 hover:text-red-500 transition"
+                className="text-sm text-white/70 hover:text-red-400 transition"
               >
                 Logout
               </button>
@@ -265,14 +264,14 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* MOBILE MENU (NO FUNCTION CHANGE) */}
+      {/* MOBILE MENU */}
       {!user && (
         <div
           className={`md:hidden overflow-hidden transition-all duration-300 ${
             menuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="px-6 pb-6 pt-4 space-y-4 bg-[#e9e6dd] border-t border-black/10 text-[#2b2b2b]">
+          <div className="px-6 pb-6 pt-4 space-y-4 bg-[#0f3b2e] border-t border-white/10 text-white">
 
             <NavItem href="/#about" label="About Nata Dol" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("about")} />
             <NavItem href="/#property" label="Properties" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("property")} />
@@ -282,7 +281,7 @@ export default function Navbar() {
 
             <Link
               to="/login"
-              className="block w-full text-center border border-black/30 py-2.5 font-medium hover:bg-black hover:text-white transition"
+              className="block w-full text-center border border-white/40 py-2.5 font-medium rounded-md hover:bg-white hover:text-[#0f3b2e] transition"
               onClick={() => setMenuOpen(false)}
             >
               Login
@@ -290,7 +289,7 @@ export default function Navbar() {
 
             <a
               href="/#contact"
-              className="block w-full text-center border border-black/30 py-2.5 font-medium hover:bg-black hover:text-white transition"
+              className="block w-full text-center bg-[#c7a463] text-[#0f3b2e] py-2.5 rounded-lg font-medium"
               onClick={() => setMenuOpen(false)}
             >
               Contact Us

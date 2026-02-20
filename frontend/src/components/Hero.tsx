@@ -48,7 +48,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-[85vh] flex items-center justify-center text-center overflow-hidden bg-[#0f0f0f]"
+      className="relative min-h-[85vh] flex items-center justify-start overflow-hidden bg-[#0f0f0f]"
     >
       {/* ================= BACKGROUND MEDIA ================= */}
       {current && (
@@ -78,44 +78,53 @@ export default function Hero() {
       <div className="absolute inset-0 bg-linear-to-b from-black/40 via-black/70 to-black z-10" />
 
       {/* ================= CONTENT ================= */}
-      <div className="relative z-20 max-w-5xl mx-auto px-6 text-left">
+      <div className="relative z-20 max-w-5xl mx-10 px-6 md:px-12">
 
-        <h1 className="text-[38px] sm:text-[48px] md:text-[64px] lg:text-[72px]
-                      font-light tracking-tight
-                      text-gray-50 leading-[1.1]">
-          Your Mountain Sanctuary Awaits
+        <h1
+          className="text-[38px] sm:text-[48px] md:text-[64px] lg:text-[72px]
+                    font-serif tracking-tight
+                    text-gray-50 leading-[1.1]"
+        >
+          Own a Private <br className="hidden sm:block" />
+          Mountain Estate in <br className="hidden sm:block" />
+          Nata Dol, Uttarakhand
         </h1>
 
-        <p className="mt-6 max-w-2xl
-                      text-[16px] md:text-[18px]
-                      font-light leading-relaxed
-                      text-white">
-          Premium plots and villas in Mukteshwar. We handle everything
-          from acquisition to business setup.
+        <p
+          className="mt-6 max-w-2xl
+                    text-[16px] md:text-[18px]
+                    font-light leading-relaxed
+                    text-white"
+        >
+          Premium land parcels, luxury villas, and second homes designed
+          for discerning HNI and NRI buyers seeking privacy, peace,
+          and long-term asset value.
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-6">
           <a
             href="#property"
             className="inline-flex items-center justify-center
-                      px-10 py-4
-                      border border-white/70
+                      px-10 py-4 rounded-lg
+                      border border-[#0f3b2e] bg-[#0f3b2e]
                       text-white
                       font-medium tracking-wide
                       transition-all duration-300
-                      hover:bg-white hover:text-black"
+                      hover:-translate-y-1
+                      "
           >
             Explore Properties
           </a>
+
           <a
             href="#contact"
             className="inline-flex items-center
-                      h-[56px]               /* match button height */
+                      h-[56px] rounded-lg px-10 py-4
+                      border border-white
                       text-white
                       font-medium tracking-wide
                       gap-2
-                      transition-all duration-300
-                      hover:gap-3"
+                      transition-all duration-300"
           >
             Get in Touch
             <span className="text-xl">›</span>
@@ -166,10 +175,12 @@ export default function Hero() {
 
       {/* ================= DOTS ================= */}
       {media.length > 1 && (
-        <div className="absolute 
-           bottom-2 sm:bottom-6 md:bottom-8
-           left-1/2 -translate-x-1/2 
-           z-30 flex gap-2">
+        <div
+          className="absolute 
+            bottom-2 sm:bottom-6 md:bottom-8
+            left-1/2 -translate-x-1/2 
+            z-30 flex gap-2"
+        >
           {media.map((_, i) => (
             <span
               key={i}
