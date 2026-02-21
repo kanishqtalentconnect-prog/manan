@@ -200,8 +200,10 @@ export default function Hero2() {
             key={i}
             className="group bg-white border border-[#e5dfd2]
                       rounded-3xl p-10 text-center
-                      transition-all duration-500
+                      transition-all duration-500 ease-out
+                      will-change-transform
                       hover:-translate-y-2
+                      hover:scale-[1.03]
                       hover:shadow-xl"
           >
             <div className="w-14 h-14 mx-auto mb-6 rounded-full 
@@ -245,19 +247,24 @@ export default function Hero2() {
           "Commercial Property Investors",
           "Tenants",
           "Real Estate Investors",
-          "High-end Property Seekers"
+          "High-end Property Seekers",
+          "Second Home Seekers",
+          "HNI Investors"
         ].map((item, i) => (
           <div
             key={i}
-            className="px-8 py-4 bg-white 
-                      border border-[#e5dfd2]
-                      rounded-full
-                      text-[#2a2a2a]
-                      font-medium
-                      shadow-sm
-                      transition-all duration-300
-                      hover:shadow-md
-                      hover:border-[#8c7b63]/40"
+            className="px-8 py-4 bg-white
+              border border-[#e5dfd2]
+              rounded-full
+              text-[#2a2a2a]
+              font-medium
+              shadow-sm
+              transition-all duration-300 ease-out
+              will-change-transform
+              hover:shadow-lg
+              hover:-translate-y-1
+              hover:scale-[1.03]
+              hover:border-[#8c7b63]/40"
           >
             {item}
           </div>

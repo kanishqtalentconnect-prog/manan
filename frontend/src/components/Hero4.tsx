@@ -12,18 +12,36 @@ interface Review {
   image?: string;
   address?: string;
 }
-
+interface SiteStats {
+  transactionValue: string;
+  happyCustomers: number;
+}
 export default function Hero4() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [page, setPage] = useState(0);
   const [reviewsPerPage, setReviewsPerPage] = useState(3);
+  const [stats, setStats] = useState<SiteStats | null>(null);
 
   useEffect(() => {
-    api.get("/reviews")
-      .then((res) => setReviews(res.data))
-      .finally(() => setLoading(false));
+    const fetchData = async () => {
+      try {
+        const [reviewsRes, statsRes] = await Promise.all([
+          api.get("/reviews"),
+          api.get("/stats"),
+        ]);
+
+        setReviews(reviewsRes.data);
+        setStats(statsRes.data.data); // because backend sends { success, data }
+      } catch (err) {
+        console.error("Error fetching data", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
   useEffect(() => {
     setPage(0);
@@ -268,15 +286,15 @@ export default function Hero4() {
 
         <div>
           <p className="text-3xl font-serif text-[#0f3b2e] mb-1">
-            50+
+            ₹{stats?.transactionValue || "0"}
           </p>
           <p className="text-sm uppercase tracking-widest text-[#777]">
-            Properties Sold
+            Transaction Value
           </p>
         </div>
         <div>
           <p className="text-3xl font-serif text-[#0f3b2e] mb-1">
-            50+
+            {stats?.happyCustomers || 0}+
           </p>
           <p className="text-sm uppercase tracking-widest text-[#777]">
             Happy Customers

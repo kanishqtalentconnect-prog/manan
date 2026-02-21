@@ -182,7 +182,7 @@ export default function Navbar() {
 
           {!user && (
             <>
-              <Link
+              {/* <Link
                 to="/login"
                 className="hidden md:inline-flex 
                   border border-white/40 
@@ -194,7 +194,7 @@ export default function Navbar() {
                   transition-all duration-300"
               >
                 Login
-              </Link>
+              </Link> */}
 
               {/* Mobile Toggle */}
               <button
@@ -279,13 +279,13 @@ export default function Navbar() {
             <NavItem href="/#hero3" label="Gallery" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero3")} />
             <NavItem href="/#hero4" label="Testimonials" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero4")} />
 
-            <Link
+            {/* <Link
               to="/login"
               className="block w-full text-center border border-white/40 py-2.5 font-medium rounded-md hover:bg-white hover:text-[#0f3b2e] transition"
               onClick={() => setMenuOpen(false)}
             >
               Login
-            </Link>
+            </Link> */}
 
             <a
               href="/#contact"
