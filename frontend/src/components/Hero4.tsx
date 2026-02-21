@@ -11,6 +11,7 @@ interface Review {
   propertyBought?: string;
   image?: string;
   address?: string;
+  createdAt: string;
 }
 interface SiteStats {
   transactionValue: string;
@@ -91,6 +92,16 @@ export default function Hero4() {
 
   const prevPage = () => {
     if (page > 0) setPage(page - 1);
+  };
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+
+    return date.toLocaleDateString("en-IN", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
   };
 
   return (
@@ -174,20 +185,13 @@ export default function Hero4() {
                 >
                   <div className="flex-1">
 
-                    <div className="w-10 h-10 rounded-full bg-[#eef3f1]
-                      border border-[#d9e3df]
-                      flex items-center justify-center 
-                      text-[#b8955b] mb-6">
-                      ❝
-                    </div>
-
-                    <div className="flex gap-1 text-[#b8955b] text-sm mb-4">
-                      {"★".repeat(r.rating)}
-                    </div>
-
                     <p className="text-sm text-[#555] leading-relaxed mb-6 break-words">
                       “{r.description}”
                     </p>
+
+                    <div className="flex gap-1 text-[#b8955b] text-xl mb-4">
+                      {"★".repeat(r.rating)}
+                    </div>
 
                     {r.propertyBought && (
                       <span className="inline-block text-[10px] uppercase tracking-wider 
@@ -196,6 +200,12 @@ export default function Hero4() {
                         px-3 py-1 rounded-full mb-6">
                         {r.propertyBought}
                       </span>
+                    )}
+
+                    {r.createdAt && (
+                      <p className="text-[14px] text-[#575757] mb-1">
+                        {formatDate(r.createdAt)}
+                      </p>
                     )}
                   </div>
 
