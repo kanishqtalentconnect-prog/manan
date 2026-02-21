@@ -9,38 +9,35 @@ export const upsertContent = async (req, res) => {
       return res.status(400).json({ message: "Section is required" });
     }
 
-    const media =
-      req.files?.map((file) => ({
-        url: file.path,
-        type: file.mimetype.startsWith("video") ? "video" : "image",
-      })) || [];
+    let content = await Content.findOne({ section });
 
-    const updateQuery = {
-      section,
-    };
+    if (!content) {
+      content = new Content({ section, media: [] });
+    }
 
-    // 🗑 Remove selected media
+    // 🗑 Remove media
     if (removedMedia) {
       const parsed = JSON.parse(removedMedia);
-      updateQuery.$pull = {
-        media: { url: { $in: parsed } },
-      };
+      content.media = content.media.filter(
+        (item) => !parsed.includes(item.url)
+      );
     }
 
     // ➕ Add new media
-    if (media.length) {
-      updateQuery.$push = {
-        media: { $each: media },
-      };
+    if (req.files?.length) {
+      const newMedia = req.files.map((file) => ({
+        url: file.path,
+        type: file.mimetype.startsWith("video")
+          ? "video"
+          : "image",
+      }));
+
+      content.media.push(...newMedia);
     }
 
-    const content = await Content.findOneAndUpdate(
-      { section },
-      updateQuery,
-      { upsert: true, new: true }
-    );
+    await content.save();
 
-    // 🔥 Clear Redis cache for this section
+    // 🔥 Clear Redis cache
     await redisClient.del(`content:${section}`);
 
     res.json(content);
