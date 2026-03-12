@@ -155,7 +155,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-8 py-4 pb-3 flex items-center justify-between">
 
         {/* LOGO */}
-        <Link to="/" className="flex flex-col items-center justify-center gap-[3px] leading-none">
+        <Link to="/" className="flex flex-col items-center justify-center gap-[4px] leading-none">
           <img
             src="/navbar-logo.png"
             alt="Nirvaya Devbhoomi"
@@ -166,8 +166,8 @@ export default function Navbar() {
             Nirvaya Devbhoomi
           </span>
 
-          <span className="text-[10px] text-white mb-0 tracking-wide italic">
-            A second Home. A timeless Investment.
+          <span className="text-[10px] text-white/90 mb-0 tracking-wide italic">
+            by Manan LLP
           </span>
         </Link>
 

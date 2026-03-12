@@ -86,7 +86,7 @@ const About = () => {
         </div>
 
         {/* HERO TEXT */}
-        <div className="text-center mb-28">
+        <div className="text-center mb-20">
           <h1 className="text-4xl md:text-6xl lg:text-6xl font-serif leading-tight mb-10 text-[#2a2a2a]">
             A Rising Investment{" "}
             <span className="italic text-[#8c7b63]">
@@ -140,6 +140,15 @@ const About = () => {
               </p>
             </div>
           ))}
+        </div>
+        
+        <div className="text-center mb-20">
+          <h1 className="text-4xl md:text-6xl lg:text-5xl font-serif leading-tight mb-10 text-[#2a2a2a]">
+            Your Second Home{" "}
+            <span className="italic text-[#8c7b63]">
+               A Timeless Investment
+            </span>
+          </h1>
         </div>
 
         {/* MEDIA SECTION */}

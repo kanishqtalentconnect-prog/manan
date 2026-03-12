@@ -4,7 +4,7 @@ export default function Offerings() {
   return (
     <section
       id="properties"
-      className="bg-[#f5f2ea] py-20"
+      className="bg-[#f5f2ea] pb-20"
     >
       <div className="max-w-7xl mx-auto px-6">
 
