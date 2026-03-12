@@ -9,7 +9,7 @@ export default function AddPropertyPage() {
 
   return (
     <div className="max-w-3xl mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-6">Add Property</h1>
+      <h1 className="text-3xl text-[#0f3b2e] font-bold mb-6">Add Property</h1>
       <div className="p-2 max-w-7xl mb-6 mx-auto bg-gray-50/50">
         <button
             onClick={() => navigate(from)}

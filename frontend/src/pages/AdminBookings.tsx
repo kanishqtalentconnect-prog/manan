@@ -44,8 +44,8 @@ export default function AdminBookings() {
   return (
     <div className="p-8 max-w-7xl mx-auto min-h-screen bg-gray-50/50">
       <div className="flex flex-col mb-6">
-        <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">Site Visit Bookings</h1>
-        <p className="text-gray-500 mt-1">Manage and respond to client visit requests.</p>
+        <h1 className="text-3xl font-extrabold text-[#0f3b2e] tracking-tight">Site Visit Bookings</h1>
+        <p className="text-[#8c7b63] mt-1">Manage and respond to client visit requests.</p>
       </div>
 
       <div className="p-2 max-w-7xl mb-6 mx-auto bg-gray-50/50">

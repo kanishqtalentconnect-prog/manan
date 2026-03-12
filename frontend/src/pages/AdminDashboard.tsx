@@ -53,10 +53,10 @@ export default function AdminDashboard() {
     {/* HEADER */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-4 gap-6">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0f3b2e] tracking-tight">
             Admin Dashboard
           </h1>
-          <p className="text-gray-500 mt-1 text-sm">
+          <p className="text-[#8c7b63] mt-1 text-sm">
             Overview of your real estate portfolio performance.
           </p>
         </div>
@@ -79,7 +79,7 @@ export default function AdminDashboard() {
               onClick={() =>
                 navigate("/admin/content-management", { state: { from: "/admin" } })
               }
-              className="bg-black text-white px-4 py-2.5 sm:px-6 sm:py-3 rounded-xl font-bold whitespace-nowrap"
+              className="bg-[#0f3b2e] text-white px-4 py-2.5 sm:px-6 sm:py-3 rounded-xl font-bold whitespace-nowrap"
             >
               Manage Content
             </button>
@@ -88,7 +88,7 @@ export default function AdminDashboard() {
               onClick={() =>
                 navigate("/admin/add-property", { state: { from: "/admin" } })
               }
-              className="bg-black text-white px-4 py-2.5 sm:px-6 sm:py-3 rounded-xl font-bold whitespace-nowrap"
+              className="bg-[#0f3b2e] text-white px-4 py-2.5 sm:px-6 sm:py-3 rounded-xl font-bold whitespace-nowrap"
             >
               + Add Property
             </button>
@@ -109,23 +109,23 @@ export default function AdminDashboard() {
 
       {/* STATS */}
       <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
-        <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-emerald-500">
+        <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-[#c7a463]">
           <p className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-1">Categories</p>
           <h3 className="text-3xl font-black text-gray-900">{stats?.categories || 0}</h3>
         </div>
-        <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-blue-600">
+        <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-[#c7a463]">
           <p className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-1">Total Properties</p>
           <h3 className="text-3xl font-black text-gray-900">{stats?.totalProperties || 0}</h3>
         </div>
-        <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-emerald-500">
+        <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-[#c7a463]">
           <p className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-1">Enquiries</p>
           <h3 className="text-3xl font-black text-gray-900">{stats?.enquiries || 0}</h3>
         </div>
-        <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-purple-500">
+        <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-[#c7a463]">
           <p className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-1">Site Visits</p>
           <h3 className="text-3xl font-black text-gray-900">{stats?.siteVisits || 0}</h3>
         </div>
-        <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-orange-600">
+        <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-[#c7a463]">
           <p className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-1">Verified Reviews</p>
           <h3 className="text-3xl font-black text-gray-900">{stats?.reviews || 0}</h3>
         </div>
@@ -134,10 +134,10 @@ export default function AdminDashboard() {
       {/* RECENT PROPERTIES TABLE */}
       <div className="mt-12 bg-white shadow-sm border border-gray-100 rounded-2xl overflow-hidden">
         <div className="px-6 py-5 border-b border-gray-50 flex items-center justify-between">
-          <h2 className="text-lg font-bold text-gray-900">
+          <h2 className="text-lg font-bold text-[#0f3b2e] tracking-tight">
             Recent Listings
           </h2>
-          <Link to="/admin/properties" className="text-blue-600 text-xs font-bold hover:underline uppercase tracking-tighter">
+          <Link to="/admin/properties" className="text-[#0f3b2e]  text-xs font-bold hover:underline uppercase tracking-tighter">
             View All
           </Link>
         </div>
@@ -158,7 +158,7 @@ export default function AdminDashboard() {
               {recent.map((p) => (
                 <tr key={p._id} className="hover:bg-gray-50/50 transition-colors group">
                   <td className="px-6 py-4">
-                    <span className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                    <span className="font-semibold text-gray-900 group-hover:text-[#c7a463] transition-colors">
                       {p.title}
                     </span>
                   </td>

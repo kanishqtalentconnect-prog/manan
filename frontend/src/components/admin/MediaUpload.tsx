@@ -67,8 +67,8 @@ export default function MediaUpload({ onChange }: Props) {
       <label
         htmlFor="media-upload"
         className="inline-flex items-center px-4 py-2 
-                   bg-black text-white rounded-lg 
-                   cursor-pointer hover:bg-gray-800 transition"
+                   bg-[#0f3b2e] text-white rounded-lg 
+                   cursor-pointer hover:opacity-90 transition"
       >
         Select Media
       </label>

@@ -33,7 +33,7 @@ export default function AdminEnquiries() {
 
   return (
     <div className="p-8 max-w-7xl mx-auto min-h-screen bg-gray-50/50">
-      <h1 className="text-3xl font-extrabold mb-6">Enquiries</h1>
+      <h1 className="text-3xl text-[#0f3b2e] font-extrabold mb-6">Enquiries</h1>
 
       <div className="p-2 max-w-7xl mb-6 mx-auto bg-gray-50/50">
         <button

@@ -43,8 +43,8 @@ export default function AdminCategories() {
   return (
     <div className="max-w-2xl mx-auto p-8 min-h-screen">
       <div className="mb-8 text-center md:text-left">
-        <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">Manage Categories</h1>
-        <p className="text-gray-500 mt-1">Organize property types like Villas, Apartments, or Penthouses.</p>
+        <h1 className="text-3xl font-extrabold text-[#0f3b2e] tracking-tight">Manage Categories</h1>
+        <p className="text-[#8c7b63] mt-1">Organize property types like Villas, Apartments, or Penthouses.</p>
       </div>
 
       <div className="p-2 max-w-7xl mb-6 mx-auto bg-gray-50/50">
@@ -68,7 +68,7 @@ export default function AdminCategories() {
         />
         <button
           onClick={addCategory}
-          className="bg-gray-900 text-white px-8 py-3 rounded-xl font-bold hover:bg-black transition-all active:scale-95 shadow-md shadow-gray-200"
+          className="bg-[#0f3b2e] text-white px-8 py-3 rounded-xl font-bold hover:opacity-90 transition-all active:scale-95 shadow-md shadow-gray-200"
         >
           Add
         </button>
@@ -87,7 +87,7 @@ export default function AdminCategories() {
             className="group flex justify-between items-center bg-white p-4 rounded-xl border border-gray-100 shadow-sm hover:border-blue-100 hover:shadow-md transition-all"
           >
             <div className="flex items-center gap-3">
-              <div className="w-2 h-2 rounded-full bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="w-2 h-2 rounded-full bg-[#c7a463] opacity-0 group-hover:opacity-100 transition-opacity" />
               <span className="font-semibold text-gray-700 group-hover:text-gray-900">
                 {cat.name}
               </span>

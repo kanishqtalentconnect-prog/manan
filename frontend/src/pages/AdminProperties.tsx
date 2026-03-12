@@ -51,10 +51,10 @@ export default function AdminProperties() {
     <div className="p-8 max-w-7xl mx-auto min-h-screen bg-gray-50/30">
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
         <div>
-          <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
+          <h1 className="text-3xl font-extrabold text-[#0f3b2e] tracking-tight">
             Manage Properties
           </h1>
-          <p className="text-gray-500 text-sm mt-1">
+          <p className="text-[#8c7b63] text-sm mt-1">
             Review, edit, or remove your current real estate listings.
           </p>
         </div>
@@ -62,7 +62,7 @@ export default function AdminProperties() {
           onClick={() => navigate("/admin/add-property", {
             state: { from: "/admin/properties" },
           })}
-          className="bg-black text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-800 transition-all flex items-center gap-2 shadow-sm"
+          className="bg-[#0f3b2e] text-white px-6 py-3 rounded-xl font-semibold hover:opacity-90 transition-all flex items-center gap-2 shadow-sm"
         >
           <span className="text-xl">+</span> Add New Listing
         </button>
@@ -116,7 +116,7 @@ export default function AdminProperties() {
                 {p.title}
               </h2>
 
-              <p className="text-blue-600 font-medium mt-1">
+              <p className="text-[#0f3b2e] font-medium mt-1">
                 {typeof p.price === "number"
                   ? `₹${p.price.toLocaleString()}`
                   : "Price on request"}
@@ -173,7 +173,7 @@ export default function AdminProperties() {
               <div className="flex items-center gap-3 mt-6">
                 <button
                   onClick={() => navigate(`/admin/edit-property/${p._id}`)}
-                  className="flex-1 bg-gray-100 text-gray-700 py-2.5 rounded-lg font-semibold hover:bg-gray-900 hover:text-white transition-all"
+                  className="flex-1 bg-gray-100 text-gray-700 py-2.5 rounded-lg font-semibold hover:bg-[#c7a463] hover:text-white transition-all"
                 >
                   Edit
                 </button>

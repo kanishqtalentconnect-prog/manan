@@ -80,7 +80,7 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-white px-6">
       <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
-
+        <img src="/navbar-logo.png" className="h-12 mx-auto mb-4" />
         {/* Heading */}
         <h2 className="text-2xl font-semibold text-center mb-6 text-[#0f3b2e]">
           Admin Login

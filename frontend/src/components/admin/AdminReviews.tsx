@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import api from "../../api/axios";
 import ReviewForm from "../ReviewForm";
+import { useNavigate } from "react-router-dom";
 
 interface Review {
   _id: string;
@@ -18,6 +19,7 @@ interface Review {
 export default function AdminReviews() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const fetchReviews = async () => {
     try {
@@ -48,14 +50,25 @@ export default function AdminReviews() {
 
   return (
     <div className="max-w-7xl mx-auto p-6 space-y-10">
-      <h1 className="text-3xl font-bold">Admin Reviews</h1>
+      <h1 className="text-3xl text-[#0f3b2e] font-bold">Admin Reviews</h1>
+
+      <div className="p-2 max-w-7xl mb-6 mx-auto bg-gray-50/50">
+        <button
+            onClick={() => navigate("/admin")}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg 
+              bg-white border border-gray-200 text-sm font-semibold 
+              text-gray-700 hover:bg-gray-50 hover:shadow transition"
+          >
+            ← Back to Dashboard
+        </button>
+      </div>
 
       {/* ADD NEW REVIEW */}
       <ReviewForm isAdmin onSuccess={fetchReviews} />
 
       {/* EXISTING REVIEWS */}
       <div className="space-y-4">
-        <h2 className="text-xl font-semibold">All Reviews</h2>
+        <h2 className="text-xl text-[#0f3b2e] font-semibold">All Reviews</h2>
 
         {loading ? (
           <p>Loading...</p>

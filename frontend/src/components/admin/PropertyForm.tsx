@@ -407,7 +407,7 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
       <button
         type="submit"
         disabled={loading}
-        className="w-full bg-black text-white py-3 rounded-lg"
+        className="w-full bg-[#0f3b2e] hover:opacity-90 text-white py-3 rounded-lg"
       >
         {loading ? "Uploading..." : initialData ? "Update Property" : "Add Property"}
       </button>
