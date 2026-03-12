@@ -152,63 +152,24 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 bg-[#0f3b2e] text-white">
-      <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-8 py-4 pb-3 flex items-center justify-between">
 
         {/* LOGO */}
-        {/* <Link to="/" className="flex items-center gap-3">
-          <div>
-            <p className="text-2xl font-serif tracking-wide text-white">
-              Manan LLP
-            </p>
-            <p className="text-[12px] text-white/80 tracking-wide">
-              Nata Dol Retreats
-            </p>
-          </div>
-        </Link> */}
-        {/* <Link to="/" className="flex flex-col items-center justify-center leading-none">
-  <img
-    src="/3.png"
-    alt="Nirvaya Devbhoomi"
-    className="h-8 w-auto scale-150 origin-center"
-  />
+        <Link to="/" className="flex flex-col items-center justify-center gap-[3px] leading-none">
+          <img
+            src="/navbar-logo.png"
+            alt="Nirvaya Devbhoomi"
+            className="h-9 w-auto scale-[1.6] origin-center"
+          />
 
-  <span className="text-[11px] text-white mt-0.5 tracking-wide">
-    Nirvaya Devbhoomi
-  </span>
+          <span className="text-[12px] text-white font-semibold mt-2 tracking-wide font-serif">
+            Nirvaya Devbhoomi
+          </span>
 
-  <span className="text-[9px] text-[#c7a463] tracking-wide">
-    Your Second Home. A Timeless Investment.
-  </span>
-</Link> */}
-<Link to="/" className="flex flex-col items-center justify-center gap-[2px] leading-none">
-  <img
-    src="/navbar-logo.png"
-    alt="Nirvaya Devbhoomi"
-    className="h-9 w-auto scale-[1.6] origin-center"
-  />
-
-  <span className="text-[11px] text-white mt-2 tracking-wide font-serif">
-    Nirvaya Devbhoomi
-  </span>
-
-  <span className="text-[9px] text-[#c7a463] mb-0 tracking-wide italic">
-    Your Second Home. A Timeless Investment.
-  </span>
-</Link>
-{/* <Link to="/" className="flex items-center">
-  <img
-    src="/2.png"
-    alt="Manan LLP Logo"
-    className="h-12 w-auto scale-150 origin-left"
-  />
-</Link> */}
-{/* <Link to="/" className="flex items-center">
-  <img
-    src="/logo_navbar.png"
-    alt="Nirvaya Devbhoomi Logo"
-    className="h-14 w-auto scale-150 origin-left"
-  />
-</Link> */}
+          <span className="text-[10px] text-white mb-0 tracking-wide italic">
+            A second Home. A timeless Investment.
+          </span>
+        </Link>
 
         {/* CENTER NAV */}
         {!user && (
