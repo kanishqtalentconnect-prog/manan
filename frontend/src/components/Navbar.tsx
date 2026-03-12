@@ -155,7 +155,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
 
         {/* LOGO */}
-        <Link to="/" className="flex items-center gap-3">
+        {/* <Link to="/" className="flex items-center gap-3">
           <div>
             <p className="text-2xl font-serif tracking-wide text-white">
               Manan LLP
@@ -164,7 +164,51 @@ export default function Navbar() {
               Nata Dol Retreats
             </p>
           </div>
-        </Link>
+        </Link> */}
+        {/* <Link to="/" className="flex flex-col items-center justify-center leading-none">
+  <img
+    src="/3.png"
+    alt="Nirvaya Devbhoomi"
+    className="h-8 w-auto scale-150 origin-center"
+  />
+
+  <span className="text-[11px] text-white mt-0.5 tracking-wide">
+    Nirvaya Devbhoomi
+  </span>
+
+  <span className="text-[9px] text-[#c7a463] tracking-wide">
+    Your Second Home. A Timeless Investment.
+  </span>
+</Link> */}
+<Link to="/" className="flex flex-col items-center justify-center gap-[2px] leading-none">
+  <img
+    src="/navbar-logo.png"
+    alt="Nirvaya Devbhoomi"
+    className="h-9 w-auto scale-[1.6] origin-center"
+  />
+
+  <span className="text-[11px] text-white mt-2 tracking-wide font-serif">
+    Nirvaya Devbhoomi
+  </span>
+
+  <span className="text-[9px] text-[#c7a463] mb-0 tracking-wide italic">
+    Your Second Home. A Timeless Investment.
+  </span>
+</Link>
+{/* <Link to="/" className="flex items-center">
+  <img
+    src="/2.png"
+    alt="Manan LLP Logo"
+    className="h-12 w-auto scale-150 origin-left"
+  />
+</Link> */}
+{/* <Link to="/" className="flex items-center">
+  <img
+    src="/logo_navbar.png"
+    alt="Nirvaya Devbhoomi Logo"
+    className="h-14 w-auto scale-150 origin-left"
+  />
+</Link> */}
 
         {/* CENTER NAV */}
         {!user && (

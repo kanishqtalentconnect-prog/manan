@@ -35,7 +35,7 @@ export default function Footer() {
 
       {/* BRAND */}
       <div>
-        <div className="flex items-center gap-3 mb-4">
+        {/* <div className="flex items-center gap-3 mb-4">
           <div className="w-10 h-10 rounded-lg bg-[#b8955b]/20 border border-[#b8955b]/40 flex items-center justify-center text-[#b8955b] font-bold">
             M
           </div>
@@ -43,8 +43,19 @@ export default function Footer() {
             <p className="text-white font-semibold">Manan LLP</p>
             <p className="text-sm text-white/70">Nata Dol Retreats</p>
           </div>
-        </div>
+        </div> */}
+        <div className="flex items-center gap-3 mb-4">
+          <img
+            src="/navbar-logo.png"
+            alt="Manan LLP Logo"
+            className="w-15 h-10 object-contain"
+          />
 
+          <div>
+            <p className="text-white font-semibold">Nirvaya Devbhoomi</p>
+            <p className="text-sm text-white/70">By Manan LLP</p>
+          </div>
+        </div>
         <p className="text-sm leading-relaxed text-white/70">
           Creating premium mountain sanctuaries where luxury meets tranquility
           in the heart of the Himalayas.
