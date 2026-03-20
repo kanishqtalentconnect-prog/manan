@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 import { useNavigate } from "react-router-dom";
+import { Info } from "lucide-react";
 
 type Booking = {
   _id: string;
@@ -8,10 +9,14 @@ type Booking = {
   email: string;
   phone: string;
   visitDate: string;
+  timeSlot: string;
+  comingFrom: string;
   status: string;
+  createdAt: string;
+
   property: {
     title: string;
-    propertyType: string;
+    propertyType?: string;
   };
 };
 
@@ -19,7 +24,8 @@ export default function AdminBookings() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
+  const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   useEffect(() => {
     api.get("/bookings")
       .then((res) => setBookings(res.data))
@@ -95,7 +101,18 @@ export default function AdminBookings() {
               {bookings.map((b) => (
                 <tr key={b._id} className="hover:bg-gray-50/30 transition-colors">
                   <td className="p-4 pl-6">
-                    <p className="font-bold text-gray-900">{b.name}</p>
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-gray-900">{b.name}</span>
+                        <button
+                          onClick={() => {
+                            setSelectedBooking(b);
+                            setIsModalOpen(true);
+                          }}
+                          className="text-gray-600 hover:text-blue-600 transition"
+                        >
+                          <Info className="w-4 h-4" />
+                        </button>
+                      </div>
                   </td>
                   <td className="p-4">
                     <div className="flex flex-col">
@@ -152,6 +169,81 @@ export default function AdminBookings() {
           </table>
         </div>
       )}
+      {isModalOpen && selectedBooking && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl shadow-xl w-[500px] p-6 relative">
+
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-3 right-3 text-gray-400 hover:text-gray-700"
+            >
+              ✕
+            </button>
+
+            <h2 className="text-xl font-bold text-[#0f3b2e] mb-4">
+              Booking Details
+            </h2>
+
+            <div className="space-y-3 text-sm">
+
+              <Detail label="Customer Name" value={selectedBooking.name} />
+              <Detail label="Email" value={selectedBooking.email} />
+              <Detail label="Phone" value={selectedBooking.phone} />
+              <Detail label="Property" value={selectedBooking.property?.title} />
+
+              <Detail
+                label="Visit Date"
+                value={new Date(selectedBooking.visitDate).toLocaleDateString(
+                  "en-IN",
+                  { day: "numeric", month: "long", year: "numeric" }
+                )}
+              />
+
+              <Detail label="Time Slot" value={selectedBooking.timeSlot} />
+              <Detail label="Coming From" value={selectedBooking.comingFrom} />
+
+              <div className="flex items-center justify-between pt-2">
+                <span className="text-gray-500 text-xs uppercase font-bold">
+                  Status
+                </span>
+                <StatusBadge status={selectedBooking.status} />
+              </div>
+
+            </div>
+
+            {selectedBooking.status === "pending" && (
+              <div className="flex justify-end gap-2 mt-6">
+                <button
+                  onClick={() => {
+                    updateStatus(selectedBooking._id, "confirmed");
+                    setSelectedBooking({
+                      ...selectedBooking,
+                      status: "confirmed",
+                    });
+                  }}
+                  className="px-4 py-2 text-sm font-bold bg-green-50 text-green-700 rounded-lg hover:bg-green-600 hover:text-white"
+                >
+                  Confirm
+                </button>
+
+                <button
+                  onClick={() => {
+                    updateStatus(selectedBooking._id, "cancelled");
+                    setSelectedBooking({
+                      ...selectedBooking,
+                      status: "cancelled",
+                    });
+                  }}
+                  className="px-4 py-2 text-sm font-bold bg-red-50 text-red-600 rounded-lg hover:bg-red-600 hover:text-white"
+                >
+                  Cancel
+                </button>
+              </div>
+            )}
+
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -170,5 +262,15 @@ function StatusBadge({ status }: { status: string }) {
     >
       {status}
     </span>
+  );
+}
+function Detail({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex justify-between border-b border-gray-100 pb-2">
+      <span className="text-gray-500 text-xs uppercase font-bold">
+        {label}
+      </span>
+      <span className="text-gray-900 font-medium">{value}</span>
+    </div>
   );
 }

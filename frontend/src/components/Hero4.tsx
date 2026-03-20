@@ -275,7 +275,7 @@ export default function Hero4() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-4 gap-10 text-center">
+      <div className="grid grid-cols-3 gap-10 text-center">
         <div>
           <p className="text-3xl font-serif text-[#0f3b2e] mb-1">
             {averageRating}/5
@@ -294,14 +294,14 @@ export default function Hero4() {
           </p>
         </div>
 
-        <div>
+        {/* <div>
           <p className="text-3xl font-serif text-[#0f3b2e] mb-1">
             ₹{stats?.transactionValue || "0"}
           </p>
           <p className="text-sm uppercase tracking-widest text-[#777]">
             Transaction Value
           </p>
-        </div>
+        </div> */}
         <div>
           <p className="text-3xl font-serif text-[#0f3b2e] mb-1">
             {stats?.happyCustomers || 0}+

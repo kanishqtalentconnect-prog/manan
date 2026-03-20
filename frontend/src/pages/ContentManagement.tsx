@@ -165,7 +165,7 @@ export default function ContentManagement() {
             </h3>
 
             {/* Transaction Value */}
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <label className="text-xs text-gray-500 block mb-1">
                 Transaction Value
               </label>
@@ -181,7 +181,7 @@ export default function ContentManagement() {
                 className="w-full px-3 py-2 border rounded-lg text-sm"
                 placeholder="e.g. 50 Cr+"
               />
-            </div>
+            </div> */}
 
             {/* Happy Customers */}
             <div className="mb-4">

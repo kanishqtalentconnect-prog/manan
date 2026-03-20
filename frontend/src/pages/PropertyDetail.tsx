@@ -30,6 +30,7 @@ type Property = {
     type: "image" | "video";
   }[];
   googleMapUrl?: string;
+  googleLocationUrl?: string;
   status?: string;
 };
 
@@ -320,7 +321,7 @@ export default function PropertyDetail() {
 
 
     {/* ================= LOCATION ================= */}
-    {property.googleMapUrl && (
+    {/* {property.googleMapUrl && (
       <div className="mt-28">
 
         <div className="flex items-center gap-6 mb-10">
@@ -338,6 +339,39 @@ export default function PropertyDetail() {
             referrerPolicy="no-referrer-when-downgrade"
           />
         </div>
+
+      </div>
+    )} */}
+    {(property.googleMapUrl || property.googleLocationUrl) && (
+      <div className="mt-28">
+
+        <div className="flex items-center gap-6 mb-10">
+          <h2 className="text-3xl font-serif text-[#0f3b2e]">
+            Neighborhood & Location
+          </h2>
+          <div className="flex-1 h-px bg-[#e5dfd2]" />
+        </div>
+
+        {/* CASE 1: Map */}
+        {property.googleMapUrl ? (
+          <div className="rounded-3xl overflow-hidden shadow-2xl border border-[#e5dfd2]">
+            <iframe
+              src={property.googleMapUrl}
+              className="w-full h-[520px]"
+              loading="lazy"
+            />
+          </div>
+        ) : (
+          /* CASE 2: Button only (no box) */
+          <a
+            href={property.googleLocationUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-[#0f3b2e] hover:opacity-90 text-white px-8 py-4 rounded-xl font-medium tracking-wide transition-all shadow-md"
+          >
+            View on Google Maps →
+          </a>
+        )}
 
       </div>
     )}

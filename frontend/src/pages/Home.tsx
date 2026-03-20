@@ -36,6 +36,7 @@ type Property = {
     type: "image" | "video";
   }[];
   googleMapUrl?: string;
+  googleLocationUrl?: string;
   status?: string;
 };
 
@@ -250,7 +251,7 @@ export default function Home() {
                       : "Price on request"}
                   </div>
 
-                  {property.googleMapUrl && (
+                  {/* {property.googleMapUrl && (
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
@@ -263,6 +264,27 @@ export default function Home() {
                     >
                       <MapPin size={16} />
                       View Location
+                    </button>
+                  )} */}
+                  {(property.googleMapUrl || property.googleLocationUrl) && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+
+                        if (property.googleMapUrl) {
+                          // 👉 Open modal
+                          setMapUrl(property.googleMapUrl);
+                        } else if (property.googleLocationUrl) {
+                          // 👉 Open Google Maps in new tab
+                          window.open(property.googleLocationUrl, "_blank");
+                        }
+                      }}
+                      className="inline-flex items-center gap-1.5 
+                                text-sm font-medium mt-2
+                                text-[#b8955b] hover:text-[#8c7b63] transition-colors"
+                    >
+                      <MapPin size={16} />
+                      {property.googleMapUrl ? "View Location" : "View on Map"}
                     </button>
                   )}
 

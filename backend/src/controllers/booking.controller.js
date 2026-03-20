@@ -1,5 +1,6 @@
 import Booking from "../models/Booking.js";
 import { sendEmail } from "../utils/sendEmail.js";
+import { sendWhatsapp } from "../utils/sendWhatsapp.js";
 
 export const createBooking = async (req, res) => {
   try {
@@ -40,7 +41,20 @@ export const createBooking = async (req, res) => {
         <p>Thank you!</p>
       `,
     });
+    sendWhatsapp({
+      to: phone,
+      message: `
+      Hello ${name},
 
+      Your site visit request has been received.
+
+      📅 Date: ${new Date(visitDate).toDateString()}
+      ⏰ Time: ${timeSlot}
+      📍 Coming From: ${comingFrom}
+
+      Our team will confirm your visit shortly.
+        `,
+    });
     sendEmail({
       to: process.env.ADMIN_EMAIL,
       subject: "New Site Visit Booking",
@@ -56,6 +70,19 @@ export const createBooking = async (req, res) => {
           <li><strong>Coming From:</strong> ${comingFrom}</li>
         </ul>
       `,
+    });
+    sendWhatsapp({
+      to: process.env.ADMIN_PHONE,
+      message: `
+      New Site Visit Booking
+
+      Name: ${name}
+      Phone: ${phone}
+      Email: ${email}
+      Date: ${new Date(visitDate).toDateString()}
+      Time: ${timeSlot}
+      Coming From: ${comingFrom}
+        `,
     });
 
     // ✅ RESPONSE LAST
@@ -98,13 +125,40 @@ export const updateBookingStatus = async (req, res) => {
       id,
       { status },
       { new: true }
-    );
+    ).populate("property", "title googleLocationUrl");
 
     if (!booking) {
       return res.status(404).json({ message: "Booking not found" });
     }
 
     // 🔔 EMAIL USER (non-blocking)
+    // sendEmail({
+    //   to: booking.email,
+    //   subject:
+    //     status === "confirmed"
+    //       ? "Your Site Visit is Confirmed"
+    //       : "Your Site Visit is Cancelled",
+    //   html: `
+    //     <h2>Hello ${booking.name},</h2>
+
+    //     <p>Your site visit has been <strong>${status.toUpperCase()}</strong>.</p>
+
+    //     <h4>Visit Details</h4>
+    //     <ul>
+    //       <li><strong>Date:</strong> ${new Date(
+    //         booking.visitDate
+    //       ).toDateString()}</li>
+    //       <li><strong>Time Slot:</strong> ${booking.timeSlot}</li>
+    //       <li><strong>Coming From:</strong> ${booking.comingFrom}</li>
+    //     </ul>
+
+    //     ${
+    //       status === "confirmed"
+    //         ? "<p>We look forward to meeting you!</p>"
+    //         : "<p>Please feel free to rebook anytime.</p>"
+    //     }
+    //   `,
+    // });
     sendEmail({
       to: booking.email,
       subject:
@@ -126,11 +180,41 @@ export const updateBookingStatus = async (req, res) => {
         </ul>
 
         ${
+          status === "confirmed" && booking.property?.googleLocationUrl
+            ? `
+            <p>
+              <strong>Location:</strong><br/>
+              <a href="${booking.property.googleLocationUrl}" target="_blank">
+                View on Google Maps
+              </a>
+            </p>
+          `
+            : ""
+        }
+
+        ${
           status === "confirmed"
             ? "<p>We look forward to meeting you!</p>"
             : "<p>Please feel free to rebook anytime.</p>"
         }
       `,
+    });
+    sendWhatsapp({
+      to: booking.phone,
+      message: `
+      Hello ${booking.name},
+
+      Your site visit has been ${status.toUpperCase()}.
+
+      📅 Date: ${new Date(booking.visitDate).toDateString()}
+      ⏰ Time: ${booking.timeSlot}
+
+      ${
+        status === "confirmed"
+          ? "We look forward to meeting you."
+          : "You can rebook anytime."
+      }
+        `,
     });
 
     // ✅ RESPONSE LAST

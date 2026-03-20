@@ -35,6 +35,9 @@ const propertySchema = new mongoose.Schema(
     googleMapUrl: {
       type: String,
     },
+    googleLocationUrl:{
+      type: String,
+    },
     status: {
       type: String,
       enum: ["available", "sold", "under_construction"],

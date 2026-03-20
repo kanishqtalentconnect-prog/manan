@@ -96,7 +96,7 @@ export default function Footer() {
         <h4 className="text-white font-semibold mb-4">Get in Touch</h4>
         <ul className="space-y-3 text-sm text-white/70">
           <li>📞 +91 7217816810</li>
-          <li>✉️ info@mananllp.com</li>
+          <li>✉️ info@nirvayadevbhoomi.in</li>
           <li>
             <a
               href="https://maps.app.goo.gl/m89aP73oVSRyC6FE8"

@@ -118,7 +118,7 @@ export default function ContactSection() {
         </p>
 
         <p className="text-[#b8955b] font-medium">
-          info@mananllp.com
+          info@nirvayadevbhoomi.in
         </p>
       </div>
 

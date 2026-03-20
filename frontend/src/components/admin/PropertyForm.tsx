@@ -21,6 +21,7 @@ type Property = {
   tag: string;
   numberProperty: number;
   googleMapUrl?: string;
+  googleLocationUrl?: string;
   media?: {
     url: string;
     type: "image" | "video";
@@ -50,6 +51,7 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
     tag: initialData?.tag || "",
     numberProperty : initialData?.numberProperty || "",
     googleMapUrl: initialData?.googleMapUrl || "",
+    googleLocationUrl: initialData?.googleLocationUrl || "",
   });
 
   const [categories, setCategories] = useState<Category[]>([]);
@@ -74,6 +76,7 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
         tag: initialData.tag || "",
         numberProperty: initialData.numberProperty || "",
         googleMapUrl: initialData.googleMapUrl || "",
+        googleLocationUrl: initialData.googleLocationUrl || "",
       });
     }
   }, [initialData]);
@@ -120,11 +123,14 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
         formData.append("bathrooms", String(form.bathrooms));
         formData.append("area", String(form.area));
       }
-
-
+      
       if (form.googleMapUrl) {
         formData.append("googleMapUrl", form.googleMapUrl);
       }
+      if (form.googleLocationUrl) {
+        formData.append("googleLocationUrl", form.googleLocationUrl);
+      }
+
       if (removedMedia.length > 0) {
         formData.append(
           "removedMedia",
@@ -297,6 +303,18 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
           name="googleMapUrl"
           placeholder="Paste Google Maps iframe src URL"
           value={form.googleMapUrl}
+          onChange={handleChange}
+        />
+      </div>
+     {/* GOOGLE LOCATION */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Google Location URL
+        </label>
+        <Input
+          name="googleLocationUrl"
+          placeholder="Paste Google Location normal URL for sharing to client"
+          value={form.googleLocationUrl}
           onChange={handleChange}
         />
       </div>

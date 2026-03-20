@@ -17,7 +17,8 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://31.97.232.215:4001",
   "https://manan-xi.vercel.app",
-  "https://manan-4vefzj2oh-kanishqtalentconnect-progs-projects.vercel.app"
+  "https://manan-4vefzj2oh-kanishqtalentconnect-progs-projects.vercel.app",
+  "https://nirvayadevbhoomi.in",
 ];
 
 app.use(
