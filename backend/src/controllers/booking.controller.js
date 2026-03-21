@@ -75,23 +75,23 @@ export const createBooking = async (req, res) => {
     });
 
     // ================= USER WHATSAPP =================
-    sendWhatsapp({
-      to: phone,
-      message: {
-        type: "template",
-        template: {
-          id: "site_visit_confirmation",
-          params: [
-            name,
-            propertyName,
-            formattedDate,
-            timeSlot,
-            comingFrom,
-            location,
-          ],
-        },
-      },
-    });
+    // sendWhatsapp({
+    //   to: phone,
+    //   message: {
+    //     type: "template",
+    //     template: {
+    //       id: "site_visit_confirmation",
+    //       params: [
+    //         name,
+    //         propertyName,
+    //         formattedDate,
+    //         timeSlot,
+    //         comingFrom,
+    //         location,
+    //       ],
+    //     },
+    //   },
+    // });
 
     // ================= ADMIN EMAIL =================
     sendEmail({
@@ -116,25 +116,25 @@ export const createBooking = async (req, res) => {
     });
 
     // ================= ADMIN WHATSAPP =================
-    sendWhatsapp({
-      to: process.env.ADMIN_PHONE,
-      message: {
-        type: "template",
-        template: {
-          id: "new_site_visit_admin_alert",
-          params: [
-            propertyName,
-            name,
-            phone,
-            email,
-            formattedDate,
-            timeSlot,
-            comingFrom,
-            location,
-          ],
-        },
-      },
-    });
+    // sendWhatsapp({
+    //   to: process.env.ADMIN_PHONE,
+    //   message: {
+    //     type: "template",
+    //     template: {
+    //       id: "new_site_visit_admin_alert",
+    //       params: [
+    //         propertyName,
+    //         name,
+    //         phone,
+    //         email,
+    //         formattedDate,
+    //         timeSlot,
+    //         comingFrom,
+    //         location,
+    //       ],
+    //     },
+    //   },
+    // });
 
     return res.status(201).json({
       message: "Site visit booked successfully",
@@ -222,25 +222,25 @@ export const updateBookingStatus = async (req, res) => {
     });
 
     // ================= WHATSAPP =================
-    sendWhatsapp({
-      to: booking.phone,
-      message: {
-        type: "template",
-        template: {
-          id:
-            status === "confirmed"
-              ? "site_visit_confirmed"
-              : "site_visit_cancelled",
-          params: [
-            booking.name,
-            propertyName,
-            formattedDate,
-            booking.timeSlot,
-            location,
-          ],
-        },
-      },
-    });
+    // sendWhatsapp({
+    //   to: booking.phone,
+    //   message: {
+    //     type: "template",
+    //     template: {
+    //       id:
+    //         status === "confirmed"
+    //           ? "site_visit_confirmed"
+    //           : "site_visit_cancelled",
+    //       params: [
+    //         booking.name,
+    //         propertyName,
+    //         formattedDate,
+    //         booking.timeSlot,
+    //         location,
+    //       ],
+    //     },
+    //   },
+    // });
 
     return res.json({
       message: "Booking status updated",

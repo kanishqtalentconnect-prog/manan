@@ -76,22 +76,22 @@ export const createEnquiry = async (req, res) => {
     });
 
     /* ========= USER WHATSAPP ========= */
-    sendWhatsapp({
-      to: phone,
-      message: {
-        type: "template",
-        template: {
-          id: "property_enquiry_user",
-          params: [
-            name,
-            propertyName,
-            bestTimeToReach,
-            question,
-            location,
-          ],
-        },
-      },
-    });
+    // sendWhatsapp({
+    //   to: phone,
+    //   message: {
+    //     type: "template",
+    //     template: {
+    //       id: "property_enquiry_user",
+    //       params: [
+    //         name,
+    //         propertyName,
+    //         bestTimeToReach,
+    //         question,
+    //         location,
+    //       ],
+    //     },
+    //   },
+    // });
 
     /* ========= ADMIN EMAIL ========= */
     sendEmail({
@@ -118,24 +118,24 @@ export const createEnquiry = async (req, res) => {
     });
 
     /* ========= ADMIN WHATSAPP ========= */
-    sendWhatsapp({
-      to: process.env.ADMIN_PHONE,
-      message: {
-        type: "template",
-        template: {
-          id: "property_enquiry_admin",
-          params: [
-            propertyName,
-            name,
-            phone,
-            email,
-            bestTimeToReach,
-            question,
-            location,
-          ],
-        },
-      },
-    });
+    // sendWhatsapp({
+    //   to: process.env.ADMIN_PHONE,
+    //   message: {
+    //     type: "template",
+    //     template: {
+    //       id: "property_enquiry_admin",
+    //       params: [
+    //         propertyName,
+    //         name,
+    //         phone,
+    //         email,
+    //         bestTimeToReach,
+    //         question,
+    //         location,
+    //       ],
+    //     },
+    //   },
+    // });
   } catch (err) {
     console.error(err);
     res.status(500).json({
