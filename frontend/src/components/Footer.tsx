@@ -6,24 +6,24 @@ export default function Footer() {
   const socialLinks = [
     {
       icon: FaFacebookF,
-      href: "https://www.facebook.com/",
+      href: "https://www.facebook.com/share/1CbdxzRGJE/",
       label: "Facebook",
     },
     {
       icon: FaInstagram,
-      href: "https://www.instagram.com/",
+      href: "https://www.instagram.com/nirvaya_devbhoomi?igsh=d2xhM3Rqanh1NWk4",
       label: "Instagram",
     },
-    {
-      icon: FaLinkedinIn,
-      href: "https://www.linkedin.com/",
-      label: "LinkedIn",
-    },
-    {
-      icon: FaYoutube,
-      href: "https://www.youtube.com/",
-      label: "YouTube",
-    },
+    // {
+    //   icon: FaLinkedinIn,
+    //   href: "https://www.linkedin.com/",
+    //   label: "LinkedIn",
+    // },
+    // {
+    //   icon: FaYoutube,
+    //   href: "https://www.youtube.com/",
+    //   label: "YouTube",
+    // },
   ];
   return (
   <footer className="relative bg-[#0f3b2e] text-white">

@@ -4,9 +4,25 @@ import { sendWhatsapp } from "../utils/sendWhatsapp.js";
 
 export const createBooking = async (req, res) => {
   try {
-    const { propertyId, name, email, phone, visitDate, timeSlot, comingFrom } = req.body;
+    const {
+      propertyId,
+      name,
+      email,
+      phone,
+      visitDate,
+      timeSlot,
+      comingFrom,
+    } = req.body;
 
-    if (!propertyId || !name || !email || !phone || !visitDate || !timeSlot || !comingFrom) {
+    if (
+      !propertyId ||
+      !name ||
+      !email ||
+      !phone ||
+      !visitDate ||
+      !timeSlot ||
+      !comingFrom
+    ) {
       return res.status(400).json({
         message: "All fields are required",
       });
@@ -19,10 +35,23 @@ export const createBooking = async (req, res) => {
       phone,
       visitDate,
       timeSlot,
-      comingFrom
+      comingFrom,
     });
 
-    // 🔔 SEND EMAILS (do NOT block response if they fail)
+    // 👉 fetch property details
+    const populatedBooking = await Booking.findById(booking._id).populate(
+      "property",
+      "title googleLocationUrl"
+    );
+
+    const propertyName = populatedBooking.property?.title || "Property";
+    const location =
+      populatedBooking.property?.googleLocationUrl ||
+      "Location will be shared soon";
+
+    const formattedDate = new Date(visitDate).toDateString();
+
+    // ================= USER EMAIL =================
     sendEmail({
       to: email,
       subject: "Site Visit Request Received",
@@ -32,29 +61,39 @@ export const createBooking = async (req, res) => {
 
         <h4>Visit Details</h4>
         <ul>
-          <li><strong>Date:</strong> ${new Date(visitDate).toDateString()}</li>
+          <li><strong>Property:</strong> ${propertyName}</li>
+          <li><strong>Date:</strong> ${formattedDate}</li>
           <li><strong>Time Slot:</strong> ${timeSlot}</li>
           <li><strong>Coming From:</strong> ${comingFrom}</li>
         </ul>
 
+        <p><strong>Location:</strong><br/>
+        <a href="${location}" target="_blank">View on Google Maps</a></p>
+
         <p>Our team will confirm your visit shortly.</p>
-        <p>Thank you!</p>
       `,
     });
+
+    // ================= USER WHATSAPP =================
     sendWhatsapp({
       to: phone,
-      message: `
-      Hello ${name},
-
-      Your site visit request has been received.
-
-      📅 Date: ${new Date(visitDate).toDateString()}
-      ⏰ Time: ${timeSlot}
-      📍 Coming From: ${comingFrom}
-
-      Our team will confirm your visit shortly.
-        `,
+      message: {
+        type: "template",
+        template: {
+          id: "site_visit_confirmation",
+          params: [
+            name,
+            propertyName,
+            formattedDate,
+            timeSlot,
+            comingFrom,
+            location,
+          ],
+        },
+      },
     });
+
+    // ================= ADMIN EMAIL =================
     sendEmail({
       to: process.env.ADMIN_EMAIL,
       subject: "New Site Visit Booking",
@@ -62,35 +101,45 @@ export const createBooking = async (req, res) => {
         <h3>New Site Visit Booking</h3>
 
         <ul>
+          <li><strong>Property:</strong> ${propertyName}</li>
           <li><strong>Name:</strong> ${name}</li>
           <li><strong>Email:</strong> ${email}</li>
           <li><strong>Phone:</strong> ${phone}</li>
-          <li><strong>Date:</strong> ${new Date(visitDate).toDateString()}</li>
+          <li><strong>Date:</strong> ${formattedDate}</li>
           <li><strong>Time Slot:</strong> ${timeSlot}</li>
           <li><strong>Coming From:</strong> ${comingFrom}</li>
         </ul>
+
+        <p><strong>Location:</strong><br/>
+        <a href="${location}" target="_blank">View on Google Maps</a></p>
       `,
     });
+
+    // ================= ADMIN WHATSAPP =================
     sendWhatsapp({
       to: process.env.ADMIN_PHONE,
-      message: `
-      New Site Visit Booking
-
-      Name: ${name}
-      Phone: ${phone}
-      Email: ${email}
-      Date: ${new Date(visitDate).toDateString()}
-      Time: ${timeSlot}
-      Coming From: ${comingFrom}
-        `,
+      message: {
+        type: "template",
+        template: {
+          id: "new_site_visit_admin_alert",
+          params: [
+            propertyName,
+            name,
+            phone,
+            email,
+            formattedDate,
+            timeSlot,
+            comingFrom,
+            location,
+          ],
+        },
+      },
     });
 
-    // ✅ RESPONSE LAST
     return res.status(201).json({
       message: "Site visit booked successfully",
       booking,
     });
-
   } catch (err) {
     console.error(err);
     return res.status(500).json({
@@ -98,7 +147,6 @@ export const createBooking = async (req, res) => {
     });
   }
 };
-
 
 export const getAllBookings = async (req, res) => {
   try {
@@ -131,34 +179,14 @@ export const updateBookingStatus = async (req, res) => {
       return res.status(404).json({ message: "Booking not found" });
     }
 
-    // 🔔 EMAIL USER (non-blocking)
-    // sendEmail({
-    //   to: booking.email,
-    //   subject:
-    //     status === "confirmed"
-    //       ? "Your Site Visit is Confirmed"
-    //       : "Your Site Visit is Cancelled",
-    //   html: `
-    //     <h2>Hello ${booking.name},</h2>
+    const propertyName = booking.property?.title || "Property";
+    const location =
+      booking.property?.googleLocationUrl ||
+      "Location will be shared soon";
 
-    //     <p>Your site visit has been <strong>${status.toUpperCase()}</strong>.</p>
+    const formattedDate = new Date(booking.visitDate).toDateString();
 
-    //     <h4>Visit Details</h4>
-    //     <ul>
-    //       <li><strong>Date:</strong> ${new Date(
-    //         booking.visitDate
-    //       ).toDateString()}</li>
-    //       <li><strong>Time Slot:</strong> ${booking.timeSlot}</li>
-    //       <li><strong>Coming From:</strong> ${booking.comingFrom}</li>
-    //     </ul>
-
-    //     ${
-    //       status === "confirmed"
-    //         ? "<p>We look forward to meeting you!</p>"
-    //         : "<p>Please feel free to rebook anytime.</p>"
-    //     }
-    //   `,
-    // });
+    // ================= EMAIL =================
     sendEmail({
       to: booking.email,
       subject:
@@ -172,57 +200,52 @@ export const updateBookingStatus = async (req, res) => {
 
         <h4>Visit Details</h4>
         <ul>
-          <li><strong>Date:</strong> ${new Date(
-            booking.visitDate
-          ).toDateString()}</li>
+          <li><strong>Property:</strong> ${propertyName}</li>
+          <li><strong>Date:</strong> ${formattedDate}</li>
           <li><strong>Time Slot:</strong> ${booking.timeSlot}</li>
           <li><strong>Coming From:</strong> ${booking.comingFrom}</li>
         </ul>
 
         ${
-          status === "confirmed" && booking.property?.googleLocationUrl
-            ? `
-            <p>
-              <strong>Location:</strong><br/>
-              <a href="${booking.property.googleLocationUrl}" target="_blank">
-                View on Google Maps
-              </a>
-            </p>
-          `
+          status === "confirmed"
+            ? `<p><strong>Location:</strong><br/>
+              <a href="${location}" target="_blank">View on Google Maps</a></p>`
             : ""
         }
 
         ${
           status === "confirmed"
             ? "<p>We look forward to meeting you!</p>"
-            : "<p>Please feel free to rebook anytime.</p>"
+            : "<p>You can rebook anytime.</p>"
         }
       `,
     });
+
+    // ================= WHATSAPP =================
     sendWhatsapp({
       to: booking.phone,
-      message: `
-      Hello ${booking.name},
-
-      Your site visit has been ${status.toUpperCase()}.
-
-      📅 Date: ${new Date(booking.visitDate).toDateString()}
-      ⏰ Time: ${booking.timeSlot}
-
-      ${
-        status === "confirmed"
-          ? "We look forward to meeting you."
-          : "You can rebook anytime."
-      }
-        `,
+      message: {
+        type: "template",
+        template: {
+          id:
+            status === "confirmed"
+              ? "site_visit_confirmed"
+              : "site_visit_cancelled",
+          params: [
+            booking.name,
+            propertyName,
+            formattedDate,
+            booking.timeSlot,
+            location,
+          ],
+        },
+      },
     });
 
-    // ✅ RESPONSE LAST
     return res.json({
       message: "Booking status updated",
       booking,
     });
-
   } catch (err) {
     console.error(err);
     return res.status(500).json({
