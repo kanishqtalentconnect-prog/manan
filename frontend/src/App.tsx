@@ -11,7 +11,7 @@ import AdminProperties from "./pages/AdminProperties";
 import AdminBookings from "./pages/AdminBookings";
 import AdminEnquiries from "./components/admin/AdminEnquiries";
 import AdminCategories from "./components/admin/Categories";
-import Faq from "./pages/FAQ";
+// import Faq from "./pages/FAQ";
 import ContentManagement from "./pages/ContentManagement";
 import AdminReviews from "./components/admin/AdminReviews";
 

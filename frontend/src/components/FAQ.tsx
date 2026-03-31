@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const faqs = [
   {
@@ -52,7 +52,7 @@ const faqs = [
 
 export default function FAQ() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   useEffect(() => {
       window.scrollTo({ top: 0, behavior: "instant" });
     }, []);
