@@ -88,7 +88,7 @@ export default function Footer() {
         <h4 className="text-white font-semibold mb-4">Resources</h4>
         <ul className="space-y-3 text-sm text-white/70">
           <li><a href="/#hero3" className="hover:text-[#b8955b] transition">Gallery</a></li>
-          <li><Link to="/faq" className="hover:text-[#b8955b] transition">Investment FAQ</Link></li>
+          <li><Link to="/#faq" className="hover:text-[#b8955b] transition">FAQ</Link></li>
         </ul>
       </div>
 

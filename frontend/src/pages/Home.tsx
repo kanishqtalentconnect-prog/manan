@@ -5,6 +5,7 @@ import Hero4 from "../components/Hero4";
 import Contact from "../components/Contact";
 import Offerings from "../components/Offering";
 import NataDol from "../components/NataDol";
+import FAQ from "../components/FAQ";
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 import BookSiteVisitModal from "../components/BookSiteVisitModal";
@@ -13,6 +14,7 @@ import EnquiryModal from "../components/EnquiryModal";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { MapPin, Headphones, ShieldCheck, DollarSign } from "lucide-react";
+import Banner from "../components/Banner";
 
 type Category = {
   _id: string;
@@ -133,6 +135,9 @@ export default function Home() {
       </section>
       <section>
         <Offerings />
+      </section>
+      <section>
+        <Banner />
       </section>
       <section id="property" className="relative bg-white py-20">
         {/* subtle top glow */}
@@ -398,6 +403,9 @@ export default function Home() {
       </section>
       <section id="hero4">
         <Hero4 />
+      </section>
+      <section id="faq">
+        <FAQ />
       </section>
       <section id="contact">
         <Contact />

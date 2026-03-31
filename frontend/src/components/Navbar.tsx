@@ -106,7 +106,7 @@ export default function Navbar() {
     location.pathname === "/faq" ||
     location.pathname === "/documentation";
   const activeSection = useScrollSpy(
-    ["", "about", "property", "hero2", "hero3", "hero4"],
+    ["", "about", "property", "hero2", "hero3", "hero4", "faq", "contact"],
     isHomePage
   );
   const handleLogout = () => {
@@ -179,6 +179,7 @@ export default function Navbar() {
             <NavItem href="/#hero2" label="About" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero2")} />
             <NavItem href="/#hero3" label="Gallery" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero3")} />
             <NavItem href="/#hero4" label="Testimonials" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero4")} />
+            <NavItem href="/#faq" label="FAQ" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("faq")} />
           </div>
         )}
 
@@ -283,6 +284,7 @@ export default function Navbar() {
             <NavItem href="/#hero2" label="Why Invest" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero2")} />
             <NavItem href="/#hero3" label="Gallery" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero3")} />
             <NavItem href="/#hero4" label="Testimonials" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("hero4")} />
+            <NavItem href="/#faq" label="FAQ" activeSection={activeSection} disableUnderline={isStaticPage} onClick={() => scrollTo("faq")} />
 
             {/* <Link
               to="/login"

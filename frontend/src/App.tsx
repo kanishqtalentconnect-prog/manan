@@ -33,7 +33,7 @@ export default function App() {
         <Route path="/admin/categories" element={<AdminCategories />} />
         <Route path="/admin/reviews" element={<AdminReviews />} />
         <Route path="/admin/content-management" element={<ContentManagement />} />
-        <Route path="/faq" element={<Faq />} />
+        {/* <Route path="/faq" element={<Faq />} /> */}
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import api from "../api/axios";
 import { useMediaCarousel } from "../hooks/useMediaCarousel";
-import { ChevronLeft, ChevronRight, Mountain, Home, TreePine, FileBadge } from "lucide-react";
+import { ChevronLeft, ChevronRight, Mountain, Home, TreePine, FileBadge, FileText } from "lucide-react";
 
 
 type MediaItem = {
@@ -12,13 +12,25 @@ type MediaItem = {
 export default function Hero2() {
   const [media, setMedia] = useState<MediaItem[]>([]);
   const videoRef = useRef<HTMLVideoElement | null>(null);
-
+  const [openPdf, setOpenPdf] = useState(false);
   /* ================= FETCH CONTENT ================= */
   useEffect(() => {
     api.get("/content/hero2").then((res) => {
       setMedia(res.data?.media || []);
     });
   }, []);
+
+  useEffect(() => {
+    if (openPdf) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [openPdf]);
 
   /* ================= CAROUSEL ================= */
   const { index, next, prev } = useMediaCarousel(media);
@@ -53,7 +65,7 @@ export default function Hero2() {
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center mb-32">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center mb-28">
 
         {/* LEFT TEXT */}
         <div>
@@ -76,6 +88,20 @@ export default function Hero2() {
             Whether you seek a private mountain retreat or a long-term appreciating asset, 
             we provide the expertise and support required throughout your ownership journey.
           </p>
+
+          <div className="mt-8">
+            <button
+              onClick={() => setOpenPdf(true)}
+              className="inline-flex items-center gap-2 px-6 py-3 
+                rounded-full border border-[#c5a46d]
+                text-[#0f3b2e] font-medium text-sm tracking-wide
+                hover:bg-[#0f3b2e] hover:text-white hover:border-[#0f3b2e]
+                transition-all duration-300 shadow-sm"
+            >
+              <FileText size={18} />
+              View Registration Certificate
+            </button>
+          </div>
         </div>
 
         {/* RIGHT MEDIA (Carousel preserved) */}
@@ -111,6 +137,7 @@ export default function Hero2() {
               </div>
             </div>
           )}
+          
 
           {/* ARROWS */}
           {hasMedia && media.length > 1 && (
@@ -272,7 +299,64 @@ export default function Hero2() {
 
       </div>
     </div>
+    {/* ================= PDF Modal ================= */}
+    {openPdf && (
+      <div className="fixed inset-0 z-50 flex items-center justify-center">
+
+        {/* BACKDROP */}
+        <div 
+          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          onClick={() => setOpenPdf(false)}
+        />
+
+        {/* MODAL CONTAINER */}
+        <div className="relative w-[92%] md:w-[85%] h-[90%] 
+          bg-[#fdfcf9] rounded-3xl overflow-hidden shadow-2xl
+          border border-[#e8e1d4]">
+
+          {/* HEADER BAR */}
+          <div className="flex items-center justify-between px-6 py-4 
+            border-b border-[#e8e1d4] bg-white/70 backdrop-blur">
+
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-[#f3efe6] flex items-center justify-center">
+                <FileText size={16} className="text-[#0f3b2e]" />
+              </div>
+
+              <p className="text-sm font-medium text-[#2a2a2a]">
+                Registration Certificate
+              </p>
+            </div>
+
+            {/* CLOSE BUTTON */}
+            <button
+              onClick={() => setOpenPdf(false)}
+              className="w-9 h-9 rounded-full bg-black/70 text-white 
+              flex items-center justify-center hover:scale-105 transition"
+            >
+              ✕
+            </button>
+          </div>
+
+          {/* PDF VIEW AREA */}
+          <div className="relative w-auto h-[calc(100%-64px)] bg-white">
+
+            <iframe
+              src="/FiLLiP.pdf#toolbar=0&navpanes=0&scrollbar=0"
+              className="w-full h-full"
+            />
+
+            {/* WATERMARK OVERLAY */}
+            <div className="pointer-events-none absolute bottom-4 right-6 text-xs text-black tracking-wide">
+              Manan International • Confidential
+            </div>
+
+          </div>
+        </div>
+      </div>
+    )}
   </section>
+  
 );
 
 }
