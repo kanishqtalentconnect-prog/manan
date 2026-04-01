@@ -19,6 +19,7 @@ const allowedOrigins = [
   "https://manan-xi.vercel.app",
   "https://manan-4vefzj2oh-kanishqtalentconnect-progs-projects.vercel.app",
   "https://manan-git-final-ui-design-kanishqtalentconnect-progs-projects.vercel.app",
+  "https://manan-git-backup-v1-kanishqtalentconnect-progs-projects.vercel.app",
   "https://nirvayadevbhoomi.in",
 ];
 
