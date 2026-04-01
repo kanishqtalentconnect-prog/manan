@@ -34,11 +34,6 @@ const faqs = [
       "Yes, we can connect you with trusted banking partners who assist with home loans at competitive interest rates, subject to eligibility.",
   },
   {
-    question: "Are the properties listed RERA approved?",
-    answer:
-      "We prioritize transparency. Wherever applicable, RERA approval details are clearly mentioned on the property detail page.",
-  },
-  {
     question: "How do I make an enquiry about a property?",
     answer:
       "You can click on the 'Make an Enquiry' button on the property detail page. Our team will get in touch with you shortly after receiving your request.",
