@@ -26,7 +26,7 @@ const faqs = [
   {
     question: "What documents should I check before purchasing a property?",
     answer:
-      "You should verify ownership documents, RERA approval, land records, approved building plans, and sale agreements. We also recommend consulting a legal expert before finalizing any deal.",
+      "You should verify ownership documents, land records, approved building plans, and sale agreements. We also recommend consulting a legal expert before finalizing any deal.",
   },
   {
     question: "Do you assist with home loans?",
