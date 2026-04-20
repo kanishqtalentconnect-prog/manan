@@ -182,7 +182,7 @@ export default function Home() {
           {!loading && properties.length === 0 && (
             <div className="text-center py-20 rounded-2xl border border-[#e6e6e6] bg-white">
               <p className="text-[#666] text-lg">
-                No properties available at the moment.
+                Coming Soon.
               </p>
             </div>
           )}
