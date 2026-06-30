@@ -222,7 +222,6 @@ export default function PropertyForm({ initialData, onSuccess }: Props) {
           placeholder="Eg. 8500000"
           value={form.price}
           onChange={handleChange}
-          required
         />
       </div>
 

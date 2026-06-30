@@ -7,12 +7,12 @@ export default function Footer() {
   const socialLinks = [
     {
       icon: FaFacebookF,
-      href: "https://www.facebook.com/share/1CbdxzRGJE/",
+      href: "https://www.facebook.com/profile.php?id=61590452921000",
       label: "Facebook",
     },
     {
       icon: FaInstagram,
-      href: "https://www.instagram.com/nirvaya_devbhoomi?igsh=d2xhM3Rqanh1NWk4",
+      href: "https://www.instagram.com/p/DZutacZNF9Z/",
       label: "Instagram",
     },
     // {
